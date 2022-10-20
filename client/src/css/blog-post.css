@@ -1,0 +1,4 @@
+.blog_post_container{
+    display:flex;
+    column-gap: 1rem;
+}

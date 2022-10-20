@@ -1,0 +1,65 @@
+
+
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.tag{
+    background-color: #219ebc;
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    color: #ffb703;
+}
+
+.banner_box{
+    background-color: #023047;
+    border-radius: 0.5rem;
+    color: #219ebc;
+    display: flex;
+    flex-wrap: wrap;
+    /* gap: 1rem; */
+    /* justify-content: space-around; */
+    align-items: center;
+}
+
+.avatar_wrapper{
+    /* width: 35rem;
+    height: 10rem; */
+
+    flex-grow: 1;
+}
+
+.female_avatar{
+    object-fit: contain;
+     height: 20rem;
+     width: 20rem;
+     padding: 1rem;
+} 
+
+.heading{
+    flex-grow: 1;
+    flex-basis: 20rem;
+    /* padding: 1rem; */
+}
+
+
+blockquote {
+    /* background: #f9f9f9; */
+    border-left: 10px solid #e9c46a;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+  }
+  blockquote:before {
+    color: #f4a261;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+  }
+  blockquote p {
+    display: inline;
+  }

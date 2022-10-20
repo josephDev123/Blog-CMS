@@ -1,0 +1,85 @@
+html{
+    font-family: 'Arima', cursive;
+    font-family: 'Cormorant Garamond', serif;
+    font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+    font-family: 'Lato', sans-serif;
+    font-family: 'Libre Franklin', sans-serif;
+    font-family: 'Roboto Slab', serif;
+}
+
+
+.header_banner{
+    background-color: #264653;
+    border-radius: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem;
+    color:#e9c46a;
+}
+
+.banner_avatar_wrapper{
+    /* border: 2px solid red; */
+    flex-grow: 1;
+ }
+
+ .banner_avatar{
+    margin: 0 auto;
+ }
+
+ .content{
+    /* border: 2px solid red; */
+    flex-grow: 2;
+    padding-top: 2rem;
+ }
+ .content > p, h4{
+    padding-top: 1rem;
+ }
+
+ .edit_btn{
+      border:none;
+      background-color: #2a9d8f;
+      border-radius: 0.3rem;
+      padding: 0.1rem 0.5rem;
+      align-self: flex-start;
+      outline: none;
+ }
+
+ .upload_btn{
+   border:none;
+   background-color: #2a9d8f;
+   border-radius: 0.3rem;
+   padding: 0.1rem 0.5rem;
+   align-self: flex-start;
+   outline: none;
+   margin-left: 1rem;
+ }
+
+ .social_media_wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 2rem;
+    background-color: #e76f51;
+    border-top-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+   font-size: 1.5rem;
+   padding: 1rem;
+
+ }
+
+ .badge{
+    display: flex;
+    gap:2rem;
+  
+ }
+ .badge > .phone, .email, .username{
+    color: #264653;
+ }
+
+ .badge .fa-solid{
+    font-size: 1.5rem;
+ }

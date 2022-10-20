@@ -1,0 +1,21 @@
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing: border-box;
+    /* border:1px solid red; */
+}
+
+.index_gallery_parent{
+    display:flex;
+    flex-wrap:wrap;
+    /* justify-content: space-between; */
+    column-gap: 2rem;
+}
+
+.index_gallery_parent > .index_content{
+  flex-grow: 1;
+  /* width: 15rem; */
+  flex-shrink: 1;
+  flex-basis: 18rem;
+
+}

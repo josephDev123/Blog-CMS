@@ -1,0 +1,19 @@
+.form_wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+form{
+    margin-top:25vh;
+    margin-bottom:25vh;
+    flex: 1 1 0;
+    min-width: 400px;
+}
+
+@media screen and (max-width: 375px) {
+    form{
+        min-width: 300px;
+    }
+} 

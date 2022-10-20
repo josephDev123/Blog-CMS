@@ -1,0 +1,23 @@
+*{
+    padding:0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.postIdcontent{
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+
+.category{
+    display:flex;
+    justify-content:flex-start;
+     background-color: green; 
+    padding: 0.2rem 0 0.2rem 0.2rem; 
+     width: 10rem;
+    /* height: 2rem;  */
+    color:white;
+}
