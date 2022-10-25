@@ -16,15 +16,17 @@ import {profileRouter} from './routes/profileRoute.js';
 const URL= process.env.MONGO_ATLAS_URL;
  
   
-// mongoose.connect(URL, {useNewUrlParser: true,  useUnifiedTopology: true})
+mongoose.connect(URL, {useNewUrlParser: true,  useUnifiedTopology: true}, (err)=>{
+  console.log(err)
+})
 
-// mongoose.connection.on("error", function(error) {
-//   console.log('error')
-// })
+mongoose.connection.on("error", function(error) {
+  console.log('error after initial connection')
+})
 
-// mongoose.connection.on("open", function() {
-//   console.log("Connected to MongoDB database.")
-// })
+mongoose.connection.on("connected", function(err, res) {
+  console.log("Connected to MongoDB database after initial connection.")
+})
 
 const PORT = process.env.PORT;
 
@@ -33,14 +35,14 @@ app.use(cors());
 app.use(express.json());
 
 
-mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true})
-  .then((result) =>{
-    console.log("Connected to MongoDB database.");
-    app.listen(PORT, ()=>{
-      console.log(`server running on port ${PORT}`)
-    })
-  })
-  .catch((err) => console.log(err));
+// mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true})
+//   .then((result) =>{
+//     console.log("Connected to MongoDB database.");
+//     app.listen(PORT, ()=>{
+//       console.log(`server running on port ${PORT}`)
+//     })
+//   })
+//   .catch((err) => console.log(err));
 
 //blog routes
 app.use('/blog', blogPostRouter);
@@ -60,6 +62,6 @@ app.all('*', (req, res)=>{
     // res.end();
 });
 
-// app.listen(PORT, ()=>{
-//     console.log(`server running on port ${PORT}`)
-// })
+app.listen(PORT, ()=>{
+    console.log(`server running on port ${PORT}`)
+})

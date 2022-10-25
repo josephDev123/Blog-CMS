@@ -3,24 +3,19 @@ import  {useState} from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import '../asset/css/roles.css';
+import {useFetch} from '../../customHooks/useFetch';
 // import Modal from './Modal';
 
 export default function Roles() {
     const [page, setPage] = useState(1);
     const [status, isStatus] = useState('');
     const [remount, setReMount] = useState(false);
-    
-    const {isError, isLoading, error, data, isFetching}= useQuery(['roles', page, remount], async ()=>{
 
-        try {
-            const users =  await axios(`http://localhost:7000/role/users?page=${page}`);
-             const usersResult = await users.data;
-             return usersResult;
-      
-          } catch (error) {
-           return error.message;
-          }
-    })
+    const {isLoading, isError, data, error, isFetching} = useFetch('http://localhost:7000/profile/users', page)
+    
+
+
+    console.log(data)
 
     //handle the user permission btn
     async function handleUserPermission(userId){
@@ -104,7 +99,7 @@ export default function Roles() {
                             <td>{users.about.substr(0, 20)} ....</td>
                             <td>{users.phone}</td>
                             <td>{users.surname}</td>
-                            <td>{users.role}</td>
+                            <td>{users.role.user && users.role.admin? users.role.user +' || admin': users.role.user}</td>
                             <td><button className='btn btn-primary btn-sm' onClick={()=>handleUserPermission(users._id)}> user permission</button></td>
                           </tr>
                         

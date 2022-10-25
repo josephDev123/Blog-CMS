@@ -13,7 +13,7 @@ export const profile_post =  async (req, res)=>{
               about:about,
               phone:phone,
               surname:surname,
-              role:{user:'user', admin:''}
+              role:{user:'registered'}
         })
               // save document
               const result = await uploadedProfile.save();
@@ -71,9 +71,9 @@ export const getProfileUsers = async (req, res)=>{
         
                 const userProfiles = await profileModel.find({}, null,  {skip, limit}); 
                 const userProfilesResult = await userProfiles
-                res.json(userProfilesResult);
+                res.status(200).json(userProfilesResult);
             } catch (error) {
-                res.json(error.message);
+                res.status(500).json(error.message);
         }
       
 }

@@ -40,7 +40,7 @@ function App() {
                       <Route path='/admin/create-post-form' element={<Post/>}/>
                       <Route path='/admin/profile' element={<Profile/>}/>
                       <Route path='/admin/users-list' element={<UsersList/>}/>
-                      <Route path='/admin/roles' element={ <IsAdmin><Roles/></IsAdmin> }/>
+                      <Route path='/admin/roles' element={ <Roles/> }/>
                     </Route>
                     <Route path='/login' element= {<Login/>}/>
                     <Route path='/register' element= {<Reqister/>}/>

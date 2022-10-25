@@ -46,7 +46,13 @@ const profileSchema = new mongoose.Schema({
         required:false
     }, 
     
-    role: {user:String, admin:String}
+    role: {
+        user:String, 
+        admin:{
+            type:Boolean,
+            default:false
+        }
+    }
 })
 
 export const profileModel = mongoose.model('profile', profileSchema);

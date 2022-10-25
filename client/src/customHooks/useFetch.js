@@ -22,6 +22,6 @@ async function serverRequest(url, query){
 }
 
 export function useFetch(url, param){
-       const {isLoading, isError, data, error} = useQuery(['server', url, param], ()=>serverRequest(url, param))
+       const {isLoading, isError, data, error, isFetching} = useQuery(['server', url, param], async ()=>serverRequest(url, param))
        return {isLoading, isError, data, error};
 }
