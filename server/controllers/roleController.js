@@ -19,7 +19,8 @@ export const role_users_get = async (req, res)=>{
       const queryId = req.query.ID;
     //   console.log(queryId);
       const Doc= await profileModel.findById(queryId);
-      Doc.role = 'admin';
+      // console.log(Doc)
+      Doc.role.admin = true;
       await Doc.save();
       res.json('success');
     }catch(errors){
