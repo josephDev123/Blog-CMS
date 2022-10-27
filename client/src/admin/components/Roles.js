@@ -4,28 +4,38 @@ import { useQuery } from 'react-query';
 import axios from 'axios';
 import '../asset/css/roles.css';
 import {useFetch} from '../../customHooks/useFetch';
-// import Modal from './Modal';
+// import Modal from 'react-bootstrap/Modal';
+import {ModalComponent} from './Modal';
 
 export default function Roles() {
     const [page, setPage] = useState(1);
     const [status, isStatus] = useState('');
     const [remount, setReMount] = useState(false);
+    const [show, setShow] = useState(false);
+    const [userid, setUserId] = useState('')
+
+    function handleShow(userId){
+      setShow(true);
+      setUserId(userId)
+    }
 
     const {isLoading, isError, data, error, isFetching} = useFetch('http://localhost:7000/profile/users', page)
     
-
-
-    console.log(data)
+    // console.log(data)
+  
+    // function sample(){
+    //   console.log(userid)
+    // }
 
     //handle the user permission btn
-    async function handleUserPermission(userId){
+    async function handleUserPermission(){
 
       try {
         const rolePermissionReq =await axios({
         url:`http://localhost:7000/role/users-permission`,
         method:'POST',
         params: {
-          ID: userId
+          ID: userid
         }
       });
       const rolePermissionResult = await rolePermissionReq.data;
@@ -34,13 +44,13 @@ export default function Roles() {
       alert("user permission changed");
       } catch (error) {
         isStatus('error');
-        alert("user permission failed");
       }
     }
 
     
   return(
         <section className='container'>
+          <ModalComponent showModal={show} setShowModal = {setShow} event={handleUserPermission}>Allow user's permission status</ModalComponent>
             <span className='tag'>
             /Roles
           </span>
@@ -75,6 +85,7 @@ export default function Roles() {
                 </>
                ):isError? <div className="alert alert-danger mt-4" role="alert"> {error.message} </div>:(
                 <div className='container mt-4 table-responsive'>
+                  {/* <ModalComponent showModal={show} setShowModal = {setShow}></ModalComponent> */}
                     {
                     data?.map(users =>(
                       <table key={users._id} className="table table-striped table-hover table-borderless caption-top">
@@ -100,14 +111,14 @@ export default function Roles() {
                             <td>{users.phone}</td>
                             <td>{users.surname}</td>
                             <td>{users.role.user && users.role.admin? users.role.user +' || admin': users.role.user}</td>
-                            <td><button className='btn btn-primary btn-sm' onClick={()=>handleUserPermission(users._id)}> user permission</button></td>
+                            <td><button className='btn btn-primary btn-sm' onClick={()=>handleShow(users._id)}> user permission</button></td>
                           </tr>
                         
                         </tbody>
                     </table>
                       ))
                     }
-
+{/* //)=>handleUserPermission(users._id) */}
               <span>Current Page: {page}</span>
                           <button className='btn btn-primary'
                             onClick={() => setPage(page => page - 1)}
