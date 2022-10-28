@@ -4,28 +4,28 @@ import { useQuery } from 'react-query';
 import axios from 'axios';
 import '../asset/css/roles.css';
 import {useFetch} from '../../customHooks/useFetch';
-// import Modal from 'react-bootstrap/Modal';
+import {SimpleAlert} from './SimpleAlert';
 import {ModalComponent} from './Modal';
+
 
 export default function Roles() {
     const [page, setPage] = useState(1);
-    const [status, isStatus] = useState('');
+    const [status, setStatus] = useState('');
     const [remount, setReMount] = useState(false);
     const [show, setShow] = useState(false);
     const [userid, setUserId] = useState('')
+    const [alert, setAlert] = useState(false);
+    const [err, setErr] = useState(null)
 
     function handleShow(userId){
       setShow(true);
       setUserId(userId)
     }
 
+    console.log(err);
     const {isLoading, isError, data, error, isFetching} = useFetch('http://localhost:7000/profile/users', page)
     
     // console.log(data)
-  
-    // function sample(){
-    //   console.log(userid)
-    // }
 
     //handle the user permission btn
     async function handleUserPermission(){
@@ -39,18 +39,20 @@ export default function Roles() {
         }
       });
       const rolePermissionResult = await rolePermissionReq.data;
-      isStatus('success');
-      setReMount(true);
-      alert("user permission changed");
+      setStatus('success');
+      setAlert(true)
+      // setReMount(true);
       } catch (error) {
-        isStatus('error');
+        setErr(error.message);
+        setStatus('danger');
+        setAlert(true)
       }
     }
 
     
   return(
         <section className='container'>
-          <ModalComponent showModal={show} setShowModal = {setShow} event={handleUserPermission}>Allow user's permission status</ModalComponent>
+          <ModalComponent showModal={show} setShowModal = {setShow} event={handleUserPermission}>change user's permission status</ModalComponent>
             <span className='tag'>
             /Roles
           </span>
@@ -85,7 +87,7 @@ export default function Roles() {
                 </>
                ):isError? <div className="alert alert-danger mt-4" role="alert"> {error.message} </div>:(
                 <div className='container mt-4 table-responsive'>
-                  {/* <ModalComponent showModal={show} setShowModal = {setShow}></ModalComponent> */}
+                  <SimpleAlert showAlert={alert} variants={status}>{err? err: 'user permission changed successful'}</SimpleAlert>
                     {
                     data?.map(users =>(
                       <table key={users._id} className="table table-striped table-hover table-borderless caption-top">

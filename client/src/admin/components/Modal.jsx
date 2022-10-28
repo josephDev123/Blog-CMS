@@ -9,7 +9,7 @@ export function ModalComponent({showModal, setShowModal, children, event}) {
 
 useEffect(()=>{
     setShow(showModal)
-})
+}, [showModal])
 
   return (
     <>
@@ -20,10 +20,10 @@ useEffect(()=>{
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>User permission</Modal.Title>
+          <Modal.Title>Grant user permission</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        {children}
+        {/* {children} */}
      
         </Modal.Body>
         <Modal.Footer>
