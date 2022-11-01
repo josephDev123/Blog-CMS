@@ -4,9 +4,10 @@ import { useQuery } from 'react-query';
 import axios from 'axios';
 import '../asset/css/roles.css';
 import {useFetch} from '../../customHooks/useFetch';
-import {SimpleAlert} from './SimpleAlert';
+// import {SimpleAlert} from './SimpleAlert';
 import {ModalComponent} from './Modal';
-
+import {SuccessAlert} from './SuccessAlert';
+import {ErrorAlert} from './ErrorAlert'
 
 export default function Roles() {
     const [page, setPage] = useState(1);
@@ -17,7 +18,7 @@ export default function Roles() {
     const [alert, setAlert] = useState(false);
     const [err, setErr] = useState(null)
 
-    function handleShow(userId){
+    function handleShowModal(userId){
       setShow(true);
       setUserId(userId)
     }
@@ -39,9 +40,12 @@ export default function Roles() {
         }
       });
       const rolePermissionResult = await rolePermissionReq.data;
-      setStatus('success');
-      setAlert(true)
-      // setReMount(true);
+      if(rolePermissionResult === 'success'){
+        setStatus('success');
+        setAlert(true)
+        setReMount((status)=>!status);
+      }
+      
       } catch (error) {
         setErr(error.message);
         setStatus('danger');
@@ -49,6 +53,7 @@ export default function Roles() {
       }
     }
 
+    console.log('mount '+remount)
     
   return(
         <section className='container'>
@@ -87,7 +92,7 @@ export default function Roles() {
                 </>
                ):isError? <div className="alert alert-danger mt-4" role="alert"> {error.message} </div>:(
                 <div className='container mt-4 table-responsive'>
-                  <SimpleAlert showAlert={alert} variants={status}>{err? err: 'user permission changed successful'}</SimpleAlert>
+                  {status==='success'?<SuccessAlert alert ={alert} status ={status}/>:<ErrorAlert alert ={alert}/>}
                     {
                     data?.map(users =>(
                       <table key={users._id} className="table table-striped table-hover table-borderless caption-top">
@@ -113,7 +118,7 @@ export default function Roles() {
                             <td>{users.phone}</td>
                             <td>{users.surname}</td>
                             <td>{users.role.user && users.role.admin? users.role.user +' || admin': users.role.user}</td>
-                            <td><button className='btn btn-primary btn-sm' onClick={()=>handleShow(users._id)}> user permission</button></td>
+                            <td><button className='btn btn-primary btn-sm' onClick={()=>handleShowModal(users._id)}> user permission</button></td>
                           </tr>
                         
                         </tbody>
