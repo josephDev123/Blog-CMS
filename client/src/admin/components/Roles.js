@@ -30,7 +30,7 @@ export default function Roles() {
 
     //handle the user permission btn
     async function handleUserPermission(){
-
+   
       try {
         const rolePermissionReq =await axios({
         url:`http://localhost:7000/role/users-permission`,
@@ -51,6 +51,7 @@ export default function Roles() {
         setStatus('danger');
         setAlert(true)
       }
+   
     }
 
     console.log('mount '+remount)
@@ -92,7 +93,7 @@ export default function Roles() {
                 </>
                ):isError? <div className="alert alert-danger mt-4" role="alert"> {error.message} </div>:(
                 <div className='container mt-4 table-responsive'>
-                  {status==='success'?<SuccessAlert alert ={alert} status ={status}/>:<ErrorAlert alert ={alert}/>}
+                  {status==='success'?<SuccessAlert alert ={alert}  setAlert={setAlert}/>:<ErrorAlert alert ={alert} setAlert={setAlert}/>}
                     {
                     data?.map(users =>(
                       <table key={users._id} className="table table-striped table-hover table-borderless caption-top">

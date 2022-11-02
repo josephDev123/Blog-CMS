@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import Alert from 'react-bootstrap/Alert';
 
-export function SuccessAlert({alert,status}) {
+export function SuccessAlert({alert, setAlert}) {
   const [show, setShow] = useState(true);
 
    useEffect(()=>{
     setShow(alert)
-    // setVariant(variants)
-  }, [alert, status])
+  }, [alert ])
 
-  console.log(alert, status)
+  console.log(alert)
 
 
 
   if (show) {
     return (
-      <Alert variant="success" onClose={() => setShow(false)} dismissible>
+      <Alert variant="success" onClose={() => setAlert(false)} dismissible>
         <Alert.Heading>Success!</Alert.Heading>
         <p>
         </p>

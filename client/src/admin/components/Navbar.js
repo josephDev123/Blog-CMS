@@ -47,12 +47,6 @@ export default function Navbar() {
               </ActiveLink>
             </li>
             <li className="nav-item">
-              {/* <a className="nav-link" href="#">Permission</a> */}
-              <ActiveLink href='/permission' className="nav-link" aria-current="page">
-              Permission
-              </ActiveLink>
-            </li>
-            <li className="nav-item">
               {/* <a className="nav-link" href="#">Statistic</a> */}
               <ActiveLink href='/statistic' className="nav-link" aria-current="page">
               Setting
