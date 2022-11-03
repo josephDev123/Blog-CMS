@@ -48,7 +48,7 @@ export default function Navbar() {
             </li>
             <li className="nav-item">
               {/* <a className="nav-link" href="#">Statistic</a> */}
-              <ActiveLink href='/statistic' className="nav-link" aria-current="page">
+              <ActiveLink href='/admin/setting' className="nav-link" aria-current="page">
               Setting
               </ActiveLink>
             </li>

@@ -14,9 +14,9 @@ export default function Roles() {
     const [status, setStatus] = useState('');
     const [remount, setReMount] = useState(false);
     const [show, setShow] = useState(false);
-    const [userid, setUserId] = useState('')
+    const [userid, setUserId] = useState('');
     const [alert, setAlert] = useState(false);
-    const [err, setErr] = useState(null)
+    const [err, setErr] = useState(null);
 
     function handleShowModal(userId){
       setShow(true);

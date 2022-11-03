@@ -15,6 +15,7 @@ import Profile from './admin/components/Profile';
 import UsersList from './admin/components/UsersList';
 import Roles from './admin/components/Roles';
 import IsAdmin from './admin/components/authorization.js/isAdmin';
+import Setting from './admin/components/Setting';
 
 import Login from './Login';
 import Reqister from './Register';
@@ -41,6 +42,7 @@ function App() {
                       <Route path='/admin/profile' element={<Profile/>}/>
                       <Route path='/admin/users-list' element={<UsersList/>}/>
                       <Route path='/admin/roles' element={ <Roles/> }/>
+                      <Route path='/admin/setting' element={ <Setting/> }/>
                     </Route>
                     <Route path='/login' element= {<Login/>}/>
                     <Route path='/register' element= {<Reqister/>}/>
