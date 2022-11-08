@@ -3,13 +3,20 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import MDEditor from '@uiw/react-md-editor';
+import rehypeSanitize from "rehype-sanitize";
+import { useState } from 'react';
 
 
 
 export default function Setting() {
+    const [content, setContent] = useState('');
+    const [color, setColor] = useState('');
+    
+
   return (
     <Container>
-        <h5>Setting</h5>
+        <h4>Setting</h4>
 
             
                 <Row sm={12} md={7} lg={8} xl={8} xxl={8} className='mb-4'>
@@ -20,6 +27,13 @@ export default function Setting() {
                             <Form.Control type='file' />
                         </Form.Group>
                     {/* </Form> */}
+                </Row>
+                <Row className='mb-4'>
+                    <Form.Group>
+                        <Form.Label>Banner content</Form.Label>
+                        {/* <Form.Control as='textarea'></Form.Control> */}
+                        <MDEditor value={content} onChange={setContent}   previewOptions={{rehypePlugins: [[rehypeSanitize]]}}/>
+                    </Form.Group>
                 </Row>
    
                
