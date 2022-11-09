@@ -3,16 +3,38 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Button from 'react-bootstrap/Button';
 import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from "rehype-sanitize";
 import { useState } from 'react';
-
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import {fileUpload} from  '../../utils/fileUpload';
 
 
 export default function Setting() {
     const [content, setContent] = useState('');
     const [color, setColor] = useState('');
-    
+    const [file, setFile] = useState('');
+    const [fileErrorMessage, setFileErrorMessage] = useState('');
+    const [fileSuccessMessage, setFileSuccessMessage] = useState('');
+    const [uploadedfileUrl, setUploadedfileUrl] = useState('');
+
+    function handleFileChange(e){
+        setFile(e.target.files[0]);
+    }
+
+    async function handleConfirmFileUpload(){
+        console.log('click')
+        try{
+            const result = await fileUpload(file);
+            console.log(result)
+        }catch(error){
+            console.log(error.message)
+        }
+       
+    }
+
+     console.log(file);
 
   return (
     <Container>
@@ -22,11 +44,15 @@ export default function Setting() {
                 <Row sm={12} md={7} lg={8} xl={8} xxl={8} className='mb-4'>
                     <h6>Banner section</h6>
                     {/* <Form>  */}
-                        <Form.Group>
-                            <Form.Label>Change Banner image</Form.Label>
-                            <Form.Control type='file' />
-                        </Form.Group>
+
+                    <InputGroup>
+                        <InputGroup.Text> Change Banner image</InputGroup.Text>
+                            <Form.Control type='file' onChange={handleFileChange}/>
+                            {/* <ProgressBar now={60} label={80} className='mt-2'/> */}
+                            <Form.Check type='checkbox' id='' disabled label='status' className='ms-2'/>
+                        <Button variant='primary' onClick={handleConfirmFileUpload}>Confirm</Button>
                     {/* </Form> */}
+                    </InputGroup>  
                 </Row>
                 <Row className='mb-4'>
                     <Form.Group>

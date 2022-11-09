@@ -1,9 +1,5 @@
 
 import { initializeApp } from "firebase/app";
-// import dotenv from 'dotenv';
-
-// dotenv.config();
-
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
