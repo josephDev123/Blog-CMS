@@ -18,15 +18,20 @@ export default function Setting() {
     const [fileErrorMessage, setFileErrorMessage] = useState('');
     const [fileSuccessMessage, setFileSuccessMessage] = useState('');
     const [uploadedfileUrl, setUploadedfileUrl] = useState('');
+    const[uploadProgress, setUploadProgress] = useState('');
 
     function handleFileChange(e){
         setFile(e.target.files[0]);
     }
 
+    function handleProgress(state){
+        setUploadProgress(state)
+    }
+
     async function handleConfirmFileUpload(){
-        console.log('click')
+        
         try{
-            const result = await fileUpload(file);
+            const result = await fileUpload(file, handleProgress);
             console.log(result)
         }catch(error){
             console.log(error.message)
@@ -34,7 +39,7 @@ export default function Setting() {
        
     }
 
-     console.log(file);
+      console.log(uploadProgress);
 
   return (
     <Container>
@@ -64,7 +69,7 @@ export default function Setting() {
    
                
                 <Row sm={12} md={6} lg={6} xl={6}>
-                    <h6>change background color section</h6>
+                    <h6>background color section</h6>
                     <Form> 
                         <InputGroup>
                              <Form.Group>
