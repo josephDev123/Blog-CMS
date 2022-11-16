@@ -10,6 +10,7 @@ import { useState } from 'react';
 import {fileUpload} from  '../../utils/fileUpload';
 import Loading from './Loading';
 import {ErrorAlert} from './ErrorAlert';
+import { axiosInstance } from '../../utils/axiosInstance';
 
 
 export default function Setting() {
@@ -30,6 +31,29 @@ export default function Setting() {
         setUploadProgress(state)
     }
 
+    async function handlesubmitBannerAndContent(e){
+          e.preventDefault();
+        try {
+          
+            if(!uploadedfileUrl || !content){
+                setAlert(true)
+                setErrorMessage('FIELD(S) CANNOT BE EMPTY')
+            }else{
+                const postAndItContentReq = await axiosInstance({
+                    method: 'post',
+                    url: 'setting/post',
+                    body:{
+                        bannerSlug:uploadedfileUrl,
+                        bannerContent:content
+                    }
+                })
+            }
+        } catch (error) {
+            console.log(error.message)
+        }
+     
+    }
+
     async function handleConfirmFileUpload(){
         
         try{
@@ -47,36 +71,32 @@ export default function Setting() {
        
     }
 
-      console.log(uploadProgress);
-      console.log(ErrorMessage);
-      console.log(uploadedfileUrl);
-      console.log(SuccessUpload);
   return (
     <Container>
         <h4>Setting</h4>
             <ErrorAlert alert={alert} setAlert={setAlert}>{ErrorMessage}</ErrorAlert>
-            <Form> 
+            <Form onSubmit={handlesubmitBannerAndContent}> 
                 <Row sm={12} md={7} lg={8} xl={8} xxl={8} className='mb-4'>
                     <h6>Banner section</h6>
 
                     <InputGroup>
                         <InputGroup.Text> Change Banner image</InputGroup.Text>
                             <Form.Control type='file' onChange={handleFileChange}/>
-                            {/* <ProgressBar now={60} label={80} className='mt-2'/> */}
-                            <Form.Check type='checkbox' id='' disabled label='status' defaultChecked={SuccessUpload} className='mx-2'/>
+                            <Form.Check type='checkbox' id='' disabled label='status' checked={SuccessUpload} className='mx-2'/>
                         <Button variant='primary' onClick={handleConfirmFileUpload}>Confirm</Button>
                
                     </InputGroup> 
                      {/* loading component */}
                     {uploadProgress && <Loading> image uploading ... </Loading>} 
-                </Row>
-                <Row className='mb-4'>
-                    <Form.Group>
+                {/* </Row>
+                <Row className='mb-4'> */}
+                    <Form.Group className='mt-4'>
                         <Form.Label>Banner content</Form.Label>
                         {/* <Form.Control as='textarea'></Form.Control> */}
                         <MDEditor value={content} onChange={setContent}   previewOptions={{rehypePlugins: [[rehypeSanitize]]}}/>
                     </Form.Group>
                 </Row>
+                <Button variant='primary' type='submit'>Change banner/content</Button>
             </Form>
                
                 <Row sm={12} md={6} lg={6} xl={6}>

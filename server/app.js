@@ -13,6 +13,9 @@ import {permissionRouter} from './routes/permissionRouter.js'
 //profile module
 import {profileRouter} from './routes/profileRoute.js';
 
+//setting router
+import {cmsSettingRouter} from './routes/SettingRouter.js'
+
 const URL= process.env.MONGO_ATLAS_URL;
  
   
@@ -54,7 +57,8 @@ app.use('/permission', permissionRouter);
 //profile route
 app.use('/profile', profileRouter);
 
-
+//setting route
+app.use('/setting', cmsSettingRouter);
 
 //any routes that does not exist
 app.all('*', (req, res)=>{
