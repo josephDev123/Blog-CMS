@@ -11,6 +11,8 @@ import {fileUpload} from  '../../utils/fileUpload';
 import Loading from './Loading';
 import {ErrorAlert} from './ErrorAlert';
 import { axiosInstance } from '../../utils/axiosInstance';
+import { SuccessAlert } from './SuccessAlert';
+import axios from 'axios'
 
 
 export default function Setting() {
@@ -19,9 +21,11 @@ export default function Setting() {
     const [file, setFile] = useState('');
     const [alert, setAlert] = useState(false);
     const [ErrorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
     const [SuccessUpload, setUploadSuccess] = useState(false);
     const [uploadedfileUrl, setUploadedfileUrl] = useState('');
     const[uploadProgress, setUploadProgress] = useState(null);
+    const[status, setStatus] = useState('');
 
     function handleFileChange(e){
         setFile(e.target.files[0]);
@@ -36,20 +40,33 @@ export default function Setting() {
         try {
           
             if(!uploadedfileUrl || !content){
+                setStatus('error')
                 setAlert(true)
                 setErrorMessage('FIELD(S) CANNOT BE EMPTY')
             }else{
                 const postAndItContentReq = await axiosInstance({
                     method: 'post',
-                    url: 'setting/post',
-                    body:{
+                    url: '/setting/post',
+                    data:{
                         bannerSlug:uploadedfileUrl,
                         bannerContent:content
                     }
                 })
+                if(postAndItContentReq.statusText === 'OK'){
+                    const reqResultReturn = await postAndItContentReq.data
+                console.log(reqResultReturn)
+                    setAlert(true)
+                    setStatus('success');
+                    setSuccessMessage('Sent successfully');
+                }
             }
+
+
         } catch (error) {
             console.log(error.message)
+            setStatus('error')
+            setAlert(true)
+            setErrorMessage(error.message)
         }
      
     }
@@ -74,7 +91,8 @@ export default function Setting() {
   return (
     <Container>
         <h4>Setting</h4>
-            <ErrorAlert alert={alert} setAlert={setAlert}>{ErrorMessage}</ErrorAlert>
+            {status==='error' && <ErrorAlert alert={alert} setAlert={setAlert}>{ErrorMessage}</ErrorAlert>}
+            {status==='success' && <SuccessAlert alert={alert} setAlert={setAlert}>{successMessage}</SuccessAlert>}
             <Form onSubmit={handlesubmitBannerAndContent}> 
                 <Row sm={12} md={7} lg={8} xl={8} xxl={8} className='mb-4'>
                     <h6>Banner section</h6>

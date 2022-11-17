@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const axiosInstance = axios.create({
-    baseUrl: 'https://localhost:7000/'
+    baseUrl: 'http://localhost:7000/'
 })
