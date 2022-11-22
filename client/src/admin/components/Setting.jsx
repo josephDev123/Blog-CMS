@@ -10,7 +10,7 @@ import { useState } from 'react';
 import {fileUpload} from  '../../utils/fileUpload';
 import Loading from './Loading';
 import {ErrorAlert} from './ErrorAlert';
-import { axiosInstance } from '../../utils/axiosInstance';
+import  axiosInstance  from '../../utils/axiosInstance';
 import { SuccessAlert } from './SuccessAlert';
 import axios from 'axios'
 
@@ -46,7 +46,7 @@ export default function Setting() {
             }else{
                 const postAndItContentReq = await axiosInstance({
                     method: 'post',
-                    url: '/setting/post',
+                    url: '/setting/change-banner-content',
                     data:{
                         bannerSlug:uploadedfileUrl,
                         bannerContent:content
