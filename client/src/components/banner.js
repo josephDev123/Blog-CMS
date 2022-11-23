@@ -1,7 +1,11 @@
 import React from 'react'
-import '../css/banner.css'
+import '../css/banner.css';
+import {useFetchGeneral} from '../customHooks/usefetch-g';
 
 export default function Banner() {
+ const {isLoading, isError, error, data} = useFetchGeneral('/setting/change-banner-content')
+ console.log(data, error)
+
   return (
     <div className='container banner_container'>
       <div className='banner_content_wrapper'>
