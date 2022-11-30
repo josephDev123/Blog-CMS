@@ -16,7 +16,7 @@ async function serverRequest(url, query){
     const res = await req.data;
     return res;
   } catch (error) {
-       return error.message;
+    return error.message;
   }
   
 }

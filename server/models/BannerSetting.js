@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 
-const CmsSettingSchema = new mongoose.Schema({
+const SettingBannerSchema = new mongoose.Schema({
     'banner_image_link':String,
     'banner_content':{
         type:String,
@@ -11,4 +11,4 @@ const CmsSettingSchema = new mongoose.Schema({
 
 }, { timestamps: true })
 
-export const CmsSettingModel = mongoose.model('setting', CmsSettingSchema);
+export const CmsSettingModel = mongoose.model('setting', SettingBannerSchema);

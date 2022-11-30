@@ -5,7 +5,7 @@ function Loading({children}) {
   return (
     <>
 
-      <Button variant="primary" disabled size='sm' className='mt-2'>
+      <Button variant="warning" disabled size='sm' className='mt-2'>
         <Spinner
           as="span"
           animation="grow"

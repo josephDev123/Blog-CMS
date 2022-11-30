@@ -12,11 +12,12 @@ import Loading from './Loading';
 import {ErrorAlert} from './ErrorAlert';
 import  axiosInstance  from '../../utils/axiosInstance';
 import { SuccessAlert } from './SuccessAlert';
-import axios from 'axios'
+// import axios from 'axios'
 
 
 export default function Setting() {
     const [content, setContent] = useState('');
+    const [title, setTitle] = useState('');
     const [color, setColor] = useState('');
     const [file, setFile] = useState('');
     const [alert, setAlert] = useState(false);
@@ -26,11 +27,12 @@ export default function Setting() {
     const [uploadedfileUrl, setUploadedfileUrl] = useState('');
     const[uploadProgress, setUploadProgress] = useState(null);
     const[status, setStatus] = useState('');
-
+console.log(title);
     function handleFileChange(e){
         setFile(e.target.files[0]);
     }
 
+    //monitor file progress
     function handleProgress(state){
         setUploadProgress(state)
     }
@@ -38,8 +40,7 @@ export default function Setting() {
     async function handlesubmitBannerAndContent(e){
           e.preventDefault();
         try {
-          
-            if(!uploadedfileUrl || !content){
+            if(!uploadedfileUrl || !content || !title){
                 setStatus('error')
                 setAlert(true)
                 setErrorMessage('FIELD(S) CANNOT BE EMPTY')
@@ -72,20 +73,18 @@ export default function Setting() {
     }
 
     async function handleConfirmFileUpload(){
-        
         try{
             const result = await fileUpload(file, handleProgress);
            
             setUploadedfileUrl(result)
             setUploadProgress(null)
             setUploadSuccess(true)
-            console.log(result)
+            // console.log(result)
         }catch(error){
             setErrorMessage(error.message)
             setAlert(true)
-            console.log(error.message)
-        }
-       
+            // console.log(error.message)
+        }  
     }
 
   return (
@@ -96,6 +95,11 @@ export default function Setting() {
             <Form onSubmit={handlesubmitBannerAndContent}> 
                 <Row sm={12} md={7} lg={8} xl={8} xxl={8} className='mb-4'>
                     <h6>Banner section</h6>
+
+                    <Form.Group className='mb-4'>
+                        <Form.Label>Title</Form.Label>
+                        <Form.Control type='text' onChange={(e)=>setTitle(e.target.value)}></Form.Control>
+                    </Form.Group>
 
                     <InputGroup>
                         <InputGroup.Text> Change Banner image</InputGroup.Text>
