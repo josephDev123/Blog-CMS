@@ -12,7 +12,6 @@ import Loading from './Loading';
 import {ErrorAlert} from './ErrorAlert';
 import  axiosInstance  from '../../utils/axiosInstance';
 import { SuccessAlert } from './SuccessAlert';
-// import axios from 'axios'
 
 
 export default function Setting() {
@@ -27,7 +26,7 @@ export default function Setting() {
     const [uploadedfileUrl, setUploadedfileUrl] = useState('');
     const[uploadProgress, setUploadProgress] = useState(null);
     const[status, setStatus] = useState('');
-console.log(title);
+
     function handleFileChange(e){
         setFile(e.target.files[0]);
     }
@@ -50,26 +49,22 @@ console.log(title);
                     url: '/setting/change-banner-content',
                     data:{
                         bannerSlug:uploadedfileUrl,
-                        bannerContent:content
+                        bannerContent:content,
+                        title
                     }
                 })
                 if(postAndItContentReq.statusText === 'OK'){
                     const reqResultReturn = await postAndItContentReq.data
-                console.log(reqResultReturn)
                     setAlert(true)
                     setStatus('success');
                     setSuccessMessage('Sent successfully');
                 }
             }
-
-
         } catch (error) {
-            console.log(error.message)
             setStatus('error')
             setAlert(true)
             setErrorMessage(error.message)
         }
-     
     }
 
     async function handleConfirmFileUpload(){
@@ -79,11 +74,9 @@ console.log(title);
             setUploadedfileUrl(result)
             setUploadProgress(null)
             setUploadSuccess(true)
-            // console.log(result)
         }catch(error){
             setErrorMessage(error.message)
             setAlert(true)
-            // console.log(error.message)
         }  
     }
 

@@ -7,6 +7,11 @@ const SettingBannerSchema = new mongoose.Schema({
         type:String,
         maxLength:50,
         required:true
+    },
+    'title':{
+        type:String,
+        maxlength:50,
+        required:true
     }
 
 }, { timestamps: true })
