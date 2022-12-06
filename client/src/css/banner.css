@@ -1,9 +1,9 @@
-.banner_container{
+/* .banner_container{
     background-image: url('/public/images/unsplash_1.jpg');
     background-size: cover;
     background-position: center;
     height: 25em;
-}
+} */
 
 .banner_content_wrapper {
     transform: translateY(7em);
