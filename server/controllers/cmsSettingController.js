@@ -18,7 +18,7 @@ export const cmsBannerAndContentPostMethod = async (req, res)=>{
 export const cmsBannerAndContentGetMethod = async (req, res)=>{
   try {
     const banner_data =  await CmsSettingModel.find();
-    console.log(banner_data)
+    // console.log(banner_data)
     res.status(200).json({message:banner_data})
   } catch (error) {
     res.status(400).send(error.message);

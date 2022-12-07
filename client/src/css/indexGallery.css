@@ -14,8 +14,15 @@
 
 .index_gallery_parent > .index_content{
   flex-grow: 1;
-  /* width: 15rem; */
+  width: 15rem;
   flex-shrink: 1;
   flex-basis: 18rem;
 
 }
+
+.index_gallery_parent > .index_content:last-child{
+  width: 15rem;
+  flex: 0.2 1;
+
+}
+

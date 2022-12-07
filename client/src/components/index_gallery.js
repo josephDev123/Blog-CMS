@@ -28,10 +28,12 @@ export default function IndexGallery({isLoading, isError, error, data}){
             <section className='index_gallery_parent'>
                     {data.map((posts)=>(
                     <div key={posts._id} className='index_content mb-4'>
-                        <img src={posts.image_link} alt='img' className='indexGallery_img' width='100%' />
-                        <h3>{posts.title}</h3>
-                        <p>{posts.content.substring(0, 50)}...</p>
-                        <Link to={'blog/post/'+posts._id}>read more</Link>
+                        <div>
+                            <img src={posts.image_link} alt='img' className='indexGallery_img' width='100%' />
+                            <h3>{posts.title}</h3>
+                            <p>{posts.content.substring(0, 50)}...</p>
+                            <Link to={'blog/post/'+posts._id}>read more</Link>
+                        </div>
                     </div>
                     ))}
             </section>
