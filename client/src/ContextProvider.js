@@ -8,7 +8,7 @@ export function ContextProvider({children}) {
     const [isAuthUser, setIsAuthUser] = useState('')
     const [isAuth, setIsAuth] = useState('loading');
     // const redirect = useNavigate();
-// console.log(isAuthUser);
+console.log(isAuthUser);
 // console.log(isAuth);
 
 const auth = getAuth();
@@ -16,7 +16,7 @@ const auth = getAuth();
 //check authentication status
 useEffect(()=>{
     onAuthStateChanged(auth, (user)=>{
-        if(user.uid){
+        if(user){
             setIsAuth('fulfilled') 
             setIsAuthUser(user.email);
         }else{
@@ -25,7 +25,7 @@ useEffect(()=>{
         }
 
     } )
-})
+}, [auth])
 
     const login = (user) =>{
         if(user === null || user === undefined){
@@ -34,7 +34,7 @@ useEffect(()=>{
         }else{
             setIsAuth('fulfilled') 
             setIsAuthUser(user);
-            clearTimeout(id)
+            // clearTimeout(id)
         }
     }
 
@@ -43,10 +43,10 @@ useEffect(()=>{
     }
 
     // if the loading takes longer time maybe because of unauthenticated user or network
-   const id = setTimeout(() => {
-        setIsAuth('network');
-        document.cookie = 'name=no register';
-    }, 10000);
+//    const id = setTimeout(() => {
+//         setIsAuth('network');
+//         document.cookie = 'name=no register';
+//     }, 10000);
 
     
     if(isAuth === 'loading'){

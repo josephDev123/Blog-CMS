@@ -16,12 +16,17 @@ import UsersList from './admin/components/UsersList';
 import Roles from './admin/components/Roles';
 import IsAdmin from './admin/components/authorization.js/isAdmin';
 import Setting from './admin/components/Setting';
+import {AuthContext} from './Context/AuthContext'
+import { useContext } from 'react';
 
 import Login from './Login';
 import Reqister from './Register';
 
 
 function App() {
+
+  const {isAuthUser} = useContext(AuthContext)
+  console.log(isAuthUser)
   return (
        
           <div className="App">

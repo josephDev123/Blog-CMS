@@ -1,7 +1,7 @@
 import React from 'react'
 import './css/loginRegister.css';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import {signInWithEmailAndPassword, getAuth} from 'firebase/auth'
 import { app } from './firebase/firebaseAuth';
 
@@ -55,7 +55,7 @@ export default function Login() {
             
             <div className="input-group mb-3">
                 <button className="btn btn-primary" type="submit">Login</button>
-                <a href='/register' className="btn btn-outline-secondary" type="button">haven't register</a>
+                <Link to='/register' className="btn btn-outline-secondary" type="button">haven't register</Link>
             </div>
         </form>
     </div>

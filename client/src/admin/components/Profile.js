@@ -15,6 +15,7 @@ export default function Profile() {
   const {isAuthUser} = useContext(AuthContext);
   const [enactRender, setEnactRender] = useState('');
   const [show, setShow] = useState(false);
+  console.log(isAuthUser)
 
   // open modal 
   const handleShow = () => setShow(true);

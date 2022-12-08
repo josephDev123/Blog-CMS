@@ -9,7 +9,7 @@ export default function Banner() {
   const [alert, setAlert] = useState(true);
   const url = 'setting/change-banner-content';
   const {isLoading, isError, error, data} = useReqHttp(url, null, null);
-  console.log( data)
+  // console.log( data)
  
 
   if(isLoading){
@@ -37,7 +37,7 @@ export default function Banner() {
     <>
     {data.message.map(item=>(
       <div className="container card text-black mt-5" key={item._id} style={{marginTop: "10rem"}}>
-        <img src={item.banner_image_link} className="card-img" alt="..."/>
+        <img src={item.banner_image_link} className="card-img img-fluid" loading='lazy' alt="banner_image"/>
         <div className="card-img-overlay text-wrap" style={{width: "35rem"}}>
           <h5 className="card-title mt-5">{item.title}</h5>
           <p className="card-text mt-4">{item.banner_content}</p>

@@ -1,7 +1,7 @@
 import React from 'react';
 import './css/loginRegister.css';
 import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {createUserWithEmailAndPassword, getAuth} from 'firebase/auth'
 import { app } from './firebase/firebaseAuth';
 import { AuthContext } from './Context/AuthContext';
@@ -57,7 +57,7 @@ export default function Reqister() {
             </div>
             <div className="input-group mb-3">
                 <button type='submit' className="btn btn-primary">Register</button>
-                <a href='/login' className="btn btn-outline-secondary" type="button">haven't login</a>
+                <Link to='/login' className="btn btn-outline-secondary" type="button">haven't login</Link>
             </div>
         </form>
     </div>
