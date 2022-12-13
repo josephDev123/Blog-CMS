@@ -1,9 +1,10 @@
 import React from 'react'
 import './css/loginRegister.css';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import {signInWithEmailAndPassword, getAuth} from 'firebase/auth'
 import { app } from './firebase/firebaseAuth';
+import {AuthContext} from './Context/AuthContext';
 
 
 export default function Login() {
@@ -13,6 +14,7 @@ export default function Login() {
     const [errorMessage, setErrorMessage] = useState('');
 
     const navigate = useNavigate();
+    const {login} = useContext(AuthContext)
 
     const auth = getAuth();
 
@@ -25,6 +27,7 @@ export default function Login() {
                 signInWithEmailAndPassword(auth, email, password).then(user=>{
                     if(user.user.uid){
                         setStatus('registered');
+                        login(user.user.email)
                         return navigate('/admin');
                     }
                 }).catch(err=> {

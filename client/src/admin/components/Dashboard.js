@@ -2,8 +2,12 @@ import React from 'react';
 import '../asset/css/dashboard.css';
 import ListArticles from './ListArticles';
 import ActiveLink from '../../ActiveLink';
+import { useContext } from 'react';
+import {AuthContext} from '../../Context/AuthContext'
 
 export default function Dashboard() {
+    const {isAuthUser} = useContext(AuthContext)
+    console.log(isAuthUser)
   return (
     <div className='container mt-4'>
         <span className='tag'>
