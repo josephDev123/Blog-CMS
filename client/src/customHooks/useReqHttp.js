@@ -4,13 +4,15 @@ import axiosInstance from '../utils/axiosInstance';
 
 async function Req_get(url, body='', param=''){
     const bodies = body && body;
-    const params = param && param
+    const params = param?param: ''
     try {
         const req_make =  await axiosInstance({
             url:`${url}`, 
             method: 'get',
             data:bodies,
-            params:params
+            params:{
+                query:params
+            }
            })
         const req_result = await req_make;
         if (req_result.statusText === 'OK') {

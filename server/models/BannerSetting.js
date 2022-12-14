@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 
 const SettingBannerSchema = new mongoose.Schema({
+    'creator':String,
     'banner_image_link':String,
     'banner_content':{
         type:String,

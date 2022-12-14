@@ -12,6 +12,8 @@ import Loading from './Loading';
 import {ErrorAlert} from './ErrorAlert';
 import  axiosInstance  from '../../utils/axiosInstance';
 import { SuccessAlert } from './SuccessAlert';
+import { useContext } from 'react';
+import { AuthContext } from '../../Context/AuthContext';
 
 
 export default function Setting() {
@@ -26,6 +28,9 @@ export default function Setting() {
     const [uploadedfileUrl, setUploadedfileUrl] = useState('');
     const[uploadProgress, setUploadProgress] = useState(null);
     const[status, setStatus] = useState('');
+
+    const {isAuthUser} = useContext(AuthContext)
+    console.log(isAuthUser)
 
     function handleFileChange(e){
         setFile(e.target.files[0]);
@@ -48,6 +53,7 @@ export default function Setting() {
                     method: 'post',
                     url: '/setting/change-banner-content',
                     data:{
+                        creator:isAuthUser,
                         bannerSlug:uploadedfileUrl,
                         bannerContent:content,
                         title
@@ -82,7 +88,7 @@ export default function Setting() {
 
   return (
     <Container>
-        <h4>Setting</h4>
+        <span className='' style={{marginTop:'2rem', fontSize:'1.5rem', background:'#219EBC', padding:'0.5rem', textAlign:'center', borderRadius:'0.5rem'}}>/Setting</span>
             {status==='error' && <ErrorAlert alert={alert} setAlert={setAlert}>{ErrorMessage}</ErrorAlert>}
             {status==='success' && <SuccessAlert alert={alert} setAlert={setAlert}>{successMessage}</SuccessAlert>}
             <Form onSubmit={handlesubmitBannerAndContent}> 

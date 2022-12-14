@@ -136,7 +136,7 @@ export default function Post() {
   return (
     <div className='container mt-4'>
         <span className='tag'>
-            /Post
+            /Add Post
         </span>
         {status === 'error' && <div className="alert alert-danger mt-5" role="alert">{successErrorMessage}</div>}
         {status === 'empty' && <div className="alert alert-danger mt-5" role="alert">{successErrorMessage}</div>}
