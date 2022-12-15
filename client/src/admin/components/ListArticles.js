@@ -32,7 +32,7 @@ export default function ListArticles() {
 
   }, { keepPreviousData : true });
 
-  console.log(data);
+  // console.log(data);
   //loading
  if(isLoading) return (
         <div className='mt-4'>
@@ -56,11 +56,11 @@ export default function ListArticles() {
 
   //success
     return (
-    <div className='mt-4  list_article_container container'>
+    <div className='mt-4  list_article_container'>
         <h3 className='pt-2'>Articles</h3>
 
         <div className="table-responsive">
-            <table className="table table table-striped table-hover table-bordered">
+            <table className="table table-striped table-hover table-bordered">
             <caption>List of Blogs</caption>
               <thead className='table-dark'>
                 <tr>

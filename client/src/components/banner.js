@@ -14,6 +14,13 @@ export default function Banner() {
   const {isAuthUser} = useContext(AuthContext);
   const {isLoading, isError, error, data} = useReqHttp(url, null, isAuthUser);
   // console.log( data)
+
+  const styleBgImg = {
+     maxHeight:'30rem', 
+     maxWidth:'100%', 
+     objectFit:'cover',   
+    //  objectPosition: '80% 80%'
+  }
  
 
   if(isLoading){
@@ -40,8 +47,8 @@ export default function Banner() {
   return (
     <>
     {data.message.map(item=>(
-      <div className="container card text-black mt-5" key={item._id} style={{marginTop: "10rem"}}>
-        <img src={item.banner_image_link} className="card-img img-fluid" loading='lazy' alt="banner_image" style={{maxHeight:'30rem', maxWidth:'100%'}} />
+      <div className="container card text-black" key={item._id} style={{marginTop: "5rem"}}>
+        <img src={item.banner_image_link} className="card-img img-fluid" loading='lazy' alt="banner_image" style={styleBgImg} />
         <div className="card-img-overlay text-wrap" style={{width: "35rem"}}>
           <h5 className="card-title mt-5">{item.title}</h5>
           <p className="card-text mt-4">{item.banner_content}</p>

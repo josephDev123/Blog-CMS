@@ -30,7 +30,7 @@ export default function Navbar() {
             </li>
             <li className="nav-item">
               {/* <a className="nav-link active" aria-current="page" href="/admin/create-post-form"></a> */}
-              <ActiveLink href='/admin/create-post-form' className="nav-link" aria-current="page">
+              <ActiveLink href='/admin/my-post' className="nav-link" aria-current="page">
                My Posts
               </ActiveLink>
             </li>
