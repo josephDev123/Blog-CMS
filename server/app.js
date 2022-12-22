@@ -62,7 +62,7 @@ app.use('/setting', cmsSettingRouter);
 
 //any routes that does not exist
 app.all('*', (req, res)=>{
-    res.json({'message':'this url is not on our routes'}) 
+    res.status(500).json({'message':'this url is not on our routes'}) 
     // res.end();
 });
 
