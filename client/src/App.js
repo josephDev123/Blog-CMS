@@ -16,7 +16,7 @@ import UsersList from './admin/components/UsersList';
 import Roles from './admin/components/Roles';
 import IsAdmin from './admin/components/authorization.js/isAdmin';
 import Setting from './admin/components/Setting';
-import Myposts from './admin/components/Myposts'
+import Myposts from './admin/pages/Myposts'
 
 import {AuthContext} from './Context/AuthContext'
 import { useContext } from 'react';

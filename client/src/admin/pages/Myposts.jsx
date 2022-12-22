@@ -1,5 +1,6 @@
 import React from 'react'
 import headingTag from '../asset/css/css_modules/page-heading.module.css'
+import MyPostsTable from '../components/myPostsTable'
 
 export default function Myposts() {
     const styleBanner = {
@@ -29,7 +30,7 @@ export default function Myposts() {
                                 </figcaption>
                             </figure>
                         </div>
-                        <div className="card-body">
+                        <div className="card-body d-none d-sm-block d-sm-none d-md-block">
                         <figure class="text-center">
                             <blockquote class="blockquote">
                                 <p>Every time you post something online, you have a choice. You can either make it something that adds to the happiness levels in the world—or you can make it something that takes away.</p>
@@ -43,6 +44,9 @@ export default function Myposts() {
                 </div>
             </div>
 
+        </section>
+        <section className='table_wrapper'>
+            <MyPostsTable/>
         </section>
          
         
