@@ -104,3 +104,10 @@ export const PostById = async (req, res)=>{
     }
 }
 
+export function getAllPostsOfCurrentAuthUser(req, res){
+    const user = req.headers;
+    console.log(user)
+    // console.log('hello user authenticated posts') 
+   res.end()
+}
+

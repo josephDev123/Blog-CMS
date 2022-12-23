@@ -1,12 +1,20 @@
 import React from 'react'
 import headingTag from '../asset/css/css_modules/page-heading.module.css'
-import MyPostsTable from '../components/myPostsTable'
+import MyPostsTable from '../components/myPostsTable';
+import {useReqHttp} from '../../customHooks/useReqHttp';
+import { useContext } from 'react';
+import {AuthContext} from  '../../Context/AuthContext';
 
 export default function Myposts() {
     const styleBanner = {
         objectFit:'cover',
         objectPosition:'center'
     }
+    const {isAuthUser} = useContext(AuthContext);
+    console.log(isAuthUser)
+
+    const {loading, isError, error, data} = useReqHttp('blog/post/currentUser', null, null, isAuthUser)
+
 
   return (
     <div className='container mt-4'>
@@ -21,21 +29,21 @@ export default function Myposts() {
                     <div className="col-md-8 col-sm-12">
                         <div className="card-body">
                             <h5 className="card-title">Card title</h5>
-                            <figure class="text-center">
-                                <blockquote class="blockquote">
+                            <figure className="text-center">
+                                <blockquote className="blockquote">
                                     <p>The first thing you learn when you’re blogging is that people are one click away from leaving you. So you’ve got to get to the point, you can’t waste people’s time, you’ve got to give them some value for their limited attention span. </p>
                                 </blockquote>
-                                <figcaption class="blockquote-footer">
+                                <figcaption className="blockquote-footer">
                                     ~Alex Tabarrok
                                 </figcaption>
                             </figure>
                         </div>
                         <div className="card-body d-none d-sm-block d-sm-none d-md-block">
-                        <figure class="text-center">
-                            <blockquote class="blockquote">
+                        <figure className="text-center">
+                            <blockquote className="blockquote">
                                 <p>Every time you post something online, you have a choice. You can either make it something that adds to the happiness levels in the world—or you can make it something that takes away.</p>
                             </blockquote>
-                            <figcaption class="blockquote-footer">
+                            <figcaption className="blockquote-footer">
                                 ~Zoe Sugg
                             </figcaption>
                         </figure>

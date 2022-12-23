@@ -2,9 +2,10 @@
 import { useQuery } from "react-query";
 import axiosInstance from '../utils/axiosInstance';
 
-async function Req_get(url, body='', param=''){
+async function Req_get(url, body='', param='', headersParams=null){
     const bodies = body && body;
     const params = param?param: ''
+    const headersCredential = !headersParams?headersParams:null
     try {
         const req_make =  await axiosInstance({
             url:`${url}`, 
@@ -12,6 +13,9 @@ async function Req_get(url, body='', param=''){
             data:bodies,
             params:{
                 query:params
+            },
+            headers:{
+                'currentUser': headersCredential
             }
            })
         const req_result = await req_make;
@@ -38,7 +42,7 @@ async function Req_get(url, body='', param=''){
   
 }
 
-export const useReqHttp = (url, body, param)=>{
-    const { isLoading, isError, error, data } = useQuery(['httpReq', url, body, param], async()=> Req_get(url, body, param));
+export const useReqHttp = (url, body, param, headers)=>{
+    const { isLoading, isError, error, data } = useQuery(['httpReq', url, body, param], async()=> Req_get(url, body, param, headers));
     return { isLoading, isError, error, data };
 }
