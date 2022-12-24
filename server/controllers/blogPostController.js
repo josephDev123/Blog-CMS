@@ -104,10 +104,17 @@ export const PostById = async (req, res)=>{
     }
 }
 
-export function getAllPostsOfCurrentAuthUser(req, res){
-    const user = req.headers;
-    console.log(user)
-    // console.log('hello user authenticated posts') 
-   res.end()
+export async function getAllPostsOfCurrentAuthUser(req, res){
+    try {
+        const user = req.headers.currentUser;
+        console.log(user)
+        const getUserPost = await Post.find({creator:user});
+        res.status(200).json(getUserPost)
+        console.log(getUserPost)
+        res.end() 
+    } catch (error) {
+        res.status(500).json({error:error.message})
+    }
+    
 }
 

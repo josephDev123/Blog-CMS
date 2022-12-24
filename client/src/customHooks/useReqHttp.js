@@ -5,7 +5,7 @@ import axiosInstance from '../utils/axiosInstance';
 async function Req_get(url, body='', param='', headersParams=null){
     const bodies = body && body;
     const params = param?param: ''
-    const headersCredential = !headersParams?headersParams:null
+    const headersCredential = headersParams?headersParams:null
     try {
         const req_make =  await axiosInstance({
             url:`${url}`, 

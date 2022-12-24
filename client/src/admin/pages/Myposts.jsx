@@ -13,7 +13,8 @@ export default function Myposts() {
     const {isAuthUser} = useContext(AuthContext);
     console.log(isAuthUser)
 
-    const {loading, isError, error, data} = useReqHttp('blog/post/currentUser', null, null, isAuthUser)
+    const {loading, isError, error, data} = useReqHttp('blog/post/currentUser', null, null, isAuthUser);
+    console.log('my psot '+data)
 
 
   return (
