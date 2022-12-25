@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function MyPostsTable() {
+export default function MyPostsTable({currentUserPosts}) {
   return (
     <div className='table-responsive'>
         <table className="table table-hover caption-top">
@@ -17,13 +17,22 @@ export default function MyPostsTable() {
                 </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
+                {currentUserPosts.map((myPosts)=>(
+                    <div key={myPosts._id}>
+                        <tr>
+                            <th scope="row">{myPosts._id}</th>
+                            <td>{myPosts.title}</td>
+                            <td>{myPosts.category}</td>
+                            <td>{myPosts.content}</td>
+                            <td>{myPosts.image_link}</td>
+                            <td><button className='btn btn-warning'>Edit post</button></td>
+                            <td><button className='btn btn-danger'>Delete post</button></td>
+                        </tr>
+
+                    </div>
+                ))}
+           
+            {/* <tr>
                 <th scope="row">2</th>
                 <td>Jacob</td>
                 <td>Thornton</td>
@@ -33,7 +42,7 @@ export default function MyPostsTable() {
                 <th scope="row">3</th>
                 <td colspan="2">Larry the Bird</td>
                 <td>@twitter</td>
-            </tr>
+            </tr> */}
             </tbody>
         </table>
     </div>

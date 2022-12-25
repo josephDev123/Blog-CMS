@@ -106,14 +106,14 @@ export const PostById = async (req, res)=>{
 
 export async function getAllPostsOfCurrentAuthUser(req, res){
     try {
-        const user = req.headers.currentUser;
+        const user = req.headers.currentuser;
         console.log(user)
         const getUserPost = await Post.find({creator:user});
-        res.status(200).json(getUserPost)
+        res.status(200).json({'data':getUserPost})
         console.log(getUserPost)
         res.end() 
     } catch (error) {
-        res.status(500).json({error:error.message})
+        res.status(500).json({'error':error.message})
     }
     
 }
