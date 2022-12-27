@@ -14,7 +14,7 @@ export default function Myposts() {
     console.log(isAuthUser)
 
     const {isLoading, isError, error, data} = useReqHttp('blog/post/currentUser', null, null, isAuthUser);
-    console.log(data.data)
+    // console.log(data.data)
 
 
   return (
@@ -55,14 +55,18 @@ export default function Myposts() {
 
         </section>
 
-          <section>
-            {isLoading&&<>Loading ...</>}
-            {isError&&<>{error.message}</>}
-          </section>
-        <section className='table_wrapper'>
-            <MyPostsTable currentUserPosts={data.data}/>
-        </section>
-         
+          {/* <section> */}
+            {/* {isLoading&&<>Loading ...</>}
+            {isError&&<>{error.message}</>} */}
+            {isLoading?
+            <> Loading ...</>
+            :isError?
+            <>{error.message}</>:
+       
+            <section className='table_wrapper'>
+                <MyPostsTable currentUserPosts={data.data}/>
+            </section>
+            }
         
     </div>
   )
