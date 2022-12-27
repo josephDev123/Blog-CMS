@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function MyPostsTable({currentUserPosts}) {
+export default function MyPostsTable({currentUserPosts, setPages, isFetching, isPreviousData, currentPage, setBackPages}) {
 
     if(currentUserPosts <= 0){
         return(
@@ -41,8 +41,17 @@ export default function MyPostsTable({currentUserPosts}) {
                 ))} 
              
             </tbody>
-           
         </table>
+
+        <span>Current Page: {currentPage + 1}</span>
+        <button className='btn btn-primary' onClick={() => setBackPages(1)}
+         disabled={currentPage === 0}>Previous</button>
+        <button className='btn btn-secondary' onClick={() => {
+           if (!isPreviousData && currentUserPosts.hasMore) {
+            setPages(1)
+           }
+        }}
+           disabled={isPreviousData || !currentUserPosts?.hasMore}>Next</button>
     </div>
   )
 }

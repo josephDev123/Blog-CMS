@@ -42,7 +42,8 @@ async function Req_get(url, body='', param='', headersParams=null){
   
 }
 
-export const useReqHttp = (url, body, param, headers)=>{
-    const { isLoading, isError, error, data } = useQuery(['httpReq', url, body, param], async()=> Req_get(url, body, param, headers));
-    return { isLoading, isError, error, data };
+export const useReqHttp = (url, body, param, headers, isPagination)=>{
+    const { isLoading, isError, error, data,  isFetching, isPreviousData } = useQuery(['httpReq', url, body, param], async()=> Req_get(url, body, param, headers), { keepPreviousData : isPagination });
+    // const queryKey= 'httpReq';
+    return { isLoading, isError, error, data, isFetching, isPreviousData};
 }

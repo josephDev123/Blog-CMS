@@ -4,17 +4,28 @@ import MyPostsTable from '../components/myPostsTable';
 import {useReqHttp} from '../../customHooks/useReqHttp';
 import { useContext } from 'react';
 import {AuthContext} from  '../../Context/AuthContext';
+import {useState, useCallback} from 'react';
 
 export default function Myposts() {
+    const [page, setPage]= useState(0);
     const styleBanner = {
         objectFit:'cover',
         objectPosition:'center'
     }
     const {isAuthUser} = useContext(AuthContext);
-    console.log(isAuthUser)
+    // console.log(isAuthUser)
 
-    const {isLoading, isError, error, data} = useReqHttp('blog/post/currentUser', null, null, isAuthUser);
-    // console.log(data.data)
+    const setPages = (num)=>{
+        return setPage((old)=> old + num)
+    }
+
+     const setBackPages = (num)=>{
+        setPage((old)=> old - num)
+    }
+    console.log(page)
+
+    const {isLoading, isError, error, data,  isFetching, isPreviousData} = useReqHttp('blog/post/currentUser', null, page, isAuthUser, true);
+    console.log(data?.data)
 
 
   return (
@@ -64,7 +75,7 @@ export default function Myposts() {
             <>{error.message}</>:
        
             <section className='table_wrapper'>
-                <MyPostsTable currentUserPosts={data.data}/>
+                <MyPostsTable currentUserPosts={data.data} setPages = {setPages} isFetching={isFetching} isPreviousData={isPreviousData} currentPage = {page} setBackPages = {setBackPages}/> 
             </section>
             }
         
