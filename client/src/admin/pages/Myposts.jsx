@@ -16,7 +16,7 @@ export default function Myposts() {
     // console.log(isAuthUser)
 
     const setPages = (num)=>{
-        return setPage((old)=> old + num)
+         setPage((old)=> old + num)
     }
 
      const setBackPages = (num)=>{
@@ -25,7 +25,7 @@ export default function Myposts() {
     console.log(page)
 
     const {isLoading, isError, error, data,  isFetching, isPreviousData} = useReqHttp('blog/post/currentUser', null, page, isAuthUser, true);
-    console.log(data?.data)
+    // console.log(data?.data)
 
 
   return (

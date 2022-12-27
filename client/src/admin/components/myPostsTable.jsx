@@ -13,7 +13,7 @@ export default function MyPostsTable({currentUserPosts, setPages, isFetching, is
     <div className='table-responsive'>
         <table className="table table-hover caption-top">
             <caption>List of posts</caption>
-            <thead>
+            <thead className='table-dark'>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
@@ -33,9 +33,9 @@ export default function MyPostsTable({currentUserPosts, setPages, isFetching, is
                             <td>{myPosts.title}</td>
                             <td>{myPosts.category}</td>
                             <td>{myPosts.content}</td>
-                            <td><img src={myPosts.image_link} alt='' loading='lazy' width='20rem' height='20rem'/></td>
-                            <td><button className='btn btn-warning'>Edit post</button></td>
-                            <td><button className='btn btn-danger'>Delete post</button></td>
+                            <td><img src={myPosts.image_link} alt='' loading='lazy' width='80rem' height='80rem' style={{objectFit:'contain'}}/></td>
+                            <td><button className='btn btn-warning'>Edit</button></td>
+                            <td><button className='btn btn-danger'>Delete</button></td>
                         </tr>
                         // </fragment>
                 ))} 
@@ -47,9 +47,9 @@ export default function MyPostsTable({currentUserPosts, setPages, isFetching, is
         <button className='btn btn-primary' onClick={() => setBackPages(1)}
          disabled={currentPage === 0}>Previous</button>
         <button className='btn btn-secondary' onClick={() => {
-           if (!isPreviousData && currentUserPosts.hasMore) {
+        //    if (!isPreviousData && currentUserPosts.hasMore) {
             setPages(1)
-           }
+        //    }
         }}
            disabled={isPreviousData || !currentUserPosts?.hasMore}>Next</button>
     </div>
