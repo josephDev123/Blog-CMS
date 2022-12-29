@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function MyPostsTable({currentUserPosts, setPages, isFetching, isPreviousData, currentPage, setBackPages}) {
+export default function MyPostsTable({currentUserPosts, increasePage, isFetching, isPreviousData, currentPage, decreasePages}) {
 
     if(currentUserPosts <= 0){
         return(
@@ -27,31 +27,28 @@ export default function MyPostsTable({currentUserPosts, setPages, isFetching, is
             
             <tbody>
             {currentUserPosts.map((myPosts)=>(
-            //  <fragment > 
+            
                         <tr key={myPosts._id}>
                             <th scope="row">{myPosts._id.substr(0, 7)}</th>
                             <td>{myPosts.title}</td>
                             <td>{myPosts.category}</td>
                             <td>{myPosts.content}</td>
-                            <td><img src={myPosts.image_link} alt='' loading='lazy' width='80rem' height='80rem' style={{objectFit:'contain'}}/></td>
+                            <td><img src={myPosts.image_link} alt='' loading='lazy' width='60rem' height='60rem' style={{objectFit:'cover'}}/></td>
                             <td><button className='btn btn-warning'>Edit</button></td>
                             <td><button className='btn btn-danger'>Delete</button></td>
                         </tr>
-                        // </fragment>
+                        
                 ))} 
              
             </tbody>
         </table>
 
-        <span>Current Page: {currentPage + 1}</span>
-        <button className='btn btn-primary' onClick={() => setBackPages(1)}
-         disabled={currentPage === 0}>Previous</button>
-        <button className='btn btn-secondary' onClick={() => {
-        //    if (!isPreviousData && currentUserPosts.hasMore) {
-            setPages(1)
-        //    }
-        }}
-           disabled={isPreviousData || !currentUserPosts?.hasMore}>Next</button>
+        <span className='me-2'>Current Page: {currentPage + 1}</span>
+        <button className='btn btn-primary me-2' onClick={() => decreasePages()} >Previous</button>
+
+        <button className='btn btn-secondary' onClick={()=>increasePage()} >Next</button>
     </div>
   )
 }
+//disabled={currentUserPosts.length <= 5}
+//disabled={currentPage===1}

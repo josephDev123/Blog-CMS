@@ -7,7 +7,9 @@ import {AuthContext} from  '../../Context/AuthContext';
 import {useState, useCallback} from 'react';
 
 export default function Myposts() {
+
     const [page, setPage]= useState(0);
+
     const styleBanner = {
         objectFit:'cover',
         objectPosition:'center'
@@ -15,18 +17,18 @@ export default function Myposts() {
     const {isAuthUser} = useContext(AuthContext);
     // console.log(isAuthUser)
 
-    const setPages = (num)=>{
-         setPage((old)=> old + num)
+    const increasePage = ()=>{
+         return setPage((old)=>old + 1)
     }
 
-     const setBackPages = (num)=>{
-        setPage((old)=> old - num)
+     const decreasePages = ()=>{
+        return setPage((old)=>old - 1)
     }
-    console.log(page)
+   
 
     const {isLoading, isError, error, data,  isFetching, isPreviousData} = useReqHttp('blog/post/currentUser', null, page, isAuthUser, true);
     // console.log(data?.data)
-
+    console.log(page)
 
   return (
     <div className='container mt-4'>
@@ -75,7 +77,7 @@ export default function Myposts() {
             <>{error.message}</>:
        
             <section className='table_wrapper'>
-                <MyPostsTable currentUserPosts={data.data} setPages = {setPages} isFetching={isFetching} isPreviousData={isPreviousData} currentPage = {page} setBackPages = {setBackPages}/> 
+                <MyPostsTable currentUserPosts={data.data} increasePage = {increasePage} isFetching={isFetching} isPreviousData={isPreviousData} currentPage = {page} decreasePages = {decreasePages}/> 
             </section>
             }
         
