@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function MyPostsTable({currentUserPosts, increasePage, isFetching, isPreviousData, currentPage, decreasePages}) {
+export default function MyPostsTable({currentUserPosts, increasePage, isFetching, isPreviousData, currentPage, decreasePage}) {
 
     if(currentUserPosts <= 0){
         return(
-            <div>No post yet</div>
+            <div className='d-flex justify-content-center align-items-center text-align-center bg-warning p-4'>No post yet</div>
         )
     }
     return (
@@ -26,7 +26,7 @@ export default function MyPostsTable({currentUserPosts, increasePage, isFetching
             </thead>
             
             <tbody>
-            {currentUserPosts.map((myPosts)=>(
+                {currentUserPosts.map((myPosts)=>(
             
                         <tr key={myPosts._id}>
                             <th scope="row">{myPosts._id.substr(0, 7)}</th>
@@ -43,10 +43,10 @@ export default function MyPostsTable({currentUserPosts, increasePage, isFetching
             </tbody>
         </table>
 
-        <span className='me-2'>Current Page: {currentPage + 1}</span>
-        <button className='btn btn-primary me-2' onClick={() => decreasePages()} >Previous</button>
+            <span className='me-2'>Current Page: {currentPage + 1}</span>
+            <button className='btn btn-primary me-2' onClick={() => decreasePage()} >Previous</button>
 
-        <button className='btn btn-secondary' onClick={()=>increasePage()} >Next</button>
+            <button className='btn btn-secondary' onClick={()=>increasePage()} >Next</button>
     </div>
   )
 }
