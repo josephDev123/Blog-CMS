@@ -1,6 +1,7 @@
 
 
 export function EditMyPostModal(){
+    
     return(
         <>
     {/* Button trigger modal  */}
