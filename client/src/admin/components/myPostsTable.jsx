@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function MyPostsTable({currentUserPosts, increasePage, isFetching, isPreviousData, currentPage, decreasePages}) {
+export default function MyPostsTable({currentUserPosts, increasePage, isFetching, isPreviousData, currentPage, decreasePage}) {
 
     if(currentUserPosts <= 0){
         return(
-            <div>No post yet</div>
+            <div className='d-flex justify-content-center align-items-center text-align-center bg-warning p-4'>No post yet</div>
         )
     }
     return (
@@ -12,7 +12,7 @@ export default function MyPostsTable({currentUserPosts, increasePage, isFetching
         
     <div className='table-responsive'>
         <table className="table table-hover caption-top">
-            <caption>List of posts</caption>
+            <caption>List of my posts</caption>
             <thead className='table-dark'>
                 <tr>
                     <th scope="col">#</th>
@@ -26,14 +26,14 @@ export default function MyPostsTable({currentUserPosts, increasePage, isFetching
             </thead>
             
             <tbody>
-            {currentUserPosts.map((myPosts)=>(
+                {currentUserPosts.map((myPosts)=>(
             
                         <tr key={myPosts._id}>
                             <th scope="row">{myPosts._id.substr(0, 7)}</th>
                             <td>{myPosts.title}</td>
                             <td>{myPosts.category}</td>
-                            <td>{myPosts.content}</td>
-                            <td><img src={myPosts.image_link} alt='' loading='lazy' width='60rem' height='60rem' style={{objectFit:'cover'}}/></td>
+                            <td>{myPosts.content.lenght > 100? myPosts.content.substr(0, 100) +'...':myPosts.content}</td>
+                            <td><img src={myPosts.image_link} alt='' loading='lazy' width='60rem' height='60rem' style={{objectFit:'contain'}}/></td>
                             <td><button className='btn btn-warning'>Edit</button></td>
                             <td><button className='btn btn-danger'>Delete</button></td>
                         </tr>
@@ -43,10 +43,10 @@ export default function MyPostsTable({currentUserPosts, increasePage, isFetching
             </tbody>
         </table>
 
-        <span className='me-2'>Current Page: {currentPage + 1}</span>
-        <button className='btn btn-primary me-2' onClick={() => decreasePages()} >Previous</button>
+            <span className='me-2'>Current Page: {currentPage + 1}</span>
+            <button className='btn btn-primary me-2' onClick={() => decreasePage()} disabled={currentPage===0}>Previous</button>
 
-        <button className='btn btn-secondary' onClick={()=>increasePage()} >Next</button>
+            <button className='btn btn-secondary' onClick={()=>increasePage()} disabled={currentUserPosts.length < 5}>Next</button>
     </div>
   )
 }

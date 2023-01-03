@@ -4,11 +4,15 @@ import MyPostsTable from '../components/myPostsTable';
 import {useReqHttp} from '../../customHooks/useReqHttp';
 import { useContext } from 'react';
 import {AuthContext} from  '../../Context/AuthContext';
-import {useState, useCallback} from 'react';
-
+import {useState} from 'react';
+import Loading from '../components/Loading'
+import {ErrorAlert} from '../components/ErrorAlert'
+;
 export default function Myposts() {
 
     const [page, setPage]= useState(0);
+    const [errorAlert, setErrorAlert]= useState(true);
+
 
     const styleBanner = {
         objectFit:'cover',
@@ -21,7 +25,7 @@ export default function Myposts() {
          return setPage((old)=>old + 1)
     }
 
-     const decreasePages = ()=>{
+     const decreasePage = ()=>{
         return setPage((old)=>old - 1)
     }
    
@@ -67,17 +71,13 @@ export default function Myposts() {
             </div>
 
         </section>
-
-          {/* <section> */}
-            {/* {isLoading&&<>Loading ...</>}
-            {isError&&<>{error.message}</>} */}
             {isLoading?
-            <> Loading ...</>
+            <> <Loading/></>
             :isError?
-            <>{error.message}</>:
+            <ErrorAlert alert={errorAlert} setAlert={setErrorAlert}>{error.message}</ErrorAlert>:
        
             <section className='table_wrapper'>
-                <MyPostsTable currentUserPosts={data.data} increasePage = {increasePage} isFetching={isFetching} isPreviousData={isPreviousData} currentPage = {page} decreasePages = {decreasePages}/> 
+                <MyPostsTable currentUserPosts={data.data} increasePage = {increasePage} isFetching={isFetching} isPreviousData={isPreviousData} currentPage = {page} decreasePage = {decreasePage}/> 
             </section>
             }
         
