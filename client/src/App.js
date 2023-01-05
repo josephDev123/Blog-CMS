@@ -50,6 +50,7 @@ function App() {
                       <Route path='/admin/roles' element={ <Roles/> }/>
                       <Route path='/admin/setting' element={ <Setting/> }/>
                       <Route path='/admin/my-post' element={ <Myposts/> }/>
+                      <Route path='/admin/my-post/:id' element={ <Myposts/> }/>
                     </Route>
                     <Route path='/login' element= {<Login/>}/>
                     <Route path='/register' element= {<Reqister/>}/>

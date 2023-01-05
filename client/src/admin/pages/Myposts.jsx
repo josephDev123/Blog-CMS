@@ -7,12 +7,15 @@ import {AuthContext} from  '../../Context/AuthContext';
 import {useState} from 'react';
 import Loading from '../components/Loading'
 import {ErrorAlert} from '../components/ErrorAlert'
-;
+import { useParams } from 'react-router-dom';
+
+
 export default function Myposts() {
 
+    const { id } = useParams();
     const [page, setPage]= useState(0);
     const [errorAlert, setErrorAlert]= useState(true);
-
+console.log(id);
 
     const styleBanner = {
         objectFit:'cover',
