@@ -1,6 +1,12 @@
 import React from 'react'
+import {EditMyPostModal} from './Edit-mypost-modal'
 
 export default function MyPostsTable({currentUserPosts, increasePage, isFetching, isPreviousData, currentPage, decreasePage}) {
+
+    function handleEditMyPost(id){
+        console.log(id)
+    }
+
 
     if(currentUserPosts <= 0){
         return(
@@ -11,7 +17,7 @@ export default function MyPostsTable({currentUserPosts, increasePage, isFetching
     
         
     <div className='table-responsive'>
-        <table className="table table-hover caption-top">
+        <table className="table table-hover caption-top table-bordered">
             <caption>List of my posts</caption>
             <thead className='table-dark'>
                 <tr>
@@ -30,11 +36,11 @@ export default function MyPostsTable({currentUserPosts, increasePage, isFetching
             
                         <tr key={myPosts._id}>
                             <th scope="row">{myPosts._id.substr(0, 7)}</th>
-                            <td>{myPosts.title}</td>
+                            <td>{myPosts.title.length > 30 ? myPosts.title.substr(0, 30) +'......':myPosts.title}</td>
                             <td>{myPosts.category}</td>
-                            <td>{myPosts.content.lenght > 100? myPosts.content.substr(0, 100) +'...':myPosts.content}</td>
+                            <td>{myPosts.content.length > 100? myPosts.content.substr(0, 100) +'.....':myPosts.content}</td>
                             <td><img src={myPosts.image_link} alt='' loading='lazy' width='60rem' height='60rem' style={{objectFit:'contain'}}/></td>
-                            <td><button className='btn btn-warning'>Edit</button></td>
+                            <td><button className='btn btn-warning' onClick={()=>handleEditMyPost(myPosts._id)} data-bs-toggle="modal" data-bs-target="#editMyPostModal">Edit</button></td>
                             <td><button className='btn btn-danger'>Delete</button></td>
                         </tr>
                         
@@ -47,8 +53,7 @@ export default function MyPostsTable({currentUserPosts, increasePage, isFetching
             <button className='btn btn-primary me-2' onClick={() => decreasePage()} disabled={currentPage===0}>Previous</button>
 
             <button className='btn btn-secondary' onClick={()=>increasePage()} disabled={currentUserPosts.length < 5}>Next</button>
+            <EditMyPostModal/>
     </div>
   )
 }
-//disabled={currentUserPosts.length <= 5}
-//disabled={currentPage===1}

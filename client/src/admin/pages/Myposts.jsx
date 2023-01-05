@@ -32,11 +32,11 @@ export default function Myposts() {
 
     const {isLoading, isError, error, data,  isFetching, isPreviousData} = useReqHttp('blog/post/currentUser', null, page, isAuthUser, true);
     // console.log(data?.data)
-    console.log(page)
+   
 
   return (
     <div className='container mt-4'>
-        <span className={headingTag.headingTag}>My posts</span>
+        <span className={headingTag.headingTag}>/My posts</span>
 
         <section className='row mt-4'>
             <div className="card mb-3 ps-0">

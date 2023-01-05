@@ -14,6 +14,7 @@ import  axiosInstance  from '../../utils/axiosInstance';
 import { SuccessAlert } from './SuccessAlert';
 import { useContext } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
+import pageTitleStyle from  '../asset/css/css_modules/page-heading.module.css'
 
 
 export default function Setting() {
@@ -87,8 +88,8 @@ export default function Setting() {
     }
 
   return (
-    <Container>
-        <span className='' style={{marginTop:'2rem', fontSize:'1.5rem', background:'#219EBC', padding:'0.5rem', textAlign:'center', borderRadius:'0.5rem'}}>/Setting</span>
+    <Container className='mt-4'>
+        <span className={pageTitleStyle.headingTag}>/Setting</span>
             {status==='error' && <ErrorAlert alert={alert} setAlert={setAlert}>{ErrorMessage}</ErrorAlert>}
             {status==='success' && <SuccessAlert alert={alert} setAlert={setAlert}>{successMessage}</SuccessAlert>}
             <Form onSubmit={handlesubmitBannerAndContent}> 
