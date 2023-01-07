@@ -1,3 +1,3 @@
 ## Blog CMS with MERN stack
 
-coming......
+Blog CMS is created with the mindset of enabling individuals to create articles, blog, written content etc. 
