@@ -1,17 +1,18 @@
-import React from 'react'
-import {EditMyPostModal} from './Edit-mypost-modal'
-import { useRef } from 'react'
-import { useNavigate, Navigate } from 'react-router-dom'
+import React from 'react';
+import {EditMyPostModal} from './Edit-mypost-modal';
+import { useRef } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
 
 export default function MyPostsTable({currentUserPosts, increasePage, isFetching, isPreviousData, currentPage, decreasePage}) {
 
 const location = useNavigate()
-    const editBtn = useRef()
+
+    const editBtns = useRef()
+
+    const {id}=useParams();
+
     function handleEditMyPost(id){
-        // return <Navigate to='my-post/'id />
-        // editBtn.current.setAttribute('data-bs-target',"#editMyPostModal")
-        console.log(editBtn.current.length)
-        editBtn.current.dataset.bsTarget = "#editMyPostModal"
         return location(`/admin/my-post/${id}`)
 
     }
@@ -49,7 +50,7 @@ const location = useNavigate()
                             <td>{myPosts.category}</td>
                             <td>{myPosts.content.length > 100? myPosts.content.substr(0, 100) +'.....':myPosts.content}</td>
                             <td><img src={myPosts.image_link} alt='' loading='lazy' width='60rem' height='60rem' style={{objectFit:'contain'}}/></td>
-                            <td><button ref={editBtn} className='btn btn-warning' onClick={()=>handleEditMyPost(myPosts._id)} data-bs-toggle="modal">Edit</button></td>
+                            <td><button ref={editBtns} className='btn btn-warning' onClick={()=>handleEditMyPost(myPosts._id)} data-bs-toggle="modal" data-bs-target="#editMyPostModal">Edit</button></td>
                             <td><button className='btn btn-danger'>Delete</button></td>
                         </tr>
                         
@@ -66,4 +67,3 @@ const location = useNavigate()
     </div>
   )
 }
-// data-bs-target="#editMyPostModal"

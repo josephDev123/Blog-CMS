@@ -38,15 +38,6 @@ app.use(cors());
 app.use(express.json());
 
 
-// mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true})
-//   .then((result) =>{
-//     console.log("Connected to MongoDB database.");
-//     app.listen(PORT, ()=>{
-//       console.log(`server running on port ${PORT}`)
-//     })
-//   })
-//   .catch((err) => console.log(err));
-
 //blog routes
 app.use('/blog', blogPostRouter);
 

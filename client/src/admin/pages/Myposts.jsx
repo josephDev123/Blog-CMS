@@ -1,28 +1,28 @@
-import React from 'react'
-import headingTag from '../asset/css/css_modules/page-heading.module.css'
+import React from 'react';
+import headingTag from '../asset/css/css_modules/page-heading.module.css';
 import MyPostsTable from '../components/myPostsTable';
 import {useReqHttp} from '../../customHooks/useReqHttp';
 import { useContext } from 'react';
 import {AuthContext} from  '../../Context/AuthContext';
 import {useState} from 'react';
-import Loading from '../components/Loading'
-import {ErrorAlert} from '../components/ErrorAlert'
+import Loading from '../components/Loading';
+import {ErrorAlert} from '../components/ErrorAlert';
 import { useParams } from 'react-router-dom';
 
 
 export default function Myposts() {
-
+    const {isAuthUser} = useContext(AuthContext);
+    // console.log(isAuthUser)
     const { id } = useParams();
     const [page, setPage]= useState(0);
     const [errorAlert, setErrorAlert]= useState(true);
-console.log(id);
+
 
     const styleBanner = {
         objectFit:'cover',
         objectPosition:'center'
     }
-    const {isAuthUser} = useContext(AuthContext);
-    // console.log(isAuthUser)
+
 
     const increasePage = ()=>{
          return setPage((old)=>old + 1)
@@ -72,8 +72,8 @@ console.log(id);
                     </div>
                 </div>
             </div>
-
         </section>
+
             {isLoading?
             <> <Loading/></>
             :isError?

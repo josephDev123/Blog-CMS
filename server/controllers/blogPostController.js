@@ -35,22 +35,22 @@ export const GetPostsCreatedByPagination = async (req, res)=>{
         }catch(e){
         res.json(e.message);
     }
-    // const page = parseInt(req.query.page);
-
-    // const limit = 3;
-    // const skip = (page - 1) * limit;
-    // // res.json(skip)
-    // Post.find({}, null , {skip:skip, limit:limit}, function(err, results) { 
-    //     if(err) throw new Error(err)
-
-    //     // const count = await Post.find()
-    //     return res.json(results);
-    // });
- //.skip(skip).limit(limit);
 }
 
-export const editBlog = (req, res)=>{
-    res.json('edit post');
+export const editBlog = async (req, res)=>{
+    const {id} = req.params();
+    console.log(id);
+    try{
+        const post = await Post.updateOne({id:id}, 
+            {
+                $set:{}
+        
+             }
+     );
+        res.send(post);
+    }catch(error){
+        res.status(500).json({'error':error.message})
+    }
 }
  
 export const allPost = (req, res)=>{
