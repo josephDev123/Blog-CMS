@@ -63,7 +63,7 @@ const location = useNavigate()
             <button className='btn btn-primary me-2' onClick={() => decreasePage()} disabled={currentPage===0}>Previous</button>
 
             <button className='btn btn-secondary' onClick={()=>increasePage()} disabled={currentUserPosts.length < 5}>Next</button>
-            <EditMyPostModal/>
+            <EditMyPostModal id={id}/>
     </div>
   )
 }

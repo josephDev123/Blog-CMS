@@ -1,7 +1,7 @@
 
 
 
-export function EditMypostForm(){
+export function EditMypostForm({data}){
     return (
         <form>
             <div className="mb-3">

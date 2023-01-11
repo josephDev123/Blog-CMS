@@ -41,9 +41,11 @@ export const editBlog = async (req, res)=>{
     const {id} = req.params();
     console.log(id);
     try{
-        const post = await Post.updateOne({id:id}, 
+        const post = await Post.updateOne({'_id':id}, 
             {
-                $set:{}
+                $set:{
+                    
+                }
         
              }
      );
