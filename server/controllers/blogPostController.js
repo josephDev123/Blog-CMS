@@ -44,7 +44,9 @@ export const editBlog = async (req, res)=>{
         const post = await Post.updateOne({'_id':id}, 
             {
                 $set:{
-                    
+                    title:'',
+                    content:'',
+                    category:''
                 }
         
              }
@@ -111,7 +113,7 @@ export async function getAllPostsOfCurrentAuthUser(req, res){
         const user = req.headers.currentuser;
         // console.log(user)
         const skip = parseInt(req.query.query)* 5;
-        console.log(skip)
+        // console.log(skip)
         const getUserPost = await Post.find({creator:user}, null, {skip, limit:5});
          res.status(200).json({'data':getUserPost})
         // console.log(getUserPost)

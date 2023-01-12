@@ -12,7 +12,7 @@ export function EditMyPostModal({id}){
 
     const location = useNavigate();
     console.log(id);
-    const { isLoading, isError, error, data, isFetching, isPreviousData} = useReqHttp('blog/post/byId', '', id, '', false)
+    const { isLoading, isError, error, data} = useReqHttp('blog/post/byId', '', id, '', false);
     
     return(
         <>
@@ -22,11 +22,11 @@ export function EditMyPostModal({id}){
         <div className="modal-dialog">
             <div className="modal-content">
             <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">{}</h5>
+                <h5 className="modal-title" id="exampleModalLabel">{ data && data[0].title.substr(0, 10) +'...'}</h5>
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleCloseModal}></button>
             </div>
             <div className="modal-body">
-                {isLoading && <Loading/>}
+                {isLoading && <Loading> Loading ...</Loading>}
                 {isError && <div className='alert alert-danger'>{error.message} {' '} <span><button onClick={()=>location('/admin/my-post')}>Try again </button></span></div>}
                 {data && <EditMypostForm data={data}/>}
             </div>
