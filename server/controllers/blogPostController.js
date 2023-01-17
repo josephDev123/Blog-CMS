@@ -37,23 +37,24 @@ export const GetPostsCreatedByPagination = async (req, res)=>{
     }
 }
 
-export const editBlog = async (req, res)=>{
+export const editBlogPost = async (req, res)=>{
     const {id} = req.params();
     console.log(id);
     try{
-        const post = await Post.updateOne({'_id':id}, 
-            {
-                $set:{
-                    title:'',
-                    content:'',
-                    category:''
-                }
+    //     const post = await Post.updateOne({'_id':id}, 
+    //         {
+    //             $set:{
+    //                 title:'',
+    //                 content:'',
+    //                 category:''
+    //             }
         
-             }
-     );
-        res.send(post);
+    //          }
+    //  );
+        // res.send(post);
+        console.log('edit my post')
     }catch(error){
-        res.status(500).json({'error':error.message})
+        res.status(400).json({'error':error.message})
     }
 }
  
@@ -100,7 +101,7 @@ export const PostById = async (req, res)=>{
         const id = req.query.query;
         if(id){
             const post =  await Post.find( {"_id":id}, null);
-            res.send(post)
+            res.send(post);
         }
         
     } catch (error) {

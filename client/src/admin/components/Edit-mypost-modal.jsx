@@ -11,7 +11,7 @@ export function EditMyPostModal({id}){
     }
 
     const location = useNavigate();
-    console.log(id);
+   
     const { isLoading, isError, error, data} = useReqHttp('blog/post/byId', '', id, '', false);
     
     return(
