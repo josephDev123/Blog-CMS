@@ -38,23 +38,27 @@ export const GetPostsCreatedByPagination = async (req, res)=>{
 }
 
 export const editBlogPost = async (req, res)=>{
-    const {id} = req.params();
-    console.log(id);
+    const id = req.params.id;
+    const {title, category, post} = req.body
+
     try{
-    //     const post = await Post.updateOne({'_id':id}, 
-    //         {
-    //             $set:{
-    //                 title:'',
-    //                 content:'',
-    //                 category:''
-    //             }
+        const post = await Post.updateOne( { _id: id }, 
+           [ {
+                $set:{
+                    // 'creator':String,
+                    'title':title,
+                    // 'image_link':String,
+                    'content':post,
+                    'category':category
+                }
         
-    //          }
-    //  );
-        // res.send(post);
-        console.log('edit my post')
+             }]
+     );
+        res.status(200).json({message:'success'});
+       
     }catch(error){
         res.status(400).json({'error':error.message})
+        console.log('sorry')
     }
 }
  
