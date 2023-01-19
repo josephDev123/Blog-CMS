@@ -18,12 +18,14 @@ export function EditMypostForm({data}){
             try {
                 //making edit post request
                 const editPostRequest = await axiosInstance({
-                     method:'POST',
-                     url: `/blog/edit/${data[0]._id}`,
+                     method:'put',
+                     url: `blog/edit/${data[0]._id}`,
                      data: { 
-                        title:title? title : data[0].title,
-                        category: category ? category :data[0].category,
-                        post: post?post:data[0].content
+                        'creator': data[0].creator,
+                        'image_link': data[0].image_link,
+                        'title': title? title : data[0].title,
+                        'category': category ? category :data[0].category,
+                        'post': post?post:data[0].content
                      }
                  })
      

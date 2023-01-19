@@ -39,20 +39,21 @@ export const GetPostsCreatedByPagination = async (req, res)=>{
 
 export const editBlogPost = async (req, res)=>{
     const id = req.params.id;
-    const {title, category, post} = req.body
+    const {title, category, post, image_link, creator} = req.body;
+    // console.log(title, category, post, creator, image_link)
 
     try{
-        const post = await Post.updateOne( { _id: id }, 
-           [ {
-                $set:{
-                    // 'creator':String,
+        const post = await Post.findByIdAndUpdate( id, 
+           {
+              
+                    'creator':creator,
                     'title':title,
-                    // 'image_link':String,
+                    'image_link':image_link,
                     'content':post,
                     'category':category
-                }
+                
         
-             }]
+             }
      );
         res.status(200).json({message:'success'});
        
@@ -129,3 +130,13 @@ export async function getAllPostsOfCurrentAuthUser(req, res){
     
 }
 
+
+
+
+   // $set:{
+                //     // 'creator':String,
+                //     'title':title,
+                //     // 'image_link':String,
+                //     'content':post,
+                //     'category':category
+                // }

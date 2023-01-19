@@ -42,7 +42,7 @@ const location = useNavigate()
             </thead>
             
             <tbody>
-                {currentUserPosts.map((myPosts)=>(
+                {currentUserPosts?.map((myPosts)=>(
             
                         <tr key={myPosts._id}>
                             <th scope="row">{myPosts._id.substr(0, 7)}</th>
@@ -62,7 +62,7 @@ const location = useNavigate()
             <span className='me-2'>Current Page: {currentPage + 1}</span>
             <button className='btn btn-primary me-2' onClick={() => decreasePage()} disabled={currentPage===0}>Previous</button>
 
-            <button className='btn btn-secondary' onClick={()=>increasePage()} disabled={currentUserPosts.length < 5}>Next</button>
+            <button className='btn btn-secondary' onClick={()=>increasePage()} disabled={currentUserPosts?.length < 5}>Next</button>
             <EditMyPostModal id={id}/>
     </div>
   )
