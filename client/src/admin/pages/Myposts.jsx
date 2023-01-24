@@ -8,14 +8,22 @@ import {useState} from 'react';
 import Loading from '../components/Loading';
 import {ErrorAlert} from '../components/ErrorAlert';
 import { useParams } from 'react-router-dom';
-
+import { useMemo } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Myposts() {
     const {isAuthUser} = useContext(AuthContext);
     // console.log(isAuthUser)
-    const { id } = useParams();
+    // const { id } = useParams();
     const [page, setPage]= useState(0);
+    const [key, setKey]= useState(uuidv4());
     const [errorAlert, setErrorAlert]= useState(true);
+
+
+    //refetch the usequery if the dependency changes
+    const queryKey = useMemo(()=>{
+        return key;
+    }, [key])
 
 
     const styleBanner = {
@@ -33,7 +41,7 @@ export default function Myposts() {
     }
    
 
-    const {isLoading, isError, error, data,  isFetching, isPreviousData} = useReqHttp('blog/post/currentUser', null, page, isAuthUser, true);
+    const {isLoading, isError, error, data,  isFetching, isPreviousData} = useReqHttp('blog/post/currentUser', null, page, queryKey, isAuthUser, true);
     // console.log(data?.data)
    
 
@@ -80,7 +88,7 @@ export default function Myposts() {
             <ErrorAlert alert={errorAlert} setAlert={setErrorAlert}>{error.message}</ErrorAlert>:
        
             <section className='table_wrapper'>
-                <MyPostsTable currentUserPosts={data.data} increasePage = {increasePage} isFetching={isFetching} isPreviousData={isPreviousData} currentPage = {page} decreasePage = {decreasePage}/> 
+                <MyPostsTable currentUserPosts={data.data} increasePage = {increasePage} isFetching={isFetching} isPreviousData={isPreviousData} currentPage = {page} decreasePage = {decreasePage} setquerykey={setKey}/> 
             </section>
             }
         

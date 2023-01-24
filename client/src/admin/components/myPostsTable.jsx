@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 
-export default function MyPostsTable({currentUserPosts, increasePage, isFetching, isPreviousData, currentPage, decreasePage}) {
+export default function MyPostsTable({currentUserPosts, increasePage, isFetching, isPreviousData, currentPage, decreasePage, setquerykey}) {
 
 const location = useNavigate()
 
@@ -63,7 +63,7 @@ const location = useNavigate()
             <button className='btn btn-primary me-2' onClick={() => decreasePage()} disabled={currentPage===0}>Previous</button>
 
             <button className='btn btn-secondary' onClick={()=>increasePage()} disabled={currentUserPosts?.length < 5}>Next</button>
-            <EditMyPostModal id={id}/>
+            <EditMyPostModal id={id} setquerykey={setquerykey}/>
     </div>
   )
 }

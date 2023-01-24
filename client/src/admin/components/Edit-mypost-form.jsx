@@ -21,11 +21,11 @@ export function EditMypostForm({data}){
                      method:'put',
                      url: `blog/edit/${data[0]._id}`,
                      data: { 
-                        'creator': data[0].creator,
-                        'image_link': data[0].image_link,
+                        // 'creator': data[0].creator,
+                        // 'image_link': data[0].image_link,
                         'title': title? title : data[0].title,
                         'category': category ? category :data[0].category,
-                        'post': post?post:data[0].content
+                        'blogPost': post?post:data[0].content
                      }
                  })
      
