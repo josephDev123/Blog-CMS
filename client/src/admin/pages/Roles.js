@@ -1,13 +1,15 @@
-import React from 'react';
+
 import  {useState} from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import '../asset/css/roles.css';
 import {useFetch} from '../../customHooks/useFetch';
 // import {SimpleAlert} from './SimpleAlert';
-import {ModalComponent} from './Modal';
-import {SuccessAlert} from './SuccessAlert';
-import {ErrorAlert} from './ErrorAlert'
+import {ModalComponent} from '../components/Modal';
+import {SuccessAlert} from '../components/SuccessAlert';
+import {ErrorAlert} from '../components/ErrorAlert'
+import {RoleBanner} from '../components/RoleBanner'
+import {AdvanceLoading} from '../components/AdvanceLoading'
 
 export default function Roles() {
     const [page, setPage] = useState(1);
@@ -23,10 +25,8 @@ export default function Roles() {
       setUserId(userId)
     }
 
-    console.log(err);
     const {isLoading, isError, data, error, isFetching} = useFetch('http://localhost:7000/profile/users', page)
-    
-    // console.log(data)
+
 
     //handle the user permission btn
     async function handleUserPermission(){
@@ -54,43 +54,24 @@ export default function Roles() {
    
     }
 
-    console.log('mount '+remount)
+
     
   return(
         <section className='container'>
-          <ModalComponent showModal={show} setShowModal = {setShow} event={handleUserPermission}>change user's permission status</ModalComponent>
+          <ModalComponent showModal={show} setShowModal = {setShow} event={handleUserPermission}>
+            change user's permission status
+          </ModalComponent>
+
             <span className='tag'>
             /Roles
           </span>
-            <section className='roles_billboard'>
-                <section className='img_wrapper'>
-                    <img className='img' src='/images/permission.png' width='' height='' alt=''/>
-                </section>
 
-                <section className='content_wrapper'>
-                    <blockquote>
-                        <p>Success means doing the best we can with what we have. Success is the doing, not the getting; in the trying, not the triumph. Success is a personal standard, reaching for the highest that is in us, becoming all that we can be.” - Zig Ziglar</p>
-
-                    </blockquote>
-
-                    <blockquote>
-                        <p>“Failure is not the opposite of success; it’s part of success.” - Arianna Huffington</p>
-                    </blockquote>
-                </section>
-            </section>
+            {/* banner head */}
+            <RoleBanner/>
           
             <section className=''>
                {isLoading? (
-                <>
-                   <button className="btn btn-primary me-2" type="button" disabled>
-                    <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    <span className="visually-hidden">Loading...</span>
-                  </button>
-                  <button className="btn btn-primary" type="button" disabled>
-                    <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    Loading...
-                  </button>
-                </>
+              <AdvanceLoading/>
                ):isError? <div className="alert alert-danger mt-4" role="alert"> {error.message} </div>:(
                 <div className='container mt-4 table-responsive'>
                   {status==='success'?<SuccessAlert alert ={alert}  setAlert={setAlert}/>:<ErrorAlert alert ={alert} setAlert={setAlert}/>}
@@ -126,6 +107,7 @@ export default function Roles() {
                     </table>
                       ))
                     }
+
 {/* //)=>handleUserPermission(users._id) */}
               <span>Current Page: {page}</span>
                           <button className='btn btn-primary'

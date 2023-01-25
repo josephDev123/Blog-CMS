@@ -7,5 +7,9 @@
 }
 
 .gallery_content{
-    flex:1 1 18rem;
+    flex: 1 1 20rem;
+}
+
+.gallery_content:last-child(){
+    flex: 1 1 20rem;
 }

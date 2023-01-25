@@ -6,7 +6,7 @@ export const role_users_get = async (req, res)=>{
         const limit = 5;
         const skip = (page - 1) * limit;
        const profile = await profileModel.find({}, null, {skip,limit})
-       const profileResult = await profile;
+       const profileResult = profile;
        res.json(profileResult);
     } catch (error) {
         res.json(error.message);

@@ -13,7 +13,7 @@ import Dashboard from './admin/components/Dashboard';
 import Post from './admin/components/Post';
 import Profile from './admin/components/Profile';
 import UsersList from './admin/components/UsersList';
-import Roles from './admin/components/Roles';
+import Roles from './admin/pages/Roles';
 import IsAdmin from './admin/components/authorization.js/isAdmin';
 import Setting from './admin/components/Setting';
 import Myposts from './admin/pages/Myposts'

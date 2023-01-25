@@ -5,6 +5,7 @@ import '../asset/css/listArticles.css';
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import { AuthContext } from '../../Context/AuthContext';
+import {AdvanceLoading} from './AdvanceLoading'
 
 
 export default function ListArticles() {
@@ -35,16 +36,7 @@ export default function ListArticles() {
   // console.log(data);
   //loading
  if(isLoading) return (
-        <div className='mt-4'>
-          <button className="btn btn-primary me-2" type="button" disabled>
-        <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-        <span className="visually-hidden">Loading...</span>
-      </button>
-      <button className="btn btn-primary" type="button" disabled>
-        <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-        Loading...
-      </button>
-      </div>
+      <AdvanceLoading/>
   ) 
 
   //error
