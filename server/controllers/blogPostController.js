@@ -131,12 +131,19 @@ export async function getAllPostsOfCurrentAuthUser(req, res){
 }
 
 
+export async function deleteBlogPost(req, res){
+    const {id} = req.params;
+  
+    try{
+    const blogPost = await Post.deleteOne({_id:id});
+    if(blogPost.acknowledged === true){
+        // console.log(blogPost)
+        res.status(200).send('success');
+    }
+    }catch(err){
+        res.status(400).json({error:true});
+    }
+
+}
 
 
-   // $set:{
-                //     // 'creator':String,
-                //     'title':title,
-                //     // 'image_link':String,
-                //     'content':post,
-                //     'category':category
-                // }

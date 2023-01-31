@@ -1,22 +1,47 @@
 import React from 'react';
 import {EditMyPostModal} from './Edit-mypost-modal';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import axiosInstance from '../../utils/axiosInstance'
+import {handleAxiosError} from '../../utils/handleAxiosError';
+import {ErrorAlert} from './ErrorAlert';
 
 
 export default function MyPostsTable({currentUserPosts, increasePage, isFetching, isPreviousData, currentPage, decreasePage, setquerykey}) {
 
 const location = useNavigate()
+const [status, setStatus] = useState('');
+const [alert, setAlert] = useState(false);
+
 
     const editBtns = useRef()
-
     const {id}=useParams();
 
     function handleEditMyPost(id){
         return location(`/admin/my-post/${id}`)
-
     }
 
+    async function handleDeletePost(id){
+        try{
+            const deletePostPromise = await axiosInstance({
+                method:'delete',
+                url:`/blog/post/${id}`
+            })
+            if(deletePostPromise.status === 200){
+                window.alert('Deleted')
+            }
+            
+        }catch(err){
+          const error = handleAxiosError(err);
+          console.log(error)
+          if(error){
+            setAlert(true)
+            setStatus('error')
+          }
+
+        }
+       
+    }
 
     if(currentUserPosts <= 0){
         return(
@@ -27,6 +52,8 @@ const location = useNavigate()
     
         
     <div className='table-responsive'>
+            { status ==='error'?<ErrorAlert alert={alert} setAlert={setAlert}> Some went wrong </ErrorAlert>:''}
+
         <table className="table table-hover caption-top table-bordered">
             <caption>List of my posts</caption>
             <thead className='table-dark'>
@@ -51,7 +78,7 @@ const location = useNavigate()
                             <td>{myPosts.content.length > 100? myPosts.content.substr(0, 100) +'.....':myPosts.content}</td>
                             <td><img src={myPosts.image_link} alt='' loading='lazy' width='60rem' height='60rem' style={{objectFit:'contain'}}/></td>
                             <td><button ref={editBtns} className='btn btn-warning' onClick={()=>handleEditMyPost(myPosts._id)} data-bs-toggle="modal" data-bs-target="#editMyPostModal">Edit</button></td>
-                            <td><button className='btn btn-danger'>Delete</button></td>
+                            <td><button className='btn btn-danger' onClick={()=>handleDeletePost(myPosts._id)}>Delete</button></td>
                         </tr>
                         
                 ))} 
