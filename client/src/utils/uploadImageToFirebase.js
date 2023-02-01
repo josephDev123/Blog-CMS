@@ -1,0 +1,4 @@
+// function uploadImageToFirebase(file, cb){
+
+
+// }

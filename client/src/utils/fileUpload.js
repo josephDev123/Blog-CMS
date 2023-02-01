@@ -1,7 +1,8 @@
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { v4 as uuidv4 } from 'uuid';
 
 
-export const fileUpload = (file, cb)=>{
+export const fileUpload = (file, cb, storage_ref)=>{
   return new Promise((resolve, reject)=>{
 
               
@@ -14,7 +15,9 @@ export const fileUpload = (file, cb)=>{
         };
 
         // Upload file and metadata to the object 'images/mountains.jpg'
-        const storageRef = ref(storage, 'banner/' + file.name);
+        const fileDestination = `${storage_ref}/`+uuidv4()+`${file.name}`;
+        const storageRef = ref(storage, fileDestination);
+        console.log(storageRef)
         const uploadTask = uploadBytesResumable(storageRef, file, metadata);
 
         // Listen for state changes, errors, and completion of the upload.
@@ -53,7 +56,7 @@ export const fileUpload = (file, cb)=>{
           () => {
             // Upload completed successfully, now we can get the download URL
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              resolve(downloadURL);
+              resolve([downloadURL, storageRef]);
             });
           }
         );

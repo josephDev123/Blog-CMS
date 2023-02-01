@@ -6,6 +6,7 @@ import { AuthContext } from '../../Context/AuthContext';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import MDEditor from '@uiw/react-md-editor';
 // import {useFirebaseImageUpload} from './custom_hooks/useFirebaseImageUpload';
+import {fileUpload} from '../../utils/fileUpload';
 
 
 export default function Post() {
@@ -20,6 +21,7 @@ export default function Post() {
     const [confirmUploadStatus, setConfirmUploadStatus]= useState(false);
 
     const [imgstatus, setImgStatus] = useState('');
+    const [storageRef, setStorageRef] = useState('');
     const [imgProgress, setImgProgress] = useState(0);
 
     const imageRef = useRef('');
@@ -33,70 +35,29 @@ export default function Post() {
         setImage(e.target.files[0])
     }
 
+    function handlefileUploadProgressCallback(message){
+       console.log(message)
+    }
+
     // uploading image or files to firebase storage in order to get the image link for the post 
-    const confirmUploadImage = (e)=>{
+    const confirmUploadImage = async (e)=>{
       
       e.preventDefault()
       if(!image){
         setStatus('empty');
         setSuccessErrorMessage('The file field is required')
       }else{
-         // Create the file metadata
-        /** @type {any} */
-        const metadata = {
-          contentType: 'image/jpeg'
-        };
 
-        // Upload file and metadata to the object 'images/mountains.jpg'
-        const storageRef = ref(storage, 'post_image/' + image.name);
-        const uploadTask = uploadBytesResumable(storageRef, image, metadata);
+        const [fileuploaded, ref] = await fileUpload(image, handlefileUploadProgressCallback, 'blog_image_destination')
+        .catch(e=> setImgStatus(e.message))
 
-        // Listen for state changes, errors, and completion of the upload.
-        uploadTask.on('state_changed',
-          (snapshot) => {
-            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            setImgProgress(progress);
-            switch (snapshot.state) {
-              case 'paused':
-                console.log('Upload is paused');
-                break;
-              case 'running':
-                console.log('Upload is running');
-                break;
-            }
-          }, 
-          (error) => {
-            // A full list of error codes is available at
-            // https://firebase.google.com/docs/storage/web/handle-errors
-            switch (error.code) {
-              case 'storage/unauthorized':
-                setImgStatus('error')
-                setSuccessErrorMessage("User does not have permission to access the object")
-                break;
-              case 'storage/canceled':
-                setImgStatus('error')
-                setSuccessErrorMessage("User canceled the upload")
-                break;
-
-              // ...
-
-              case 'storage/unknown':
-                setImgStatus('error')
-                setSuccessErrorMessage("Unknown error occurred, inspect error.serverResponse")
-                break;
-            }
-          }, 
-          () => {
-            // Upload completed successfully, now we can get the download URL
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>{
-              setUploadImage(downloadURL);
-              setConfirmUploadStatus(true)
-            });
-          }
-        );
+        console.log(fileuploaded, ref);
+        setUploadImage(fileuploaded)
+        setStorageRef(ref)
         }
     }
+
+
 
 
 // handles the submission of post
@@ -183,3 +144,68 @@ export default function Post() {
     </div>
   )
 }
+
+
+
+
+
+
+
+
+
+
+
+ // Create the file metadata
+        /** @type {any} */
+        // const metadata = {
+        //   contentType: 'image/jpeg'
+        // };
+
+        // // Upload file and metadata to the object 'images/mountains.jpg'
+        // const storageRef = ref(storage, 'post_image/' + image.name);
+        // const uploadTask = uploadBytesResumable(storageRef, image, metadata);
+
+        // // Listen for state changes, errors, and completion of the upload.
+        // uploadTask.on('state_changed',
+        //   (snapshot) => {
+        //     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        //     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        //     setImgProgress(progress);
+        //     switch (snapshot.state) {
+        //       case 'paused':
+        //         console.log('Upload is paused');
+        //         break;
+        //       case 'running':
+        //         console.log('Upload is running');
+        //         break;
+        //     }
+        //   }, 
+        //   (error) => {
+        //     // A full list of error codes is available at
+        //     // https://firebase.google.com/docs/storage/web/handle-errors
+        //     switch (error.code) {
+        //       case 'storage/unauthorized':
+        //         setImgStatus('error')
+        //         setSuccessErrorMessage("User does not have permission to access the object")
+        //         break;
+        //       case 'storage/canceled':
+        //         setImgStatus('error')
+        //         setSuccessErrorMessage("User canceled the upload")
+        //         break;
+
+        //       // ...
+
+        //       case 'storage/unknown':
+        //         setImgStatus('error')
+        //         setSuccessErrorMessage("Unknown error occurred, inspect error.serverResponse")
+        //         break;
+        //     }
+        //   }, 
+        //   () => {
+        //     // Upload completed successfully, now we can get the download URL
+        //     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>{
+        //       setUploadImage(downloadURL);
+        //       setConfirmUploadStatus(true)
+        //     });
+        //   }
+        // );

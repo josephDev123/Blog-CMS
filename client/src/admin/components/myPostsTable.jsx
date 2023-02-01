@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance'
 import {handleAxiosError} from '../../utils/handleAxiosError';
 import {ErrorAlert} from './ErrorAlert';
+import Loading from './Loading'
 
 
 export default function MyPostsTable({currentUserPosts, increasePage, isFetching, isPreviousData, currentPage, decreasePage, setquerykey}) {
@@ -23,11 +24,13 @@ const [alert, setAlert] = useState(false);
 
     async function handleDeletePost(id){
         try{
+            setStatus('loading');
             const deletePostPromise = await axiosInstance({
                 method:'delete',
                 url:`/blog/post/${id}`
             })
             if(deletePostPromise.status === 200){
+                setStatus('success');
                 window.alert('Deleted')
             }
             
@@ -43,7 +46,7 @@ const [alert, setAlert] = useState(false);
        
     }
 
-    if(currentUserPosts <= 0){
+    if(currentUserPosts.length <= 0){
         return(
             <div className='d-flex justify-content-center align-items-center text-align-center bg-warning p-4'>No post yet</div>
         )
@@ -76,9 +79,21 @@ const [alert, setAlert] = useState(false);
                             <td>{myPosts.title.length > 30 ? myPosts.title.substr(0, 30) +'......':myPosts.title}</td>
                             <td>{myPosts.category}</td>
                             <td>{myPosts.content.length > 100? myPosts.content.substr(0, 100) +'.....':myPosts.content}</td>
-                            <td><img src={myPosts.image_link} alt='' loading='lazy' width='60rem' height='60rem' style={{objectFit:'contain'}}/></td>
-                            <td><button ref={editBtns} className='btn btn-warning' onClick={()=>handleEditMyPost(myPosts._id)} data-bs-toggle="modal" data-bs-target="#editMyPostModal">Edit</button></td>
-                            <td><button className='btn btn-danger' onClick={()=>handleDeletePost(myPosts._id)}>Delete</button></td>
+                            <td>
+                                <img src={myPosts.image_link} alt='' loading='lazy' width='60rem' height='60rem' style={{objectFit:'contain'}}/>
+                            </td>
+
+                            <td>
+                                <button ref={editBtns} className='btn btn-warning' onClick={()=>handleEditMyPost(myPosts._id)} data-bs-toggle="modal" data-bs-target="#editMyPostModal">
+                                    Edit
+                                </button>
+                            </td>
+
+                            <td>
+                                <button className='btn btn-danger' onClick={()=>handleDeletePost(myPosts._id)}>
+                                    {status==='loading'?<Loading>Deleting ...</Loading>:'Delete'}
+                                </button>
+                            </td>
                         </tr>
                         
                 ))} 
