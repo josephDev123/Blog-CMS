@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import MDEditor from '@uiw/react-md-editor';
-// import {useFirebaseImageUpload} from './custom_hooks/useFirebaseImageUpload';
 import {fileUpload} from '../../utils/fileUpload';
+import {AdvanceLoading} from './AdvanceLoading';
 
 
 export default function Post() {
@@ -16,45 +15,39 @@ export default function Post() {
     const [content, setContent] = useState('');
     const [image, setImage] = useState('');
     const[status, setStatus] =useState('');
-    const [successErrorMessage, setSuccessErrorMessage] = useState('');
-    const [uploadImage, setUploadImage] = useState('');
-    const [confirmUploadStatus, setConfirmUploadStatus]= useState(false);
+    const [firebaseImageLink, setFirebaseImageLink] = useState('');
 
-    const [imgstatus, setImgStatus] = useState('');
-    const [storageRef, setStorageRef] = useState('');
-    const [imgProgress, setImgProgress] = useState(0);
+    const [firebaseImagedeployingStatus, setfirebaseImagedeployingStatus] = useState('');
+    const [storageRefDb, setStorageRefDb] = useState('');
+   
 
     const imageRef = useRef('');
 
     const {isAuthUser} = useContext(AuthContext);
-    const storage = getStorage();
-
-    // const customImageUpload = useFirebaseImageUpload(image, setStatus, setSuccessErrorMessage, setImgProgress, setSuccessErrorMessage, setUploadImage, setConfirmUploadStatus)
-
+  
     const handleFileUpload = (e)=>{
         setImage(e.target.files[0])
     }
 
     function handlefileUploadProgressCallback(message){
        console.log(message)
+       setfirebaseImagedeployingStatus('uploaded')
     }
 
     // uploading image or files to firebase storage in order to get the image link for the post 
     const confirmUploadImage = async (e)=>{
-      
       e.preventDefault()
       if(!image){
         setStatus('empty');
-        setSuccessErrorMessage('The file field is required')
       }else{
-
+         setfirebaseImagedeployingStatus('loading')
         const [fileuploaded, ref] = await fileUpload(image, handlefileUploadProgressCallback, 'blog_image_destination')
-        .catch(e=> setImgStatus(e.message))
+        .catch(e=> setfirebaseImagedeployingStatus('error'))
 
         console.log(fileuploaded, ref);
-        setUploadImage(fileuploaded)
-        setStorageRef(ref)
-        }
+        setFirebaseImageLink(fileuploaded);
+        setStorageRefDb(ref);
+      }
     }
 
 
@@ -63,31 +56,29 @@ export default function Post() {
 // handles the submission of post
     const handlePostSubmit = (e)=>{
         e.preventDefault()
-        if(typeof uploadImage === undefined || uploadImage === null || uploadImage === '' || title === '' || categories === '' || content === ''){
+        if(firebaseImageLink === undefined || firebaseImageLink === null 
+            || firebaseImageLink === '' || title === '' || categories === '' 
+            || content === '' || storageRefDb ===''){
           setStatus('empty');
-          setSuccessErrorMessage('Fields cannot be empty, undefined, and null');
         }else{
-
+          setStatus('loading');
           axios.post('http://localhost:7000/blog/create-post', {
             creator:isAuthUser,
             title:title,
             categories:categories,
             content:content,
-            image_link:uploadImage
+            image_link:firebaseImageLink,
+            imageRefInFirebase: storageRefDb
           })
           .then(res=>{
               setStatus('success')
-              setSuccessErrorMessage(res.data.message)
               setTitle(' ');
               setCategories('');
               setContent('');
-              setImgProgress(0)
-              setConfirmUploadStatus(false)
-              imageRef.current.value = ''
+              imageRef.current = ''
           })
           .catch(e=>{
               setStatus('error')
-              setSuccessErrorMessage(e.message)
           })
         }
     }
@@ -99,9 +90,10 @@ export default function Post() {
         <span className='tag'>
             /Add Post
         </span>
-        {status === 'error' && <div className="alert alert-danger mt-5" role="alert">{successErrorMessage}</div>}
-        {status === 'empty' && <div className="alert alert-danger mt-5" role="alert">{successErrorMessage}</div>}
-         {status === 'success' && <div className="alert alert-success mt-5" role="alert">{successErrorMessage}</div>}
+        {status === 'error' && <div className="alert alert-danger mt-5" role="alert">Something went wrong</div>}
+        {status === 'empty' && <div className="alert alert-danger mt-5" role="alert">Field cannot be empty</div>}
+         {status === 'success' && <div className="alert alert-success mt-5" role="alert">Success</div>}
+
         <form className="row g-3 mt-2" onSubmit={handlePostSubmit}>
             <div className="col-md-6">
                 <label htmlFor="post_title" className="form-label">Title</label>
@@ -116,11 +108,10 @@ export default function Post() {
                 <MDEditor value={content} onChange={setContent}/> 
             </div>
             <div className="col-md-4">
-                {imgProgress > 0 && <div className="progress">
-                    <div className="progress-bar" role="progressbar" style={{width: imgProgress }} aria-valuenow={imgProgress} aria-valuemin={imgProgress} aria-valuemax={imgProgress}>{imgProgress} % </div>
-                </div>}
 
-                {imgstatus==='error' && <div className="alert alert-danger" role="alert"> {successErrorMessage}</div>}
+               {firebaseImagedeployingStatus ==='loading' && <AdvanceLoading>Image loading ...</AdvanceLoading>}
+
+              {firebaseImagedeployingStatus==='error' && <div className="alert alert-danger" role="alert"> something went wrong</div>}
                 
 
                 <label htmlFor="post_image" className="form-label">Images</label>
@@ -131,12 +122,13 @@ export default function Post() {
             </div>
             <div className="col-md-4">
                 <div className="form-check form-check-inline" style={{ marginTop:'2rem' }}>
-                  <input className="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" checked={confirmUploadStatus} disabled/>
+                  <input className="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" checked={firebaseImagedeployingStatus==='uploaded'} disabled/>
                   <label className="form-check-label" htmlFor="inlineCheckbox3">image confirmed</label>
                 </div>
             </div>
             <div className="col-12">
-                <button type="submit" className="btn btn-primary">Create post</button>
+                {status==='loading'?<AdvanceLoading>Loading ...</AdvanceLoading>:
+                <button type="submit" className="btn btn-primary">Create post</button>}
             </div>
         </form>
 

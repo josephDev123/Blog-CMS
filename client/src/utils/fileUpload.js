@@ -28,10 +28,10 @@ export const fileUpload = (file, cb, storage_ref)=>{
             // console.log('Upload is ' + progress + '% done');
             switch (snapshot.state) {
               case 'paused':
-                cb('Upload is paused');
+                cb('paused');
                 break;
               case 'running':
-                cb('Upload is running');
+                cb('loading');
                 break;
             }
           }, 
@@ -56,6 +56,7 @@ export const fileUpload = (file, cb, storage_ref)=>{
           () => {
             // Upload completed successfully, now we can get the download URL
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              cb('uploaded')
               resolve([downloadURL, storageRef]);
             });
           }

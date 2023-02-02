@@ -4,16 +4,16 @@ export const AddBlog = (req, res)=>{
    const post = req.body;
   
     const createPost = new Post({
-        creator:post.creator,
-        title:post.title,
-        image_link:post.image_link,
-        content:post.content,
-        category:post.categories
+        creator: post.creator,
+        title: post.title,
+        image_link: post.image_link,
+        content: post.content,
+        category: post.categories,
+        storage_ref: JSON.stringify(post.imageRefInFirebase)
     })
 
     createPost.save(error=>{
         return error ? res.json({'message': 'Post fails'}):res.json({'message': 'post submitted successfully'})
-       
     })   
 
 }
