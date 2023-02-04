@@ -5,7 +5,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance'
 import {handleAxiosError} from '../../utils/handleAxiosError';
 import {ErrorAlert} from './ErrorAlert';
-import Loading from './Loading'
+// import Loading from './Loading'
+import {AdvanceLoading} from './AdvanceLoading';
+import {deleteFileInFirebaseDb} from '../../utils/delete_file_in_firebasedb';
 
 
 export default function MyPostsTable({currentUserPosts, increasePage, isFetching, isPreviousData, currentPage, decreasePage, setquerykey}) {
@@ -14,7 +16,7 @@ const location = useNavigate()
 const [status, setStatus] = useState('');
 const [alert, setAlert] = useState(false);
 
-
+console.log(currentUserPosts)
     const editBtns = useRef()
     const {id}=useParams();
 
@@ -22,29 +24,34 @@ const [alert, setAlert] = useState(false);
         return location(`/admin/my-post/${id}`)
     }
 
-    async function handleDeletePost(id){
+    function deletefirebaseFileStatusCb(message){
+        console.log(message)
+        setStatus(message)
+    }
+
+    async function handleDeletePost(id, firebaseRef){
         try{
             setStatus('loading');
-            const deletePostPromise = await axiosInstance({
-                method:'delete',
-                url:`/blog/post/${id}`
-            })
-            if(deletePostPromise.status === 200){
-                setStatus('success');
-                window.alert('Deleted')
-            }
+            const deleteFirebase = await deleteFileInFirebaseDb(JSON.parse(firebaseRef), deletefirebaseFileStatusCb)
+            // const deletePostPromise = await axiosInstance({
+            //     method:'delete',
+            //     url:`/blog/post/${id}`
+            // })
+            // if(deletePostPromise.status === 200){
+            //     setStatus('success');
+            //     window.alert('Deleted')
+            // }
             
         }catch(err){
-          const error = handleAxiosError(err);
-          console.log(error)
-          if(error){
+        //   const error = handleAxiosError(err);
+        //   console.log(error)
+        //   if(error){
             setAlert(true)
             setStatus('error')
-          }
-
-        }
-       
+        //   }
+        } 
     }
+
 
     if(currentUserPosts.length <= 0){
         return(
@@ -90,9 +97,11 @@ const [alert, setAlert] = useState(false);
                             </td>
 
                             <td>
-                                <button className='btn btn-danger' onClick={()=>handleDeletePost(myPosts._id)}>
-                                    {status==='loading'?<Loading>Deleting ...</Loading>:'Delete'}
-                                </button>
+                                {status==='loading'?<AdvanceLoading>Deleting ...</AdvanceLoading>:
+                                    <button className='btn btn-danger' onClick={()=>handleDeletePost(myPosts._id, myPosts.storage_ref)}>
+                                        Delete
+                                    </button>
+                                } 
                             </td>
                         </tr>
                         

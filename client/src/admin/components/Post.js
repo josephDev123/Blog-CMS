@@ -31,16 +31,16 @@ export default function Post() {
 
     function handlefileUploadProgressCallback(message){
        console.log(message)
-       setfirebaseImagedeployingStatus('uploaded')
+       setfirebaseImagedeployingStatus(message)
     }
 
-    // uploading image or files to firebase storage in order to get the image link for the post 
+    // uploading image or files to firebase storage in order to get the image link/firestore ref for the post 
     const confirmUploadImage = async (e)=>{
       e.preventDefault()
       if(!image){
         setStatus('empty');
       }else{
-         setfirebaseImagedeployingStatus('loading')
+        //  setfirebaseImagedeployingStatus('loading')
         const [fileuploaded, ref] = await fileUpload(image, handlefileUploadProgressCallback, 'blog_image_destination')
         .catch(e=> setfirebaseImagedeployingStatus('error'))
 
@@ -75,7 +75,8 @@ export default function Post() {
               setTitle(' ');
               setCategories('');
               setContent('');
-              imageRef.current = ''
+              setfirebaseImagedeployingStatus('')
+              imageRef.current.value = ''
           })
           .catch(e=>{
               setStatus('error')
@@ -109,9 +110,9 @@ export default function Post() {
             </div>
             <div className="col-md-4">
 
-               {firebaseImagedeployingStatus ==='loading' && <AdvanceLoading>Image loading ...</AdvanceLoading>}
+               {firebaseImagedeployingStatus ==='loading'? <AdvanceLoading>Image loading ...</AdvanceLoading>:''}
 
-              {firebaseImagedeployingStatus==='error' && <div className="alert alert-danger" role="alert"> something went wrong</div>}
+              {firebaseImagedeployingStatus==='error'? <div className="alert alert-danger" role="alert"> something went wrong</div>:''}
                 
 
                 <label htmlFor="post_image" className="form-label">Images</label>

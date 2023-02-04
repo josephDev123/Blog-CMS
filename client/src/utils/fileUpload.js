@@ -33,6 +33,8 @@ export const fileUpload = (file, cb, storage_ref)=>{
               case 'running':
                 cb('loading');
                 break;
+                default:
+                  cb('uploaded');
             }
           }, 
           (error) => {
