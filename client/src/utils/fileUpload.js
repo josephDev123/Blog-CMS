@@ -17,7 +17,7 @@ export const fileUpload = (file, cb, storage_ref)=>{
         // Upload file and metadata to the object 'images/mountains.jpg'
         const fileDestination = `${storage_ref}/`+uuidv4()+`${file.name}`;
         const storageRef = ref(storage, fileDestination);
-        console.log(storageRef)
+        console.log(fileDestination)
         const uploadTask = uploadBytesResumable(storageRef, file, metadata);
 
         // Listen for state changes, errors, and completion of the upload.
@@ -59,7 +59,7 @@ export const fileUpload = (file, cb, storage_ref)=>{
             // Upload completed successfully, now we can get the download URL
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
               cb('uploaded')
-              resolve([downloadURL, storageRef]);
+              resolve([downloadURL, fileDestination]);
             });
           }
         );

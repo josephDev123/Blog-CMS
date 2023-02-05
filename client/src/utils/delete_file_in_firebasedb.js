@@ -1,19 +1,24 @@
 import { getStorage, ref, deleteObject } from "firebase/storage";
 
-export async function deleteFileInFirebaseDb(imageRef, cb){
+export function deleteFileInFirebaseDb(imageRef, cb){
 
-const storage = getStorage();
+  return new Promise((resolve, reject)=>{
+    const storage = getStorage();
+console.log(imageRef)
+    // Create a reference to the file to delete
+    const desertRef = ref(storage, imageRef);
+    
+    // Delete the file
+    deleteObject(desertRef).then(() => {
+      // File deleted successfully
+      cb('file deleted')
+      resolve('file deleted');
+    }).catch((error) => {
+      // Uh-oh, an error occurred!
+      cb('file error');
+      reject(new Error(error));
+    });
 
-// Create a reference to the file to delete
-const desertRef = ref(storage, imageRef);
+  })
 
-// Delete the file
-deleteObject(desertRef).then(() => {
-  // File deleted successfully
-  cb('file success')
-}).catch((error) => {
-  // Uh-oh, an error occurred!
-  cb('file error');
-  throw new Error(error);
-});
 }

@@ -30,9 +30,10 @@ console.log(currentUserPosts)
     }
 
     async function handleDeletePost(id, firebaseRef){
+        console.log(firebaseRef)
         try{
             setStatus('loading');
-            const deleteFirebase = await deleteFileInFirebaseDb(JSON.parse(firebaseRef), deletefirebaseFileStatusCb)
+            const deleteFirebase = await deleteFileInFirebaseDb(firebaseRef, deletefirebaseFileStatusCb)
             // const deletePostPromise = await axiosInstance({
             //     method:'delete',
             //     url:`/blog/post/${id}`

@@ -9,7 +9,7 @@ export const AddBlog = (req, res)=>{
         image_link: post.image_link,
         content: post.content,
         category: post.categories,
-        storage_ref: JSON.stringify(post.imageRefInFirebase)
+        storage_ref: post.imageRefInFirebase
     })
 
     createPost.save(error=>{
