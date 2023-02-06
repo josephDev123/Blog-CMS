@@ -128,7 +128,7 @@ export default function Post() {
                 </div>
             </div>
             <div className="col-12">
-                {status==='loading'?<AdvanceLoading>Loading ...</AdvanceLoading>:
+                {status==='loading'?<AdvanceLoading> Creating post ... </AdvanceLoading>:
                 <button type="submit" className="btn btn-primary">Create post</button>}
             </div>
         </form>

@@ -24,32 +24,32 @@ console.log(currentUserPosts)
         return location(`/admin/my-post/${id}`)
     }
 
-    function deletefirebaseFileStatusCb(message){
-        console.log(message)
-        setStatus(message)
-    }
+    // function deletefirebaseFileStatusCb(message){
+    //     console.log(message)
+    //     setStatus(message)
+    // }
 
     async function handleDeletePost(id, firebaseRef){
-        console.log(firebaseRef)
         try{
-            setStatus('loading');
-            const deleteFirebase = await deleteFileInFirebaseDb(firebaseRef, deletefirebaseFileStatusCb)
-            // const deletePostPromise = await axiosInstance({
-            //     method:'delete',
-            //     url:`/blog/post/${id}`
-            // })
-            // if(deletePostPromise.status === 200){
-            //     setStatus('success');
-            //     window.alert('Deleted')
-            // }
+             setStatus('loading');
+            const deleteFirebase = await deleteFileInFirebaseDb(firebaseRef);
+            console.log(deleteFirebase)
+            const deletePostPromise = await axiosInstance({
+                method:'delete',
+                url:`/blog/post/${id}`
+            })
+            if(deletePostPromise.status === 200){
+                setStatus('success');
+                window.alert('Deleted')
+            }
             
         }catch(err){
-        //   const error = handleAxiosError(err);
-        //   console.log(error)
-        //   if(error){
+          const error = handleAxiosError(err);
+          console.log(error)
+          if(error){
             setAlert(true)
             setStatus('error')
-        //   }
+           }
         } 
     }
 
