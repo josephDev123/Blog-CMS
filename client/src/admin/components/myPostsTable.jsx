@@ -16,7 +16,7 @@ const location = useNavigate()
 const [status, setStatus] = useState('');
 const [alert, setAlert] = useState(false);
 
-console.log(currentUserPosts)
+
     const editBtns = useRef()
     const {id}=useParams();
 
