@@ -1,6 +1,6 @@
 import React from 'react';
 import '../asset/css/dashboard.css';
-import ListArticles from './ListArticles';
+import ListArticles from '../components/ListArticles';
 import ActiveLink from '../../ActiveLink';
 import { useContext } from 'react';
 import {AuthContext} from '../../Context/AuthContext'

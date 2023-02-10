@@ -9,13 +9,13 @@ import {PostByIdPage} from './components/pages/PostByIdPage';
 
 //admin
 import Layout from './admin/components/Layout';
-import Dashboard from './admin/components/Dashboard';
-import Post from './admin/components/Post';
-import Profile from './admin/components/Profile';
-import UsersList from './admin/components/UsersList';
+import Dashboard from './admin/pages/Dashboard';
+import AddPost from './admin/pages/AddPost';
+import Profile from './admin/pages/Profile';
+import UsersList from './admin/pages/UsersList';
 import Roles from './admin/pages/Roles';
 import IsAdmin from './admin/components/authorization.js/isAdmin';
-import Setting from './admin/components/Setting';
+import Setting from './admin/pages/Setting';
 import Myposts from './admin/pages/Myposts'
 
 import {AuthContext} from './Context/AuthContext'
@@ -44,7 +44,7 @@ function App() {
                     {/* admin */}
                     <Route path='admin' element={<Layout/>}>
                       <Route index element={<Dashboard/>}/>
-                      <Route path='/admin/create-post-form' element={<Post/>}/>
+                      <Route path='/admin/create-post-form' element={<AddPost/>}/>
                       <Route path='/admin/profile' element={<Profile/>}/>
                       <Route path='/admin/users-list' element={<UsersList/>}/>
                       <Route path='/admin/roles' element={ <Roles/> }/>

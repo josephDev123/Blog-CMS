@@ -85,8 +85,7 @@ export default function Myposts() {
             {isLoading?
             <> <Loading/></>
             :isError?
-            <ErrorAlert alert={errorAlert} setAlert={setErrorAlert}>{error.message}</ErrorAlert>:
-       
+            <ErrorAlert alert={errorAlert} setAlert={setErrorAlert}>Oh! something went wrong</ErrorAlert>:
             <section className='table_wrapper'>
                 <MyPostsTable currentUserPosts={data.data} increasePage = {increasePage} isFetching={isFetching} isPreviousData={isPreviousData} currentPage = {page} decreasePage = {decreasePage} setquerykey={setKey}/> 
             </section>

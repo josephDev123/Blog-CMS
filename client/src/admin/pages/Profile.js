@@ -2,8 +2,8 @@ import React from 'react'
 import '../asset/css/profile.css';
 import { useContext, useEffect,useState } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
-import EditProfile from './EditProfile';
-import {UploadProfile} from './UploadProfile';
+import EditProfile from '../components/EditProfile';
+import {UploadProfile} from '../components/UploadProfile';
 import { useQuery } from 'react-query';
 import Button from 'react-bootstrap/Button';
 import { useFetch } from '../../customHooks/useFetch'; 

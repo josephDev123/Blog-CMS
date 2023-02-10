@@ -1,7 +1,7 @@
 
 import React from 'react';
 import '../asset/css/usersList.css';
-import Users from './Users';
+import Users from '../components/Users';
 import { useCallback, useState } from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';

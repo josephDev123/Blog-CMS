@@ -8,10 +8,10 @@ import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from "rehype-sanitize";
 import { useState } from 'react';
 import {fileUpload} from  '../../utils/fileUpload';
-import Loading from './Loading';
-import {ErrorAlert} from './ErrorAlert';
+import Loading from '../components/Loading';
+import {ErrorAlert} from '../components/ErrorAlert';
 import  axiosInstance  from '../../utils/axiosInstance';
-import { SuccessAlert } from './SuccessAlert';
+import { SuccessAlert } from '../components/SuccessAlert';
 import { useContext } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
 import pageTitleStyle from  '../asset/css/css_modules/page-heading.module.css'

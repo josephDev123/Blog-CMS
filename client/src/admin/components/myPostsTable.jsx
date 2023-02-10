@@ -54,17 +54,14 @@ const [alert, setAlert] = useState(false);
     }
 
 
-    if(currentUserPosts.length <= 0){
+    if(currentUserPosts?.length <= 0){
         return(
             <div className='d-flex justify-content-center align-items-center text-align-center bg-warning p-4'>No post yet</div>
         )
     }
-    return (
-    
-        
+    return ( 
     <div className='table-responsive'>
-            { status ==='error'?<ErrorAlert alert={alert} setAlert={setAlert}> Some went wrong </ErrorAlert>:''}
-
+        { status ==='error'?<ErrorAlert alert={alert} setAlert={setAlert}> Some went wrong </ErrorAlert>:''}
         <table className="table table-hover caption-top table-bordered">
             <caption>List of my posts</caption>
             <thead className='table-dark'>
@@ -78,7 +75,6 @@ const [alert, setAlert] = useState(false);
                     <th scope="col">Delete post</th>
                 </tr>
             </thead>
-            
             <tbody>
                 {currentUserPosts?.map((myPosts)=>(
             
@@ -98,11 +94,9 @@ const [alert, setAlert] = useState(false);
                             </td>
 
                             <td>
-                                {status==='loading'?<AdvanceLoading>Deleting ...</AdvanceLoading>:
                                     <button className='btn btn-danger' onClick={()=>handleDeletePost(myPosts._id, myPosts.storage_ref)}>
                                         Delete
                                     </button>
-                                } 
                             </td>
                         </tr>
                         
