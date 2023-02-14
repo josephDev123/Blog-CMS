@@ -31,7 +31,6 @@ export default function Myposts() {
         objectPosition:'center'
     }
 
-
     const increasePage = ()=>{
          return setPage((old)=>old + 1)
     }
@@ -44,7 +43,6 @@ export default function Myposts() {
     const {isLoading, isError, error, data,  isFetching, isPreviousData} = useReqHttp('blog/post/currentUser', null, page, queryKey, isAuthUser, true);
     // console.log(data?.data)
    
-
   return (
     <div className='container mt-4'>
         <span className={headingTag.headingTag}>/My posts</span>

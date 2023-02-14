@@ -21,7 +21,7 @@ const [alert, setAlert] = useState(false);
     const {id}=useParams();
 
     function handleEditMyPost(id){
-        return location(`/admin/my-post/${id}`)
+        return location(`/admin/my-post/${id}`);
     }
 
     // function deletefirebaseFileStatusCb(message){

@@ -29,7 +29,7 @@ export function EditMyPostModal({id, setquerykey}){
             </div>
             <div className="modal-body">
                 {isLoading && <Loading> Loading ...</Loading>}
-                {isError && <div className='alert alert-danger'>{error.message} {' '} <span><button onClick={()=>location('/admin/my-post')}>Try again </button></span></div>}
+                {isError && <div className='alert alert-danger'> Something went wrong <span><button onClick={()=>location('/admin/my-post')}>Try again </button></span></div>}
                 {data && <EditMypostForm data={data} />}
             </div>
             {/* <div className="modal-footer">
