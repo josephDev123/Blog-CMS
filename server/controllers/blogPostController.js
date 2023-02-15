@@ -39,7 +39,7 @@ export const GetPostsCreatedByPagination = async (req, res)=>{
 
 export const editBlogPost = async (req, res)=>{
     const id = req.params.id;
-    const {title, category, blogPost} = req.body;
+    const {storage_ref, firebaseImage_link, title, category, blogPost} = req.body;
     // console.log(title, category, post, creator, image_link)
 
     try{
@@ -47,8 +47,9 @@ export const editBlogPost = async (req, res)=>{
            {
               $set:{
                 // 'creator':creator,
+                'storage_ref':storage_ref,
                 'title':title,
-                // 'image_link':image_link,
+                'image_link':firebaseImage_link,
                 'content':blogPost,
                 'category':category
             

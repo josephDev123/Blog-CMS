@@ -6,7 +6,7 @@ import {ErrorAlert} from './ErrorAlert';
 import {fileUpload} from '../../utils/fileUpload';
 import {deleteFileInFirebaseDb} from '../../utils/delete_file_in_firebasedb';
 import {AdvanceLoading} from './AdvanceLoading';
-import {SimpleAlert} from './SimpleAlert';
+// import {SimpleAlert} from './SimpleAlert';
 
 export function EditMypostForm({data}){
     const[title, setTitle] = useState('');
@@ -20,6 +20,8 @@ export function EditMypostForm({data}){
     const[imgStatus, setImgStatus] = useState('');
     const[alert, setAlert] = useState(false);
 
+    console.log(imgStatus)
+
    async function submitEditPost(e){
         e.preventDefault()
             setStatus('loading');
@@ -31,7 +33,7 @@ export function EditMypostForm({data}){
                         data: { 
                             // 'creator': data[0].creator,
                             'storage_ref': mongodbFirebaseRef? mongodbFirebaseRef: data[0].storage_ref,
-                            'image_link': firebaseImgUrl? firebaseImgUrl: data[0].image_link,
+                            'firebaseImage_link': firebaseImgUrl? firebaseImgUrl: data[0].image_link,
                             'title': title? title : data[0].title,
                             'category': category ? category :data[0].category,
                             'blogPost': post?post:data[0].content
@@ -49,22 +51,25 @@ export function EditMypostForm({data}){
             }
    }
 
+
         function handleChangeFileupload(file){
                 setFile(file.target.files[0]);
         }
 
-        function cb(status){
-            setImgStatus(status);
+        function cb(imgStatusLoading){
+            setImgStatus(imgStatusLoading);
         }
 
    async function handleFileDeployImagetoFirebaseToGetUrl(ImageRef){
         try {
+            // delete the fileurl from firebase db first
             await deleteFileInFirebaseDb(ImageRef);
             const [firebaseImgUrl, fileRef ] = await fileUpload(file, cb, 'blog_image_destination');
-            console.log(firebaseImgUrl, fileRef);
-            setImgStatus('uploaded')
+         
             setFirebaseImgUrl(firebaseImgUrl);
             setMongodbFirebaseRef(fileRef);
+            setImgStatus('uploaded')
+            setAlert(true)
         } catch (error) {
             setImgStatus('error');
         }
@@ -91,8 +96,8 @@ export function EditMypostForm({data}){
 
             <div className="mb-3">
                { imgStatus === 'loading' ? <AdvanceLoading/> : '' }
-               { imgStatus === 'error' ? <ErrorAlert> Something went wrong </ErrorAlert> : '' }
-               { imgStatus === 'uploaded' ?<SimpleAlert alert={alert} setAlert={setAlert}> File prepared for upload </SimpleAlert>:'' }
+               { imgStatus === 'error'? <ErrorAlert> Something went wrong </ErrorAlert> : '' }
+               { imgStatus === 'uploaded'? <SuccessAlert alert={alert} setAlert={setAlert}> File prepared for upload </SuccessAlert>: '' }
             </div>
 
              <div className="mb-3">
@@ -102,7 +107,7 @@ export function EditMypostForm({data}){
            <div className="mb-3">
                 {/* <label htmlFor="image" className="form-label">image</label> */}
                 <input type="file" className="form-control mb-2" id="image" onChange={(e)=>handleChangeFileupload(e)}/>
-                <button className='btn btn-primary' onClick={()=>handleFileDeployImagetoFirebaseToGetUrl(data[0]?.storage_ref)}> confirm image </button>
+                <button type='button' className='btn btn-primary' onClick={()=>handleFileDeployImagetoFirebaseToGetUrl(data[0]?.storage_ref)}> confirm image </button>
             </div>
 
             {status === 'loading' ? <Loading> Loading... </Loading> : <button type="submit" className="btn btn-primary">Save Changes</button>}

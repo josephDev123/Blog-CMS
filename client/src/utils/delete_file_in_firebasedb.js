@@ -18,7 +18,7 @@ export function deleteFileInFirebaseDb(imageRef){
       // Uh-oh, an error occurred!
       // cb('file error');
       if(error.code === "storage/object-not-found"){
-        resolve('')
+        resolve('');
       }
       reject(new Error(error.message));
     });
