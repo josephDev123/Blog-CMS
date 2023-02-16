@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+// import { Outlet } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
 
-export function SuccessAlert({alert, setAlert}) {
+export function SuccessAlert({alert, setAlert, children}) {
   const [show, setShow] = useState(true);
 
    useEffect(()=>{
@@ -18,7 +18,7 @@ export function SuccessAlert({alert, setAlert}) {
       <Alert variant="success" onClose={() => setAlert(false)} dismissible>
         <Alert.Heading>Success!</Alert.Heading>
         <p>
-          <Outlet/>
+           {children}
         </p>
       </Alert>
     );

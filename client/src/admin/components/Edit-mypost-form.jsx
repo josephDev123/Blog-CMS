@@ -56,14 +56,15 @@ export function EditMypostForm({data}){
                 setFile(file.target.files[0]);
         }
 
-        function cb(imgStatusLoading){
-            setImgStatus(imgStatusLoading);
+        function cb(imgStatus){
+            setImgStatus(imgStatus);
         }
 
-   async function handleFileDeployImagetoFirebaseToGetUrl(ImageRef){
+   async function handleFileDeployImagetoFirebaseToGetNewImageUrl(ImageRef){
         try {
-            // delete the fileurl from firebase db first
+            // delete the old firebase image url of the post from firebase storage db first
             await deleteFileInFirebaseDb(ImageRef);
+            //upload new image and get new image url for the edited post
             const [firebaseImgUrl, fileRef ] = await fileUpload(file, cb, 'blog_image_destination');
          
             setFirebaseImgUrl(firebaseImgUrl);
@@ -101,13 +102,13 @@ export function EditMypostForm({data}){
             </div>
 
              <div className="mb-3">
-                <img src={data[0]?.image_link} alt='post-image' className='img-responsive img-thumbnail' width='200' height='200'/>
+                <img src={data[0]?.image_link} alt='the blog post images' className='img-responsive img-thumbnail' width='200' height='200'/>
             </div>
 
            <div className="mb-3">
                 {/* <label htmlFor="image" className="form-label">image</label> */}
                 <input type="file" className="form-control mb-2" id="image" onChange={(e)=>handleChangeFileupload(e)}/>
-                <button type='button' className='btn btn-primary' onClick={()=>handleFileDeployImagetoFirebaseToGetUrl(data[0]?.storage_ref)}> confirm image </button>
+                <button type='button' className='btn btn-primary' onClick={()=>handleFileDeployImagetoFirebaseToGetNewImageUrl(data[0]?.storage_ref)}> confirm image </button>
             </div>
 
             {status === 'loading' ? <Loading> Loading... </Loading> : <button type="submit" className="btn btn-primary">Save Changes</button>}
