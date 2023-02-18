@@ -1,4 +1,4 @@
-import React from 'react';
+
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
@@ -6,7 +6,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from "rehype-sanitize";
-import { useState } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import {fileUpload} from  '../../utils/fileUpload';
 import Loading from '../components/Loading';
 import {ErrorAlert} from '../components/ErrorAlert';
@@ -31,7 +31,10 @@ export default function Setting() {
     const[status, setStatus] = useState('');
 
     const {isAuthUser} = useContext(AuthContext)
-    console.log(isAuthUser)
+
+    useLayoutEffect(()=>{
+        document.title = 'Setting Page';
+    }, [])
 
     function handleFileChange(e){
         setFile(e.target.files[0]);

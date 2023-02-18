@@ -1,5 +1,5 @@
 
-import  {useState} from 'react';
+import  {useState, useLayoutEffect} from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import '../asset/css/roles.css';
@@ -19,6 +19,10 @@ export default function Roles() {
     const [userid, setUserId] = useState('');
     const [alert, setAlert] = useState(false);
     const [err, setErr] = useState(null);
+
+    useLayoutEffect(()=>{
+      document.title = 'Role Page';
+  }, [])
 
     function handleShowModal(userId){
       setShow(true);

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useState } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { useRef } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
@@ -26,6 +26,10 @@ export default function AddPost() {
     const imageRef = useRef('');
 
     const {isAuthUser} = useContext(AuthContext);
+
+    useLayoutEffect(()=>{
+      document.title = 'Create Post Page';
+  }, [])
   
     const handleFileUpload = (e)=>{
         setImage(e.target.files[0])
@@ -151,59 +155,3 @@ export default function AddPost() {
 
 
 
-
-
- // Create the file metadata
-        /** @type {any} */
-        // const metadata = {
-        //   contentType: 'image/jpeg'
-        // };
-
-        // // Upload file and metadata to the object 'images/mountains.jpg'
-        // const storageRef = ref(storage, 'post_image/' + image.name);
-        // const uploadTask = uploadBytesResumable(storageRef, image, metadata);
-
-        // // Listen for state changes, errors, and completion of the upload.
-        // uploadTask.on('state_changed',
-        //   (snapshot) => {
-        //     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        //     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        //     setImgProgress(progress);
-        //     switch (snapshot.state) {
-        //       case 'paused':
-        //         console.log('Upload is paused');
-        //         break;
-        //       case 'running':
-        //         console.log('Upload is running');
-        //         break;
-        //     }
-        //   }, 
-        //   (error) => {
-        //     // A full list of error codes is available at
-        //     // https://firebase.google.com/docs/storage/web/handle-errors
-        //     switch (error.code) {
-        //       case 'storage/unauthorized':
-        //         setImgStatus('error')
-        //         setSuccessErrorMessage("User does not have permission to access the object")
-        //         break;
-        //       case 'storage/canceled':
-        //         setImgStatus('error')
-        //         setSuccessErrorMessage("User canceled the upload")
-        //         break;
-
-        //       // ...
-
-        //       case 'storage/unknown':
-        //         setImgStatus('error')
-        //         setSuccessErrorMessage("Unknown error occurred, inspect error.serverResponse")
-        //         break;
-        //     }
-        //   }, 
-        //   () => {
-        //     // Upload completed successfully, now we can get the download URL
-        //     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>{
-        //       setUploadImage(downloadURL);
-        //       setConfirmUploadStatus(true)
-        //     });
-        //   }
-        // );

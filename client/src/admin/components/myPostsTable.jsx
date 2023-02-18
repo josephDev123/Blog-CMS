@@ -1,7 +1,7 @@
 import React from 'react';
 import {EditMyPostModal} from './Edit-mypost-modal';
 import { useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance'
 import {handleAxiosError} from '../../utils/handleAxiosError';
 import {ErrorAlert} from './ErrorAlert';
@@ -80,7 +80,7 @@ const [alert, setAlert] = useState(false);
             
                         <tr key={myPosts._id}>
                             <th scope="row">{myPosts._id.substr(0, 7)}</th>
-                            <td>{myPosts.title.length > 30 ? myPosts.title.substr(0, 30) +'......':myPosts.title}</td>
+                            <td><Link to={"/blog/post/"+myPosts._id}>{myPosts.title.length > 30 ? myPosts.title.substr(0, 30) +'......':myPosts.title}</Link></td>
                             <td>{myPosts.category}</td>
                             <td>{myPosts.content.length > 100? myPosts.content.substr(0, 100) +'.....':myPosts.content}</td>
                             <td>

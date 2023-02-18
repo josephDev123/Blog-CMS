@@ -1,6 +1,6 @@
 import React from 'react'
 import '../asset/css/profile.css';
-import { useContext, useEffect,useState } from 'react';
+import { useContext, useEffect,useState, useLayoutEffect } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
 import EditProfile from '../components/EditProfile';
 import {UploadProfile} from '../components/UploadProfile';
@@ -15,6 +15,10 @@ export default function Profile() {
   const {isAuthUser} = useContext(AuthContext);
   const [enactRender, setEnactRender] = useState('');
   const [show, setShow] = useState(false);
+
+  useLayoutEffect(()=>{
+    document.title = 'Profile Page';
+}, [])
 
   // open modal 
   const handleShow = () => setShow(true);

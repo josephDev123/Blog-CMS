@@ -1,13 +1,16 @@
 
-import React from 'react';
 import '../asset/css/usersList.css';
 import Users from '../components/Users';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useLayoutEffect } from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
 
 export default function UsersList() {
   const [page, setPage] = useState(1);
+
+  useLayoutEffect(()=>{
+    document.title = 'Users Page';
+}, [])
 
   const isPage = useCallback((pageNumber)=>{
      return setPage(page)

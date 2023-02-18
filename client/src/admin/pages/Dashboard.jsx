@@ -2,12 +2,16 @@ import React from 'react';
 import '../asset/css/dashboard.css';
 import ListArticles from '../components/ListArticles';
 import ActiveLink from '../../ActiveLink';
-import { useContext } from 'react';
+import { useContext, useLayoutEffect } from 'react';
 import {AuthContext} from '../../Context/AuthContext'
 
 export default function Dashboard() {
     const {isAuthUser} = useContext(AuthContext)
-    console.log(isAuthUser)
+
+    useLayoutEffect(()=>{
+        document.title = 'Dashboard Page'
+    }, [])
+
   return (
     <div className='container mt-4'>
         <span className='tag'>

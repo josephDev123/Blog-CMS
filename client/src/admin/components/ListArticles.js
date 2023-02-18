@@ -6,6 +6,7 @@ import { useQuery } from 'react-query';
 import axios from 'axios';
 import { AuthContext } from '../../Context/AuthContext';
 import {AdvanceLoading} from './AdvanceLoading'
+import {Link} from 'react-router-dom'
 
 
 export default function ListArticles() {
@@ -70,7 +71,7 @@ export default function ListArticles() {
                   
                   <tr key={item._id}>
                     <th scope="row">{item._id.substring(0, 5)}</th>
-                    <td>{item.title}</td>
+                    <td><Link to={'/blog/post/'+item._id}>{item.title}</Link></td>
                     <td>{item.creator}</td>
                     <td>{item.content}</td>
                     <td>{item.category}</td>

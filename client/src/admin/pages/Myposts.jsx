@@ -2,7 +2,7 @@ import React from 'react';
 import headingTag from '../asset/css/css_modules/page-heading.module.css';
 import MyPostsTable from '../components/myPostsTable';
 import {useReqHttp} from '../../customHooks/useReqHttp';
-import { useContext } from 'react';
+import { useContext, useLayoutEffect } from 'react';
 import {AuthContext} from  '../../Context/AuthContext';
 import {useState} from 'react';
 import Loading from '../components/Loading';
@@ -30,6 +30,10 @@ export default function Myposts() {
         objectFit:'cover',
         objectPosition:'center'
     }
+
+    useLayoutEffect(()=>{
+        document.title = 'My Personal Post Page';
+    }, [])
 
     const increasePage = ()=>{
          return setPage((old)=>old + 1)
