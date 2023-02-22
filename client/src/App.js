@@ -2,7 +2,7 @@
 import './css/App.css';
 import Layouts from './components/layouts';
 import { Routes, Route } from "react-router-dom";
-import IndexGalleryLayout from './components/pages/index_gallery_layout';
+import LandingPage from './components/pages/LandingPage';
 import { BrowserRouter } from "react-router-dom";
 import {Blogs} from './components/pages/blogs';
 import {PostByIdPage} from './components/pages/PostByIdPage';
@@ -36,7 +36,7 @@ function App() {
                   
                     {/* client */}
                     <Route path='/' element={<Layouts/>}>
-                      <Route index element={<IndexGalleryLayout/>}/>
+                      <Route index element={<LandingPage/>}/>
                       <Route path='/blogs-post' element={<Blogs/>} />
                       <Route path='/blog/post/:id' element = {<PostByIdPage/>} />
                     </Route>

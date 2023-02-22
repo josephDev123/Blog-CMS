@@ -28,11 +28,6 @@ export default function Navbar(){
                     </ActiveLink>
                     </li>
                     <li className="nav-item">
-                    <ActiveLink href='/post' className="nav-link">
-                         post
-                    </ActiveLink>
-                    </li>
-                    <li className="nav-item">
                     <ActiveLink href='/about-us' className="nav-link">
                         About us
                     </ActiveLink>

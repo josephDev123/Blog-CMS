@@ -20,12 +20,16 @@ console.log('from gallery '+ data)
   return (
        <div className='gallery_container'>
         {data.map(posts=>(
-           <div key={posts._id} className='gallery_content mb-4'>
-              <img src={posts.image_link} alt='img' className='blog_img_heading' width='100%'/>
+           <div key={posts._id} className='gallery_content'>
+              <img src={posts.image_link} alt='post' className='blog_img_heading' width='100%'/>
               <h3>{posts.title}</h3>
               <p>{posts.content}</p>
               <p>{new Date(posts.createdAt).toDateString()}</p>
-              <Link to={'/blog/post/'+posts._id}>read more</Link>
+              <Link to={'/blog/post/'+posts._id}>
+                <button type='button' className='btn btn-primary btn-sm'>
+                  read more
+                </button>
+              </Link>
            </div>
         ))}
            

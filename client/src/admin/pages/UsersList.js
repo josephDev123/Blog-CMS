@@ -28,7 +28,6 @@ export default function UsersList() {
     }
   })
 
-  console.log(data);
 
   return (
     <div className='container mt-4'>
