@@ -7,9 +7,9 @@ import Gallery from '../gallery'
 
 export const Blogs =()=>{
     useLayoutEffect(()=>{
-        document.title = 'Blogs'
+        document.title = 'Blogs || Posts'
         return ()=>{
-            document.title = 'Blog CMS'
+            document.title = ''
         }
     }, [])
   const [category, setCategory] = useState('');

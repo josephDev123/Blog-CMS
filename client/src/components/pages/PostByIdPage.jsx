@@ -1,9 +1,18 @@
 import {useParams} from 'react-router-dom';
 import {useFetch} from '../../customHooks/useFetch';
+import {useLayoutEffect} from 'react';
 import '../../css/postByIdPage.css';
 
 
 export const PostByIdPage = ()=>{
+    useLayoutEffect(()=>{
+        document.title = 'Post'
+    
+        return ()=>{
+            document.title= ''
+        }
+      }, []);
+
     let {id} = useParams();
     const  {isLoading, isError, data, error} = useFetch('http://localhost:7000/blog/post/byId', id);
      
