@@ -22,7 +22,7 @@ export default function LandingPage() {
           <p>If you're like most designers and marketers, you search for illustrations in Google Images.</p>
        </div>
 
-      <div>
+      <div className='landing_page-flow'>
           <div>
                 <h3>Heading</h3>
                 <p>Paragraph</p>
