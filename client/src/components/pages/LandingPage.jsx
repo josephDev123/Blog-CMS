@@ -22,17 +22,19 @@ export default function LandingPage() {
           <p>If you're like most designers and marketers, you search for illustrations in Google Images.</p>
        </div>
 
-      <div className='landing_page-flow'>
-          <div>
-                <h3>Heading</h3>
-                <p>Paragraph</p>
+      <div className='landing_page_action_wrapper'>
+          <div className='landing_page_action_action'>
+                <h3> specific feature component</h3>
+                <p>When building a small project it was good for me to put all
+                   the components in components folder and call them in different pages 
+                </p>
                 <span>
                   <button>Create Content</button>
                   <button>Get Started</button>
                 </span>
           </div>
-          <div>
-                <img src='' alt='' style={{width:'100%', height:'100%'}} />
+          <div className='landing_page_action_side_image'>
+                <img src={process.env.PUBLIC_URL+'/images/blog1.jpg'} alt='' style={{width:'100%', height:'100%'}} />
           </div>
 
       </div>
