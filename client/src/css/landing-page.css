@@ -27,20 +27,17 @@
     justify-content: space-between;
     border: 1px solid red;
     gap: 1rem;
-    /* max-height: 23rem; */
     padding: 1rem
 }
 
 .landing_page_action_action, .landing_page_action_side_image{
     flex: 1 0 20rem;
     border: 1px solid blue;
-    /* height: 100%; */
 }
 
 .landing_page_action_side_image > img{
     object-fit: contain;
-     height: fit-content;
+     height: 15rem;
     border: 1px solid purple;
-    /* filter: drop-shadow('blur'); */
     
 }

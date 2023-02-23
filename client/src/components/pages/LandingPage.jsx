@@ -34,7 +34,7 @@ export default function LandingPage() {
                 </span>
           </div>
           <div className='landing_page_action_side_image'>
-                <img src={process.env.PUBLIC_URL+'/images/blog1.jpg'} alt='' style={{width:'100%', height:'100%'}} />
+                <img src={process.env.PUBLIC_URL+'/images/blog1.jpg'} alt='' style={{width:'100%'}} />
           </div>
 
       </div>
