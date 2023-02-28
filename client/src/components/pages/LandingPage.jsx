@@ -19,18 +19,23 @@ export default function LandingPage() {
   return (
     <div className='landing_container container mt-4'>
        <div className='content-fontsize'>
-          <p>If you're like most designers and marketers, you search for illustrations in Google Images.</p>
+        <h2>What We Do: Power Your Blog with Our CMS Software</h2>
+          <p>At our core, we believe that every blogger should have access to powerful and user-friendly content
+             management software that makes it easy to create and share engaging content online. 
+             That's why we've developed our cutting-edge CMS software, designed specifically for bloggers like you.</p>
        </div>
 
       <div className='landing_page_action_wrapper'>
           <div className='landing_page_action_action'>
-                <h3> specific feature component</h3>
-                <p>When building a small project it was good for me to put all
-                   the components in components folder and call them in different pages 
+                <h3> Upgrade Your Blogging Experience with a Modern CMS</h3>
+                <p>Are you tired of managing your blog with clunky, outdated software? Say goodbye to the hassle and
+                   switch to a modern CMS today! With our user-friendly platform, you'll be able to create, publish, 
+                   and manage your content with ease. Don't let your blog suffer from outdated technology any longer. 
+                   Take action and upgrade to a better blogging experience now!
                 </p>
                 <span>
-                  <button>Create Content</button>
-                  <button>Get Started</button>
+                  <button type='button'>Create Content</button>
+                  <button type='button'>Get Started</button>
                 </span>
           </div>
           <div className='landing_page_action_side_image'>
