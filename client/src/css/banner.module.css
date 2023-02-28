@@ -5,12 +5,8 @@
     height: 25em;
 }
 
-/* .banner_content_wrapper {
-    transform: translateY(7em);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width:50%;
-    color:#541690
-} */
+.banner_content_wrapper {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}

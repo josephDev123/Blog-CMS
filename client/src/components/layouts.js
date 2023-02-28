@@ -11,6 +11,7 @@ export default function Layouts() {
   return (
     <div>
         <Navbar/>
+        <br/><br/>
         <Banner/>
         <Outlet/>
         <Footer/>

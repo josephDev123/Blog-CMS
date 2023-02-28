@@ -38,6 +38,7 @@ export default function Banner() {
               <div className='banner_content_wrapper'>
                   <h4>Velit dolore ut nostrud aliquip pariatur officia dolore.</h4>
                   <p className='mt-2'>Sint labore anim qui in.</p>
+                  <button type='button'>Create post</button>
               </div>
             </div>
       </section>

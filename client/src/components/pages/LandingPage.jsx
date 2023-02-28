@@ -1,9 +1,9 @@
 
 // import {Heading} from '../Heading'
 import '../../css/landing-page.css'
-import {useSelectCategory} from '../../customHooks/useSelectCategory';
+// import {useSelectCategory} from '../../customHooks/useSelectCategory';
 import {useState, useLayoutEffect} from 'react';
-import IndexGallery from '../index_gallery';
+// import IndexGallery from '../index_gallery';
 
 export default function LandingPage() {
   useLayoutEffect(()=>{
@@ -39,7 +39,7 @@ export default function LandingPage() {
                 </span>
           </div>
           <div className='landing_page_action_side_image'>
-                <img src={process.env.PUBLIC_URL+'/images/blog1.jpg'} alt='' style={{width:'100%'}} />
+                <img src={process.env.PUBLIC_URL+'/images/blog1.jpg'} alt='landing create image' style={{width:'100%'}} />
           </div>
 
       </div>
