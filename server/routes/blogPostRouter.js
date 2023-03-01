@@ -1,5 +1,7 @@
 import express from 'express';
-import {AddBlog, editBlogPost, allPost, allPostByCategories, allCategoriesPost, GetPostsCreatedByPagination, PostById, getAllPostsOfCurrentAuthUser, deleteBlogPost} from '../controllers/blogPostController.js';
+import {AddBlog, editBlogPost, allPost, allPostByCategories,
+     allCategoriesPost, GetPostsCreatedByPagination, PostById, 
+     getAllPostsOfCurrentAuthUser, deleteBlogPost} from '../controllers/blogPostController.js';
 
 
 const blogPostRouter = express.Router();

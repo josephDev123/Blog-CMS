@@ -82,9 +82,10 @@ export const allCategoriesPost = async (req, res)=>{
 }
 
 
-//query db by category
+//query db by category || empty query
 export const allPostByCategories = async (req, res)=>{
     try {
+        // if there is query
         const param = req.query.query;
         if(param){
             const limit = 5;
