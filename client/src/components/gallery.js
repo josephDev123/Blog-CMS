@@ -37,8 +37,8 @@ export default function Gallery({category}) {
           ))}
           
        </div>
-       <span style={{display:'flex', gap:'0.4rem'}}>
-          <button className='btn btn-primary btn-sm'>Previous Page</button>
+       <span style={{display:'flex', gap:'0.4rem', marginTop:'2rem'}}>
+          <button className='btn btn-warning btn-sm'>Previous Page</button>
            <button className='btn btn-secondary btn-sm'>Next Page</button>
         </span>
     </div>
