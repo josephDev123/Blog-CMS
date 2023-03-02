@@ -86,14 +86,17 @@ export const allCategoriesPost = async (req, res)=>{
 export const allPostByCategories = async (req, res)=>{
     try {
         // if there is query
-        const param = req.query.query;
-        if(param){
+        const {body} = req.body;
+        if(body){
+            const skip = req.query.query * 5
+            console.log( req.query.query)
             const limit = 5;
-            const posts =  await Post.find( {"category":param}, null).limit(limit);
+            const posts =  await Post.find( {"category":body}, null, {skip:skip, limit:limit});
             res.send(posts);
         }else{
+            const skip = req.query.query * 5
             const limit = 5;
-            const posts =  await Post.find().limit(limit);
+            const posts =  await Post.find({skip:skip, limit:limit});
             res.send(posts);
         }
         

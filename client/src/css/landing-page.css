@@ -48,9 +48,16 @@
     
 }
 
-.landing_page_action_action, .landing_page_action_side_image{
+.landing_page_action_action{
     flex: 1 0 20rem;
     /* border: 1px solid blue; */
+}
+
+ .landing_page_action_side_image{
+    flex: 1 0 30rem;
+   
+    /* border: 1px solid blue; */
+    
 }
 
 .landing_page_action_action > h3{
@@ -67,8 +74,8 @@ margin-top: 3rem;
 .landing_page_action_action span > button:first-child{
     padding: 0.6rem;
     color: #e07a5f;
-    background-color: #f4f1de;
-    border: none;
+    /* background-color: #f4f1de; */
+    border: 0.1rem solid #f4f1de;
 
 }
 
@@ -82,8 +89,10 @@ margin-top: 3rem;
 
 
 .landing_page_action_side_image > img{
-    object-fit: contain;
-     height: 15rem;
+    object-fit: cover;
+     height: 25rem;
+     width: 25rem;
+     /* background-position: left; */
      /* filter: drop-shadow(2px 2px 1rem var(--tertiary2)); */
      /* filter: drop-shadow(30px 10px 4px #4444dd); */
     /* border: 1px solid purple; */
