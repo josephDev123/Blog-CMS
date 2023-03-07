@@ -30,7 +30,7 @@ export default function Gallery({category}) {
                 <p>{posts.content}</p>
                 <p>{new Date(posts.createdAt).toDateString()}</p>
                 <Link to={'/blog/post/'+posts._id}>
-                  <button type='button' className='btn btn-primary btn-sm'>
+                  <button type='button' className='btn btn-sm read-me'>
                     read more
                   </button>
                 </Link>

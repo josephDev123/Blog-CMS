@@ -1,9 +1,8 @@
 
-// import {Heading} from '../Heading'
 import '../../css/landing-page.css'
-// import {useSelectCategory} from '../../customHooks/useSelectCategory';
-import {useState, useLayoutEffect} from 'react';
-// import IndexGallery from '../index_gallery';
+import {useState, useLayoutEffect, useContext} from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function LandingPage() {
   useLayoutEffect(()=>{
@@ -12,6 +11,9 @@ export default function LandingPage() {
         document.title = ''
     }
   }, []);
+
+  const navigate = useNavigate();
+
 
   // const {isLoading, isError, error, data} = useSelectCategory(`http://localhost:7000/blog/all-post/categories`);
   // console.log(data);
@@ -34,8 +36,8 @@ export default function LandingPage() {
                    Take action and upgrade to a better blogging experience now!
                 </p>
                 <span>
-                  <button type='button'>Create Content</button>
-                  <button type='button'>Get Started</button>
+                  <button type='button' onClick={()=>navigate('/admin/create-post-form')}>Create Content</button>
+                  <button type='button' onClick={()=>navigate('/blogs-post')}>Get Started</button>
                 </span>
           </div>
           <div className='landing_page_action_side_image'>

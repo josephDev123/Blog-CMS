@@ -20,6 +20,7 @@
     color: var(--tertiary);
     background-color: var(--tertiary1);
     border: none;
+    border-radius: 0.5rem;
 }
 
 

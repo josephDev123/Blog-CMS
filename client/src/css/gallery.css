@@ -19,5 +19,9 @@
 
 .blog_img_heading{
     max-height: 8rem;
-    object-fit:contain
+    object-fit:contain;
+}
+
+button.read-me{
+    background-color: var(--secondary);
 }
