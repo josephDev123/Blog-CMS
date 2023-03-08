@@ -14,10 +14,6 @@ export default function LandingPage() {
 
   const navigate = useNavigate();
 
-
-  // const {isLoading, isError, error, data} = useSelectCategory(`http://localhost:7000/blog/all-post/categories`);
-  // console.log(data);
-
   return (
     <div className='landing_container container mt-4'>
        <div className='content-fontsize'>

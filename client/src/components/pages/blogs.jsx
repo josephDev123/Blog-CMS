@@ -2,7 +2,7 @@ import react from 'react';
 import '../../css/blog-post.css'
 import Search from '../search';
 import { useState, useLayoutEffect } from 'react';
-import {useSelectCategory} from '../../customHooks/useSelectCategory';
+import {useReqHttp} from '../../customHooks/useReqHttp';
 import Gallery from '../gallery'
 
 export const Blogs =()=>{
@@ -13,7 +13,7 @@ export const Blogs =()=>{
         }
     }, [])
   const [category, setCategory] = useState('');
-  const {isLoading, isError, error, data} = useSelectCategory(`http://localhost:7000/blog/all-post/categories`);
+  const {isLoading, isError, error, data} = useReqHttp(`/blog/all-post/categories`);
 
     return(
         <div className='container blog_post_container mt-4'>
