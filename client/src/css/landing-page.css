@@ -53,6 +53,11 @@
     /* border: 1px solid blue; */
 }
 
+.d-status{
+    transition: opacity 0.5s linear;
+   opacity: 0;
+}
+
  .landing_page_action_side_image{
     flex: 1 0 30rem;
    
@@ -76,7 +81,6 @@ margin-top: 3rem;
     color: #e07a5f;
     /* background-color: #f4f1de; */
     border: 0.1rem solid #f4f1de;
-
 }
 
 .landing_page_action_action span > button:last-child{
@@ -92,9 +96,21 @@ margin-top: 3rem;
     object-fit: cover;
      height: 25rem;
      width: 35rem;
-     background-position: center top;
-     /* filter: drop-shadow(2px 2px 1rem var(--tertiary2)); */
-     /* filter: drop-shadow(30px 10px 4px #4444dd); */
-    /* border: 1px solid purple; */
-    
+     background-position: center top;  
+}
+
+.animate-section {
+    animation: movement 1s linear;
+}
+
+@keyframes movement {
+   from {
+    transition: transform 0.5s;
+        transform: translateY(-25%);
+       
+    }
+
+    to {
+        transform: translateX(0%);
+    }
 }

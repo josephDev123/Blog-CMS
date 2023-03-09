@@ -1,16 +1,35 @@
 
 import '../../css/landing-page.css'
-import {useState, useLayoutEffect, useContext} from 'react';
+import {useState, useLayoutEffect, useContext, useRef, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
+import {handleIntersect} from  '../../utils/handleIntersect'
 
 
 export default function LandingPage() {
+  const ref = useRef()
+  let options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.1,
+  }
   useLayoutEffect(()=>{
     document.title = 'Home || Welcome'
     return ()=>{
         document.title = ''
     }
   }, []);
+
+  useEffect(()=>{
+    const observer = new IntersectionObserver(handleIntersect, options);
+    observer.observe(ref.current);
+
+    return ()=>{
+
+    }
+  }, [])
+
+ 
+ 
 
   const navigate = useNavigate();
 
@@ -24,7 +43,7 @@ export default function LandingPage() {
        </div>
 
       <div className='landing_page_action_wrapper'>
-          <div className='landing_page_action_action'>
+          <div className='landing_page_action_action d-status' ref={ref}>
                 <h3> Upgrade Your Blogging Experience with a Modern CMS</h3>
                 <p>Are you tired of managing your blog with clunky, outdated software? Say goodbye to the hassle and
                    switch to a modern CMS today! With our user-friendly platform, you'll be able to create, publish, 
