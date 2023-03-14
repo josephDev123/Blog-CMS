@@ -7,6 +7,7 @@ import {handleIntersect} from  '../../utils/handleIntersect'
 
 export default function LandingPage() {
   const ref = useRef()
+  const image_container_el = useRef()
   let options = {
     root: null,
     rootMargin: "0px",
@@ -23,13 +24,10 @@ export default function LandingPage() {
     const observer = new IntersectionObserver(handleIntersect, options);
     observer.observe(ref.current);
 
-    return ()=>{
+    const observerImage_container = new IntersectionObserver(handleIntersect, options);
+    observerImage_container.observe(image_container_el.current);
+  }, []);
 
-    }
-  }, [])
-
- 
- 
 
   const navigate = useNavigate();
 
@@ -55,7 +53,7 @@ export default function LandingPage() {
                   <button type='button' onClick={()=>navigate('/blogs-post')}>Get Started</button>
                 </span>
           </div>
-          <div className='landing_page_action_side_image'>
+          <div className='landing_page_action_side_image' ref={image_container_el}>
                 <img src={process.env.PUBLIC_URL+'/images/blog1.jpg'} alt='landing create image' style={{width:'100%'}} />
           </div>
 

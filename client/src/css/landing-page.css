@@ -7,11 +7,7 @@
     --tertiary1: #81b29a;
     --tertiary2: #f2cc8f;
 } */
-.landing_container{
-    /* display: flex; */
-    /* flex-direction: column;
-    justify-content: space-between; */
-}
+
 
 .content-fontsize{
     max-width: 73%;
@@ -32,6 +28,10 @@
     font-size: 2.5rem;
     text-transform: uppercase;
     font-family: 'Shantell Sans', cursive;
+    animation: typing 4s linear infinite alternate-reverse;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 5px solid var(--primary);
 }
 
 .content-fontsize > p{
@@ -112,5 +112,14 @@ margin-top: 3rem;
 
     to {
         transform: translateX(0%);
+    }
+}
+
+@keyframes typing {
+    from{
+        width: 0;
+    }
+    to{
+        width: 100%;
     }
 }
