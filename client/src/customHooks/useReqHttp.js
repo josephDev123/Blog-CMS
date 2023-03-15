@@ -12,7 +12,7 @@ async function Req_get(url, body='', param='', headersParams=null){
             method: 'get',
             data:bodies,
             params:{
-                query:params
+                'query':params
             },
             headers:{
                 'currentUser': headersCredential

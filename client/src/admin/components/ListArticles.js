@@ -1,12 +1,10 @@
 import React from 'react';
 import { useContext, useState } from 'react';
 import '../asset/css/listArticles.css';
-// import PostListInTable from './PostListInTable';
-import { useQuery } from 'react-query';
-import axios from 'axios';
 import { AuthContext } from '../../Context/AuthContext';
 import {AdvanceLoading} from './AdvanceLoading'
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import {useReqHttp} from '../../customHooks/useReqHttp'
 
 
 export default function ListArticles() {
@@ -14,28 +12,9 @@ export default function ListArticles() {
 
   const {isAuthUser} = useContext(AuthContext);
 
-  const {isLoading, isError, data, error, isFetching, isPreviousData } = useQuery(['posts', page], async ()=>{
-
-      try {
-                  const post = await axios({
-                    // url:`http://localhost:7000/blog/all-post-pagination/${page}`,
-                    url:`http://localhost:7000/blog/all-post-pagination?page=${page}`,
-                    method:'get'
-                  })
-            
-                const result =  await post.data;
-                  return result;
-            
-                } catch (error) {
-                 return error.messsage;
-                }
-            
+  const {isLoading, isError, error, data, isFetching, isPreviousData } = useReqHttp('blog/all-post-pagination', '', page, 'posts', '', true)
 
 
-  }, { keepPreviousData : true });
-
-  // console.log(data);
-  //loading
  if(isLoading) return (
       <AdvanceLoading/>
   ) 
@@ -45,7 +24,7 @@ export default function ListArticles() {
 
 
 
-// if(!data.length ) return <div className="alert alert-primary mt-4" role="alert">No Articles</div>
+if(data.length === 0) return <div className="alert alert-primary mt-4" role="alert">No Articles</div>
 
   //success
     return (
@@ -73,9 +52,9 @@ export default function ListArticles() {
                     <th scope="row">{item._id.substring(0, 5)}</th>
                     <td><Link to={'/blog/post/'+item._id}>{item.title}</Link></td>
                     <td>{item.creator}</td>
-                    <td>{item.content}</td>
+                    <td>{item.content.length <= 50 ? item.content : item.content.substring(0, 50)+'.....'}</td>
                     <td>{item.category}</td>
-                    <td><img src={item.image_link} className="img-fluid rounded float-end" height='100rem' width='100rem' alt="blog_image"/></td>
+                    <td><img src={item.image_link} className="img-fluid rounded" height='50rem' width='50rem' alt="blog_image"/></td>
                 </tr>
                   ))
                 }
