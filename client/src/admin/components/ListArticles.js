@@ -62,15 +62,15 @@ if(data.length === 0) return <div className="alert alert-primary mt-4" role="ale
               </tbody>
             </table>
         </div>
-
+<br/>
               <span>Current Page: {page}</span>
-            <button className='btn btn-primary'
+            <button className='btn border border-none' style={{backgroundColor:'var(--admin-primary)', color:'var(--admin-secondary)'}}
               onClick={() => setPage(old => old - 1)}
               disabled={page === 1}
             >
               Previous Page
             </button>{' '}
-            <button className='btn btn-secondary'
+            <button className='btn'
               onClick={() => {
                 // if (!isPreviousData && data.hasMore) {
                   setPage(old => old + 1)

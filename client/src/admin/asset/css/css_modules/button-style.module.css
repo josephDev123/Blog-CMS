@@ -1,0 +1,32 @@
+.COLOR{
+    color: #023047;
+    color: #219ebc;
+    color: #ffb703;
+
+    color: #073a53;
+    color: #178ba8;
+    color: #ffb703;
+}
+
+.primaryColorBg{
+   background-color: var(--admin-primary);
+    color: var(--admin-secondary);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.primaryColorBg:hover{
+        background-color: #073a53;
+ }
+
+.secondaryBtnColorBg{
+    background-color: var(--admin-secondary);
+     color: var(--admin-primary);
+     padding: 0.5rem;
+     border-radius: 0.5rem;
+     border: none;
+ }
+
+ .secondaryBtnColorBg:hover{
+    background-color: #178ba8;
+ }

@@ -5,9 +5,9 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance'
 import {handleAxiosError} from '../../utils/handleAxiosError';
 import {ErrorAlert} from './ErrorAlert';
-// import Loading from './Loading'
 import {AdvanceLoading} from './AdvanceLoading';
 import {deleteFileInFirebaseDb} from '../../utils/delete_file_in_firebasedb';
+import btnColorBg from '../asset/css/css_modules/button-style.module.css'
 
 
 export default function MyPostsTable({currentUserPosts, increasePage, isFetching, isPreviousData, currentPage, decreasePage, setquerykey}) {
@@ -23,11 +23,6 @@ const [alert, setAlert] = useState(false);
     function handleEditMyPost(id){
         return location(`/admin/my-post/${id}`);
     }
-
-    // function deletefirebaseFileStatusCb(message){
-    //     console.log(message)
-    //     setStatus(message)
-    // }
 
     async function handleDeletePost(id, firebaseRef){
         try{
@@ -60,6 +55,7 @@ const [alert, setAlert] = useState(false);
         )
     }
     return ( 
+        <>
     <div className='table-responsive'>
         { status ==='error'?<ErrorAlert alert={alert} setAlert={setAlert}> Some went wrong </ErrorAlert>:''}
         <table className="table table-hover caption-top table-bordered">
@@ -82,19 +78,19 @@ const [alert, setAlert] = useState(false);
                             <th scope="row">{myPosts._id.substr(0, 7)}</th>
                             <td><Link to={"/blog/post/"+myPosts._id}>{myPosts.title.length > 30 ? myPosts.title.substr(0, 30) +'......':myPosts.title}</Link></td>
                             <td>{myPosts.category}</td>
-                            <td>{myPosts.content.length > 100? myPosts.content.substr(0, 100) +'.....':myPosts.content}</td>
+                            <td>{myPosts.content.length > 50? myPosts.content.substr(0, 50) +'.....':myPosts.content}</td>
                             <td>
                                 <img src={myPosts.image_link} alt='' loading='lazy' width='60rem' height='60rem' style={{objectFit:'contain'}}/>
                             </td>
 
                             <td>
-                                <button ref={editBtns} className='btn btn-warning' onClick={()=>handleEditMyPost(myPosts._id)} data-bs-toggle="modal" data-bs-target="#editMyPostModal">
+                                <button ref={editBtns} className={btnColorBg.secondaryBtnColorBg} onClick={()=>handleEditMyPost(myPosts._id)} data-bs-toggle="modal" data-bs-target="#editMyPostModal">
                                     Edit
                                 </button>
                             </td>
 
                             <td>
-                                    <button className='btn btn-danger' onClick={()=>handleDeletePost(myPosts._id, myPosts.storage_ref)}>
+                                    <button className={btnColorBg.primaryColorBg} onClick={()=>handleDeletePost(myPosts._id, myPosts.storage_ref)}>
                                         Delete
                                     </button>
                             </td>
@@ -104,12 +100,14 @@ const [alert, setAlert] = useState(false);
              
             </tbody>
         </table>
-
-            <span className='me-2'>Current Page: {currentPage + 1}</span>
-            <button className='btn btn-primary me-2' onClick={() => decreasePage()} disabled={currentPage===0}>Previous</button>
-
-            <button className='btn btn-secondary' onClick={()=>increasePage()} disabled={currentUserPosts?.length < 5}>Next</button>
+<br/>
+           
             <EditMyPostModal id={id} setquerykey={setquerykey}/>
     </div>
+    <span className='me-2'>Current Page: {currentPage + 1}</span>
+            <button className={btnColorBg.primaryColorBg}  onClick={() => decreasePage()} disabled={currentPage===0}>Previous</button>
+
+            <button className='btn ms-2' onClick={()=>increasePage()} disabled={currentUserPosts?.length < 5}>Next</button>
+    </>
   )
 }

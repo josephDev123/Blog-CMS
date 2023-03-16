@@ -126,7 +126,7 @@ export default function AddPost() {
             </div>
 
             <div className="col-sm-4" style={{ marginTop:'3rem' }}>
-                <button type="submit" className="btn btn-primary" onClick={confirmUploadImage}>click to Confirm image</button>
+                <button type="submit"style={{backgroundColor:'var(--admin-primary)', color:'var(--secondary)'}} className="btn" onClick={confirmUploadImage}>click to Confirm image</button>
             </div>
 
             <div className="col-md-4">
@@ -138,7 +138,7 @@ export default function AddPost() {
 
             <div className="col-12">
                 {status==='loading'?<AdvanceLoading/>:
-                <button type="submit" className="btn btn-primary">Create post</button>}
+                <button type="submit" style={{backgroundColor:'var(--admin-primary)', color:'var(--secondary)'}} className="btn">Create post</button>}
             </div>
         </form>
 
