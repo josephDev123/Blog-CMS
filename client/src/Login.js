@@ -42,7 +42,7 @@ export default function Login() {
 
   return (
     <div className='container form_wrapper'>
-        <form onSubmit={handleSubmitLogin}>
+        <form onSubmit={handleSubmitLogin} className='login-form'>
             <h3>Login</h3>
 
             {status === 'empty' &&  <div className="alert alert-danger" role="alert">Field(s) cannot be empty!</div>}

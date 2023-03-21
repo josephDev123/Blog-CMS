@@ -7,6 +7,7 @@ import {UploadProfile} from '../components/UploadProfile';
 import { useQuery } from 'react-query';
 import Button from 'react-bootstrap/Button';
 import { useFetch } from '../../customHooks/useFetch'; 
+import {useReqHttp} from '../../customHooks/useReqHttp'
 import Spinner from 'react-bootstrap/Spinner'
 import axios from 'axios';
 
@@ -28,17 +29,8 @@ export default function Profile() {
   let profileCount = useFetch('http://localhost:7000/profile/profile-count', enactRender)
 
 
-  const { isLoading, isError, data, error } = useQuery(['profile', isAuthUser], async ()=>{
-          try {
-            const fetchUserProfile = await axios(`http://localhost:7000/profile/get-user-profile/${isAuthUser}`);
+  const { isLoading, isError, data, error } = useReqHttp(`profile/get-user-profile/${isAuthUser}`, '', '', 'profile', '', true );
 
-            const UserProfile = await fetchUserProfile.data;
-            return UserProfile;
-          } catch (error) {
-            return error.message;
-          }
-     
-  })
 
   function handleEditProfile(){
     setShow(true)
@@ -50,16 +42,17 @@ export default function Profile() {
              <span className='tag'>
               /Profile
             </span>
-             <section className='header_banner mt-2'>
+
+             <section className='header_banner mt-4'>
                <div className='banner_avatar_wrapper'>
-                   <img className='banner_avatar' src='/admin/asset/images/undraw_profile_pic.png' alt='avatar' style={{height:'10rem'}} />
+                   <img className='banner_avatar' src='/admin/asset/images/undraw_profile_pic.png' alt='users avatar' style={{height:'10rem'}} />
                </div>
              
                <div className='content'>
                     {isLoading?<Spinner animation="border" role="status" size="sm"><span className="visually-hidden">Loading...</span></Spinner>:isError?<h4>{error.message}</h4>:data.length ===0?<>No profile</>:(
                       <>
                       
-                          <h4> <i className="fa-solid fa-user-plus" style={{ color:'#f4a261', marginRight:'0.7rem' }}></i>{data[0].name}</h4>
+                        <h4> <i className="fa-solid fa-user-plus" style={{ color:'#f4a261', marginRight:'0.7rem' }}></i>{data[0].name}</h4>
                         <h4> <i className="fa-solid fa-user-doctor" style={{ color:'#f4a261', marginRight:'0.7rem' }}></i>{data[0].title}</h4>
                         <p><i className="fa-solid fa-address-card" style={{ color:'#f4a261', marginRight:'0.7rem' }}></i>{data[0].about}</p> 
                       </>
