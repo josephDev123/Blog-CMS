@@ -6,6 +6,7 @@ import {handleIntersect} from  '../../utils/handleIntersect'
 
 
 export default function LandingPage() {
+  
   const ref = useRef()
   const image_container_el = useRef()
   let options = {
@@ -30,7 +31,7 @@ export default function LandingPage() {
 
 
   const navigate = useNavigate();
-
+ 
   return (
     <div className='landing_container container mt-4'>
        <div className='content-fontsize'>

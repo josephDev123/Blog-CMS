@@ -26,7 +26,7 @@ import ProtectedRoute from './ProtectedRoute';
 
 
 function App() {
-
+ 
   const {isAuthUser} = useContext(AuthContext)
   console.log(isAuthUser)
   return (
