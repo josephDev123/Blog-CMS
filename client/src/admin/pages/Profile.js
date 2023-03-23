@@ -26,7 +26,7 @@ export default function Profile() {
 
   // handle how to display  upload btn and edit btn based on number of data are in the collection(the upload btn and edit btn shouldn't be display at the same time)
   // let {isLoading:isCountLoading, isError:isCountError, data:isCountData, error:countError} this code is correct
-  let profileCount = useFetch('http://localhost:7000/profile/profile-count', enactRender)
+  let profileCount = useReqHttp('http://localhost:7000/profile/profile-count','', '', enactRender)
 
 
   const { isLoading, isError, data, error } = useReqHttp(`profile/get-user-profile/${isAuthUser}`, '', '', 'profile', '', true );
