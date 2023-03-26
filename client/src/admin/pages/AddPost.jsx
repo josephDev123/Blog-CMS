@@ -94,14 +94,14 @@ export default function AddPost() {
     
   return (
     <div className='container mt-4'>
-        <span className='tag mb-4'>
+        <span className='tag'>
             /Add Post
         </span>
         {status === 'error' && <SimpleAlert showAlert={alert} variants='danger'>Something went wrong</SimpleAlert>}
         {status === 'empty' && <SimpleAlert showAlert={alert} variants='warning'>Field cannot be empty</SimpleAlert>}
         {status === 'success' && <SimpleAlert showAlert={alert} variants='success'>Success</SimpleAlert>}
 
-        <form className="row g-3 mt-2" onSubmit={handlePostSubmit}>
+        <form className="row g-3" onSubmit={handlePostSubmit} style={{marginTop:'1rem'}}>
             <div className="col-md-6">
                 <label htmlFor="post_title" className="form-label">Title</label>
                 <input type="text" placeholder='Title' className="form-control" value={title} id="post_title" onChange={(e)=>setTitle(e.target.value)}/>
@@ -126,7 +126,7 @@ export default function AddPost() {
             </div>
 
             <div className="col-sm-4" style={{ marginTop:'3rem' }}>
-                <button type="submit" className="btn btn-primary" onClick={confirmUploadImage}>click to Confirm image</button>
+                <button type="submit"style={{backgroundColor:'var(--admin-primary)', color:'var(--secondary)'}} className="btn" onClick={confirmUploadImage}>click to Confirm image</button>
             </div>
 
             <div className="col-md-4">
@@ -138,7 +138,7 @@ export default function AddPost() {
 
             <div className="col-12">
                 {status==='loading'?<AdvanceLoading/>:
-                <button type="submit" className="btn btn-primary">Create post</button>}
+                <button type="submit" style={{backgroundColor:'var(--admin-primary)', color:'var(--secondary)'}} className="btn">Create post</button>}
             </div>
         </form>
 

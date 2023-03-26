@@ -1,5 +1,5 @@
 import {useParams} from 'react-router-dom';
-import {useFetch} from '../../customHooks/useFetch';
+import {useReqHttp} from '../../customHooks/useReqHttp';
 import {useLayoutEffect} from 'react';
 import '../../css/postByIdPage.css';
 
@@ -14,7 +14,7 @@ export const PostByIdPage = ()=>{
       }, []);
 
     let {id} = useParams();
-    const  {isLoading, isError, data, error} = useFetch('http://localhost:7000/blog/post/byId', id);
+    const  {isLoading, isError, data, error} = useReqHttp('/blog/post/byId', '', id);
      
     if(isLoading){
         return (
@@ -31,7 +31,7 @@ export const PostByIdPage = ()=>{
         )
     } 
 
-    if(isError) return <div class="alert alert-danger container" role="alert">{error.message}</div>
+    if(isError) return <div class="alert alert-danger container" role="alert">Something went wrong</div>
   
     return(
         <section className='container mt-5'>
@@ -42,8 +42,8 @@ export const PostByIdPage = ()=>{
                     </section>
                     <section className='postIdcontent'>
                     
-                    <img src={post.image_link} alt='' width='100%'/>
-                    <h3 className='mt-2'>{post.title}</h3>
+                    <img src={post.image_link} className='article_image' alt='' width='100%'/>
+                    <h3 className='mt-2' style={{textDecoration:'underline'}}>{post.title}: </h3>
                     <p>{post.content}</p>
                     <p>{new Date(post.createdAt).toDateString()}</p>
                     </section>

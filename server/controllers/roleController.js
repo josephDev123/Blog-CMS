@@ -2,7 +2,7 @@ import { profileModel } from "../models/Profile.js";
 
 export const role_users_get = async (req, res)=>{
     try {
-        const page =  parseInt(req.query.page);
+        const page =  parseInt(req.query.query);
         const limit = 5;
         const skip = (page - 1) * limit;
        const profile = await profileModel.find({}, null, {skip,limit})

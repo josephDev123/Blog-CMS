@@ -1,7 +1,7 @@
 
 export function RoleBanner(){
     return(
-        <section className='roles_billboard'>
+        <section className='roles_billboard mt-5'>
                 <section className='img_wrapper'>
                     <img className='img' src='/images/permission.png' width='' height='' alt=''/>
                 </section>

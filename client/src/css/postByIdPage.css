@@ -13,11 +13,18 @@
 
 
 .category{
-    display:flex;
+    display:inline-block;
     justify-content:flex-start;
-     background-color: green; 
-    padding: 0.2rem 0 0.2rem 0.2rem; 
-     width: 10rem;
-    /* height: 2rem;  */
-    color:white;
+    border-radius: 0.5rem;
+     background-color: var(--tertiary); 
+    padding: 0.5rem;
+     width: 100%;
+     max-width: 10rem;
+    color:var(--secondary);
+}
+
+img.article_image{
+    height: 100%;
+    max-height: 40rem;
+    object-fit: contain;
 }

@@ -21,7 +21,7 @@ export const AddBlog = (req, res)=>{
 
 export const GetPostsCreatedByPagination = async (req, res)=>{
     try{
-        const page = parseInt(req.query.page);
+        const page = parseInt(req.query.query);
 
         const limit = 3;
         const skip = (page - 1) * limit;
@@ -82,17 +82,21 @@ export const allCategoriesPost = async (req, res)=>{
 }
 
 
-//query db by category
+//query db by category || empty query
 export const allPostByCategories = async (req, res)=>{
     try {
-        const param = req.query.query;
-        if(param){
+        // if there is query
+        const {body} = req.body;
+        if(body){
+            const skip = req.query.query * 5
+            console.log( req.query.query)
             const limit = 5;
-            const posts =  await Post.find( {"category":param}, null).limit(limit);
+            const posts =  await Post.find( {"category":body}, null, {skip:skip, limit:limit});
             res.send(posts);
         }else{
+            const skip = req.query.query * 5
             const limit = 5;
-            const posts =  await Post.find().limit(limit);
+            const posts =  await Post.find({skip:skip, limit:limit});
             res.send(posts);
         }
         

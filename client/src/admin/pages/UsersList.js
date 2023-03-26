@@ -3,6 +3,7 @@ import '../asset/css/usersList.css';
 import Users from '../components/Users';
 import { useCallback, useState, useLayoutEffect } from 'react';
 import { useQuery } from 'react-query';
+import {useReqHttp} from '../../customHooks/useReqHttp';
 import axios from 'axios';
 
 export default function UsersList() {
@@ -16,17 +17,7 @@ export default function UsersList() {
      return setPage(page)
   }, [page]);
 
-  const {isLoading, isError, data, error,isFetching, isPreviousData} = useQuery(['users', page], async ()=>{
-
-    try {
-      const users =  await axios(`http://localhost:7000/profile/users?page=${page}`);
-       const usersResult = await users.data;
-       return usersResult;
-
-    } catch (error) {
-     return error.message;
-    }
-  })
+  const {isLoading, isError, data, error,isFetching, isPreviousData} = useReqHttp('profile/users','', page, 'users', '', true)
 
 
   return (

@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import button_styles from '../asset/css/css_modules/button-style.module.css';
 
 export default function Users({ isLoading, data, error, isError, page, setPage, isFetching, isPreviousData}) {
 
@@ -20,7 +21,6 @@ export default function Users({ isLoading, data, error, isError, page, setPage, 
   if(isError){
     return <div className="alert alert-danger mt-4" role="alert"> {error.message} </div>
   }
-  
 
   return (
     <div className='container mt-4 table-responsive'>
@@ -53,14 +53,14 @@ export default function Users({ isLoading, data, error, isError, page, setPage, 
         ))
       }
 
-<span>Current Page: {page}</span>
-            <button className='btn btn-primary'
+    <span>Current Page: {page}</span>
+            <button className={button_styles.primaryColorBg}
               onClick={() => setPage(page => page - 1)}
               disabled={page === 1}
             >
               Previous Page
             </button>{' '}
-            <button className='btn btn-secondary'
+            <button className='btn'
               onClick={() => {
                 // if (!isPreviousData && data.hasMore) {
                   setPage(old => old + 1)

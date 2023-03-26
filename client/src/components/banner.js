@@ -6,10 +6,14 @@ import { ErrorAlert } from '../admin/components/ErrorAlert';
 import bannerPhoto from '../css/banner.module.css';
 import { useContext } from 'react';
 import { AuthContext } from '../Context/AuthContext';
+import { useNavigate, Navigate, useLocation } from 'react-router-dom';
 
 export default function Banner() {
   const [alert, setAlert] = useState(true);
   const url = 'setting/change-banner-content';
+
+// const location= useLocation()
+  const navigate = useNavigate()
 
   const {isAuthUser} = useContext(AuthContext);
   const {isLoading, isError, error, data} = useReqHttp(url, null, isAuthUser);
@@ -36,8 +40,9 @@ export default function Banner() {
       <section className='container'>
             <div className={ bannerPhoto.banner_container}>
               <div className='banner_content_wrapper'>
-                  <h4>Velit dolore ut nostrud aliquip pariatur officia dolore.</h4>
-                  <p className='mt-2'>Sint labore anim qui in.</p>
+                  <h4>Streamline Your Content Management with Our Powerful CMS Platform!.</h4>
+                  <p className='mt-2'>Unlock the Power of Knowledge with Expert Insights and Inspiring Ideas.</p>
+                  <button type='button' onClick={()=>navigate('/admin/create-post-form')}>Create post</button>
               </div>
             </div>
       </section>

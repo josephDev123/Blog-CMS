@@ -1,9 +1,15 @@
+:root{
+    --admin-primary: #023047;
+    --admin-secondary: #219ebc;
+    --admin-tertiary: #ffb703;
+}
+
 .heading_box{
     margin-top: 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #F2C94C;
+    background-color: var(--admin-primary);
     padding:2rem;
     border-radius: 5px;
     flex-wrap: wrap;
@@ -13,6 +19,7 @@
 .heading_content{
     flex-grow: 2;
     flex-basis: 70%;
+    color: var(--admin-secondary);
 }
 
 .heading_img{
@@ -29,8 +36,8 @@
 
 .heading_content .write_post{
     text-decoration: none;
-    background-color: #232946;
-    color: white;
+    background-color: var(--admin-secondary);
+    color: var(--admin-tertiary);
     padding: 0.5rem;
     border-radius: 0.3rem;
 }

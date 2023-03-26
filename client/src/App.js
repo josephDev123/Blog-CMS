@@ -22,10 +22,11 @@ import {AuthContext} from './Context/AuthContext'
 import { useContext } from 'react';
 import Login from './Login';
 import Reqister from './Register';
+import ProtectedRoute from './ProtectedRoute';
 
 
 function App() {
-
+ 
   const {isAuthUser} = useContext(AuthContext)
   console.log(isAuthUser)
   return (
@@ -43,14 +44,14 @@ function App() {
                     
                     {/* admin */}
                     <Route path='admin' element={<Layout/>}>
-                      <Route index element={<Dashboard/>}/>
-                      <Route path='/admin/create-post-form' element={<AddPost/>}/>
-                      <Route path='/admin/profile' element={<Profile/>}/>
-                      <Route path='/admin/users-list' element={<UsersList/>}/>
-                      <Route path='/admin/roles' element={ <Roles/> }/>
-                      <Route path='/admin/setting' element={ <Setting/> }/>
-                      <Route path='/admin/my-post' element={ <Myposts/> }/>
-                      <Route path='/admin/my-post/:id' element={ <Myposts/> }/>
+                      <Route index element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
+                      <Route path='/admin/create-post-form' element={<ProtectedRoute><AddPost/></ProtectedRoute>}/>
+                      <Route path='/admin/profile' element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
+                      <Route path='/admin/users-list' element={<ProtectedRoute><UsersList/></ProtectedRoute>}/>
+                      <Route path='/admin/roles' element={ <ProtectedRoute><Roles/></ProtectedRoute> }/>
+                      <Route path='/admin/setting' element={ <ProtectedRoute><Setting/></ProtectedRoute> }/>
+                      <Route path='/admin/my-post' element={ <ProtectedRoute><Myposts/> </ProtectedRoute>}/>
+                      <Route path='/admin/my-post/:id' element={ <ProtectedRoute><Myposts/> </ProtectedRoute>}/>
                     </Route>
                     <Route path='/login' element= {<Login/>}/>
                     <Route path='/register' element= {<Reqister/>}/>
