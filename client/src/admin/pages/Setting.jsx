@@ -15,6 +15,7 @@ import { SuccessAlert } from '../components/SuccessAlert';
 import { useContext } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
 import pageTitleStyle from  '../asset/css/css_modules/page-heading.module.css'
+import btn_style from '../asset/css/css_modules/button-style.module.css'
 
 
 export default function Setting() {
@@ -30,6 +31,11 @@ export default function Setting() {
     const[uploadProgress, setUploadProgress] = useState(null);
     const[status, setStatus] = useState('');
 
+
+     const btn ={
+        backgroundColor:'',
+        color: ''
+     }
     const {isAuthUser} = useContext(AuthContext)
 
     useLayoutEffect(()=>{
@@ -95,7 +101,7 @@ export default function Setting() {
         <span className={pageTitleStyle.headingTag}>/Setting</span>
             {status==='error' && <ErrorAlert alert={alert} setAlert={setAlert}>{ErrorMessage}</ErrorAlert>}
             {status==='success' && <SuccessAlert alert={alert} setAlert={setAlert}>{successMessage}</SuccessAlert>}
-            <Form onSubmit={handlesubmitBannerAndContent}> 
+            <Form onSubmit={handlesubmitBannerAndContent} className='mt-4'> 
                 <Row sm={12} md={7} lg={8} xl={8} xxl={8} className='mb-4'>
                     <h6>Banner section</h6>
 
@@ -108,21 +114,22 @@ export default function Setting() {
                         <InputGroup.Text> Change Banner image</InputGroup.Text>
                             <Form.Control type='file' onChange={handleFileChange}/>
                             <Form.Check type='checkbox' id='' disabled label='status' checked={SuccessUpload} className='mx-2'/>
-                        <Button variant='primary' onClick={handleConfirmFileUpload}>Confirm</Button>
+                        <Button onClick={handleConfirmFileUpload}>Confirm</Button>
                
                     </InputGroup> 
+                    
                      {/* loading component */}
                     {uploadProgress && <Loading> image uploading ... </Loading>} 
-                {/* </Row>
-                <Row className='mb-4'> */}
+                
                     <Form.Group className='mt-4'>
                         <Form.Label>Banner content</Form.Label>
-                        {/* <Form.Control as='textarea'></Form.Control> */}
                         <MDEditor value={content} onChange={setContent}   previewOptions={{rehypePlugins: [[rehypeSanitize]]}}/>
                     </Form.Group>
+
                 </Row>
-                <Button variant='primary' type='submit'>Change banner/content</Button>
+                <Button variant='primary mb-4' type='submit'>Change banner/content</Button>
             </Form>
+            <hr />
                
                 <Row sm={12} md={6} lg={6} xl={6}>
                     <h6>background color section</h6>

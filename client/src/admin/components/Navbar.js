@@ -1,7 +1,11 @@
 import React from 'react'
-import ActiveLink from '../../ActiveLink'
+import ActiveLink from '../../ActiveLink';
+import {logout} from '../../utils/logout'
+import btn_style from '../asset/css/css_modules/button-style.module.css'
+import { useLocation } from 'react-router-dom';
 
 export default function Navbar() {
+  const {pathname} = useLocation()
   return (
     <nav className="navbar navbar-light bg-light">
     <div className="container">
@@ -67,9 +71,10 @@ export default function Navbar() {
             </li>
             <li className="nav-item">
               {/* <a className="nav-link" href="#">Logout</a> */}
-              <ActiveLink href='/logout' className="nav-link" aria-current="page">
+              {/* <ActiveLink href='#' className="nav-link" aria-current="page" onClick={()=>logout('/')}>
               Logout
-              </ActiveLink>
+              </ActiveLink> */}
+              <button className={'mb-4 '+ btn_style.primaryColorBg} onClick={()=>logout(pathname)}>Logout</button>
             </li>
           </ul>
           <form className="d-flex">

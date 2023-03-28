@@ -101,7 +101,7 @@ export default function AddPost() {
         {status === 'empty' && <SimpleAlert showAlert={alert} variants='warning'>Field cannot be empty</SimpleAlert>}
         {status === 'success' && <SimpleAlert showAlert={alert} variants='success'>Success</SimpleAlert>}
 
-        <form className="row g-3" onSubmit={handlePostSubmit} style={{marginTop:'1rem'}}>
+        <form className="row g-3 mt-2" onSubmit={handlePostSubmit}>
             <div className="col-md-6">
                 <label htmlFor="post_title" className="form-label">Title</label>
                 <input type="text" placeholder='Title' className="form-control" value={title} id="post_title" onChange={(e)=>setTitle(e.target.value)}/>
