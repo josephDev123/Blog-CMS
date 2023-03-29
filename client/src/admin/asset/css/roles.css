@@ -2,25 +2,22 @@
     margin: 0;
     padding:0;
     box-sizing: border-box;
-    /* border: 1px solid red; */
 }
 
 .roles_billboard{
     display: flex;
     justify-content: space-evenly;
-    /* align-items: flex-start;
-    align-content: flex-start; */
-    /* gap: 2rem; */
     flex-wrap: wrap;
 }
 
-.img_wrapper, .content_wrapper{
-    flex: 1 0;
+.img, .content_wrapper{
+    flex: 1 0 15rem;
 }
 
-.img_wrapper > .img{
-    max-width: 100%;
-    object-fit: contain;
+.img{
+    height: 100%;
     max-height: 18rem;
+    object-fit: contain;
+    
   
-}
+} 

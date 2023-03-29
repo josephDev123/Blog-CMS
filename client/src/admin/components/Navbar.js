@@ -5,7 +5,6 @@ import btn_style from '../asset/css/css_modules/button-style.module.css'
 import { useLocation } from 'react-router-dom';
 
 export default function Navbar() {
-  const {pathname} = useLocation()
   return (
     <nav className="navbar navbar-light bg-light">
     <div className="container">
@@ -74,7 +73,7 @@ export default function Navbar() {
               {/* <ActiveLink href='#' className="nav-link" aria-current="page" onClick={()=>logout('/')}>
               Logout
               </ActiveLink> */}
-              <button className={'mb-4 '+ btn_style.primaryColorBg} onClick={()=>logout(pathname)}>Logout</button>
+              <button className={'mb-4 '+ btn_style.primaryColorBg} onClick={()=>logout()}>Logout</button>
             </li>
           </ul>
           <form className="d-flex">

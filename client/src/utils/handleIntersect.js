@@ -3,7 +3,7 @@ export function handleIntersect(enteries, observer){
        if(entry.isIntersecting){
          entry.target.classList.add("animate-section")
          entry.target.classList.remove("d-status")
-         console.log(entry)
+        //  console.log(entry)
        }else{
          entry.target.classList.remove("animate-section")
          entry.target.classList.add("d-status")

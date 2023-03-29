@@ -2,17 +2,15 @@ import { getAuth, signOut } from "firebase/auth";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
 
 export function logout(redirect){
-    // const location =  useNavigate();
-    // const currentURL = window.location
-// console.log(currentURL)
+    const currentURL = window.location
     const auth = getAuth();
     signOut(auth).then(() => {
       // Sign-out successful.
-    //   location(redirect)
-    throw new Error("Not implemented")
+     // The user will be automatically logout because there an higher component that logout user when the user is undefined or null
+     console.log('Sign-out successful')
     }).catch((error) => {
-      alert('Sign-out failed happened in : '+redirect+ ':' +error.message)
-       Navigate(redirect)
+       alert('Sign-out failed happened in: ' +error.message);
+       Navigate(currentURL.pathname)
     });
 
 }
