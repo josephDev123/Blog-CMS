@@ -11,6 +11,6 @@ export default function FallbackUi() {
   }
 
   return (
-    <div style={style}> &#128545 Something went wrong</div>
+    <div style={style}> <span>&#128545</span> Something went wrong </div>
   )
 }

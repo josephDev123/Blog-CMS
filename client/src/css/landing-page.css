@@ -31,7 +31,7 @@
     animation:typing 4s linear infinite alternate-reverse;
     white-space: nowrap;
     overflow: hidden;
-    width: 100%;
+    /* width: 100%; */
     border-right: 5px solid var(--primary);
 }
 
@@ -50,7 +50,7 @@
 }
 
 .landing_page_action_action{
-    flex: 1 0 20rem;
+    flex: 1 1 20rem;
     /* border: 1px solid blue; */
 }
 
@@ -60,7 +60,7 @@
 }
 
  .landing_page_action_side_image{
-    flex: 1 0 30rem;
+    flex: 1 1 30rem;
    
     /* border: 1px solid blue; */
     
@@ -94,7 +94,7 @@ margin-top: 3rem;
 
 
 .landing_page_action_side_image > img{
-    object-fit: cover;
+    object-fit: contain;
      height: 25rem;
      width: 35rem;
      background-position: center top;  
@@ -107,7 +107,7 @@ margin-top: 3rem;
 @keyframes movement {
    from {
     transition: transform 0.5s;
-        transform: translateY(-25%);
+    transform: translateY(-25%);
        
     }
 
@@ -123,4 +123,22 @@ margin-top: 3rem;
     to{
         width: 100%;
     }
+}
+
+@media screen and (max-width: 425px) {
+    .content-fontsize{
+        max-width: 100%;
+    }
+    
+    .content-fontsize > h2{
+        font-size: 0.7rem;
+        font-weight: 900;
+    }
+
+    .content-fontsize > p{
+        font-size: 0.7rem;
+        
+    }
+
+    
 }

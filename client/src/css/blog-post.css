@@ -2,3 +2,11 @@
     display:flex;
     column-gap: 1rem;
 }
+
+@media screen and (max-width: 425px){
+    .blog_post_container{
+        display:flex;
+        flex-direction: column;
+        
+    }
+}
