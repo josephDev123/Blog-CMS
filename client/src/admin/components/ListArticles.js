@@ -63,7 +63,7 @@ if(data.length === 0) return <div className="alert alert-primary mt-4" role="ale
                 </table>
             </div>
 
-             <span>Current Page: {page}</span>
+             <span>Current Page: {page} {' '}
                 <button className='btn border border-none' style={{backgroundColor:'var(--admin-primary)', color:'var(--admin-secondary)'}}
                   onClick={() => setPage(old => old - 1)}
                   disabled={page === 1}
@@ -72,16 +72,16 @@ if(data.length === 0) return <div className="alert alert-primary mt-4" role="ale
                 </button>{' '}
                 <button className='btn'
                   onClick={() => {
-                    // if (!isPreviousData && data.hasMore) {
                       setPage(old => old + 1)
-                    // }
                   }}
                   // Disable the Next Page button until we know a next page is available
                   disabled={data.length <= 2}
                 >
                   Next Page
                 </button>
-                {isFetching ? <span className='alet alert-warning'> Loading...</span> : null}{' '}      
+                {isFetching ? <span className='alet alert-warning'> Loading...</span> : null}{' '} 
+
+                </span>     
         </div>
 
   )
