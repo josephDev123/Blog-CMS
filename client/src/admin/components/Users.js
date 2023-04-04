@@ -25,9 +25,7 @@ export default function Users({ isLoading, data, error, isError, page, setPage, 
   return (
        <>
         <div className='container mt-4 mb-4 table-responsive'>
-          {
-          data?.map(users =>(
-            <table key={users._id} className="table table-striped table-hover table-borderless caption-top">
+            <table  className="table table-striped table-hover table-borderless caption-top">
               <caption>List of users profile</caption>
               <thead className='table-dark'>
                 <tr>
@@ -40,7 +38,9 @@ export default function Users({ isLoading, data, error, isError, page, setPage, 
                 </tr>
               </thead>
               <tbody>
-                <tr>
+
+              {data?.map(users =>(
+                <tr key={users._id}>
                   <th scope="row">{users._id.substr(0, 5)}</th>
                   <td>{users.name}</td>
                   <td>{users.title}</td>
@@ -48,11 +48,11 @@ export default function Users({ isLoading, data, error, isError, page, setPage, 
                   <td>{users.phone}</td>
                   <td>{users.surname}</td>
                 </tr>
-              
+               ))} 
+
               </tbody>
           </table>
-            ))
-          }
+          
                 
         </div>
 

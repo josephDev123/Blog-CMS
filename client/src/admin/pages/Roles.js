@@ -29,7 +29,7 @@ export default function Roles() {
       setUserId(userId)
     }
 
-    const {isLoading, isError, data, error, isFetching} = useReqHttp('http://localhost:7000/profile/users', '', page, 'role', '', true)
+    const {isLoading, isError, data, error, isFetching} = useReqHttp('profile/users', '', page, 'role', '', true)
 
 
     //handle the user permission btn
@@ -80,9 +80,8 @@ export default function Roles() {
                 <>
                 <div className='container mt-4 table-responsive'>
                   {status==='success'?<SuccessAlert alert ={alert}  setAlert={setAlert}/>:<ErrorAlert alert ={alert} setAlert={setAlert}/>}
-                    {
-                    data?.map(users =>(
-                      <table key={users._id} className="table table-striped table-hover table-borderless caption-top">
+                   
+                      <table className="table table-striped table-hover table-borderless caption-top">
                         <caption>List of users and roles</caption>
                         <thead className='table-dark'>
                           <tr>
@@ -97,7 +96,9 @@ export default function Roles() {
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
+                        {
+                    data?.map(users =>(
+                          <tr key={users._id}>
                             <th scope="row">{users._id.substr(0, 5)}</th>
                             <td>{users.name}</td>
                             <td>{users.title}</td>
@@ -107,11 +108,11 @@ export default function Roles() {
                             <td>{users.role.user && users.role.admin? users.role.user +' || admin': users.role.user}</td>
                             <td><button className={btn_styles.secondaryBtnColorBg} onClick={()=>handleShowModal(users._id)}> user permission</button></td>
                           </tr>
-                        
+                           ))
+                         }   
                         </tbody>
                     </table>
-                      ))
-                    }    
+                    
                   </div>
                   <span>Current Page: {page}</span>
                           <button className={btn_styles.primaryColorBg}

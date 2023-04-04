@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+import  axiosInstance from '../../utils/axiosInstance'
 import {useNavigate, Navigate} from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -27,9 +28,9 @@ export default function EditProfile({profile, show, setShow, trigger}) {
     e.preventDefault();
     try{
         //handle the profile data request
-        const userprofileResp = await axios({
+        const userprofileResp = await axiosInstance({
             method:'post',
-            url:`http://localhost:7000/profile/edit-profile/${profile._id}`,
+            url:`/profile/edit-profile/${profile._id}`,
             data:{
                 profile,
                 names,
