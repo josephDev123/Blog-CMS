@@ -1,40 +1,38 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import '../asset/css/profile.css';
-import { useContext, useEffect,useState, useLayoutEffect } from 'react';
+import { useContext, useState, useLayoutEffect } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
 import EditProfile from '../components/EditProfile';
 import {UploadProfile} from '../components/UploadProfile';
-import { useQuery } from 'react-query';
 import Button from 'react-bootstrap/Button';
-import { useFetch } from '../../customHooks/useFetch'; 
 import {useReqHttp} from '../../customHooks/useReqHttp'
 import Spinner from 'react-bootstrap/Spinner'
-import axios from 'axios';
 
 export default function Profile() {  
 
   const {isAuthUser} = useContext(AuthContext);
-  const [enactRender, setEnactRender] = useState('');
+  const [enactRender, setEnactRender] = useState(false);
   const [show, setShow] = useState(false);
-// console.log(isAuthUser)
+console.log(enactRender)
+
   useLayoutEffect(()=>{
     document.title = 'Profile Page';
 }, [])
 
   // open modal 
   const handleShow = () => setShow(true);
+ const handleEditProfile = ()=> setShow(true);
+
+//  const renderCb = useCallback(()=>{
+//      return setEnactRender()
+//  }, [enactRender])
 
   // handle how to display  upload btn and edit btn based on number of data are in the collection(the upload btn and edit btn shouldn't be display at the same time)
   // let {isLoading:isCountLoading, isError:isCountError, data:isCountData, error:countError} this code is correct
   // let profileCount = useReqHttp('http://localhost:7000/profile/profile-count','', '', enactRender)
 
 
-  const { isLoading, isError, data, error } = useReqHttp(`profile/get-user-profile/${isAuthUser}`, '', '', 'profile', '', true );
-
-
-  function handleEditProfile(){
-    setShow(true)
-  }
+  const { isLoading, isError, data, error } = useReqHttp(`profile/get-user-profile/${isAuthUser}`, '', '', enactRender, '', true );
 
 
   return(

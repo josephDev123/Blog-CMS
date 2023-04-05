@@ -1,17 +1,12 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
-// import axios from 'axios';
+import { useState } from 'react';
 import  axiosInstance from '../../utils/axiosInstance'
-import {useNavigate, Navigate} from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {Alerts} from './Alert';
 
 export default function EditProfile({profile, show, setShow, trigger}) {
-
-    //redirect hook
-    const redirect = useNavigate();
 
     const [names, setName] = useState('');
     const [title, setTitle] = useState('');
@@ -20,8 +15,6 @@ export default function EditProfile({profile, show, setShow, trigger}) {
     const [surname, setSurname] = useState('');
     const [variant, setVariant] = useState('');
     const [alert, setAlert] = useState(false);
-
-// console.log(names,title, about,phone, );
 
 
    async function  handleSubmitEditProfile(e){
@@ -45,7 +38,7 @@ export default function EditProfile({profile, show, setShow, trigger}) {
         if(resultResponse.success==='profile updated'){
           setAlert(true);
           setVariant('success')
-          trigger('enactRender')
+          trigger((initial)=>!initial)
           console.log('edited');
         }
         
@@ -56,11 +49,12 @@ export default function EditProfile({profile, show, setShow, trigger}) {
         }
    }
 
+
    //close modal
    const handleClose = () => {
     setShow(false);
     setAlert(false);
-    trigger('enactRender')
+    trigger(true)
   }
 
 

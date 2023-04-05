@@ -56,7 +56,7 @@ export function UploadProfile({trigger, showModal, setShowModal}) {
           e.target.reset();
           setVariant('success');
           setAlert(true)
-          trigger('enactRender')
+          trigger((initial)=>!initial)
         }else{
           setVariant('danger');
           setAlert(true)
