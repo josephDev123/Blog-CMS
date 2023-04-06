@@ -14,7 +14,7 @@ export default function Roles() {
 
     const [page, setPage] = useState(1);
     const [status, setStatus] = useState('');
-    const [remount, setReMount] = useState(false);
+    const [refetch, setRefetch] = useState(false);
     const [show, setShow] = useState(false);
     const [userid, setUserId] = useState('');
     const [alert, setAlert] = useState(false);
@@ -29,7 +29,7 @@ export default function Roles() {
       setUserId(userId)
     }
 
-    const {isLoading, isError, data, error, isFetching} = useReqHttp('profile/users', '', page, 'role', '', true)
+    const {isLoading, isError, data, error, isFetching} = useReqHttp('profile/users', '', page, refetch, '', true)
 
 
     //handle the user permission btn
@@ -47,7 +47,7 @@ export default function Roles() {
       if(rolePermissionResult === 'success'){
         setStatus('success');
         setAlert(true)
-        setReMount((status)=>!status);
+        setRefetch((status)=>!status);
       }
       
       } catch (error) {
