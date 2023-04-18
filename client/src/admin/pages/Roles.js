@@ -2,7 +2,8 @@
 import  {useState, useLayoutEffect} from 'react';
 import axiosInstance from '../../utils/axiosInstance';
 import '../asset/css/roles.css';
-import {useReqHttp} from '../../customHooks/useReqHttp';
+// import {useReqHttp} from '../../customHooks/useReqHttp';
+import { useQuery } from "react-query";
 import {ModalComponent} from '../components/Modal';
 import {SuccessAlert} from '../components/SuccessAlert';
 import {ErrorAlert} from '../components/ErrorAlert'
@@ -29,7 +30,44 @@ export default function Roles() {
       setUserId(userId)
     }
 
-    const {isLoading, isError, data, error, isFetching} = useReqHttp('profile/users', '', page, refetch, '', true)
+    // const {isLoading, isError, data, error, isFetching} = useReqHttp('profile/users', '', page, refetch, '', true)
+const {isLoading:isLoadingUsers,
+   isError:isErrorUsers, 
+   data:dataUsers, 
+   error:errorUsers, 
+   isFetching:isFetchingUsers} = useQuery(['roles', refetch], async ()=>{
+    try{
+      const req = await axiosInstance({
+        method:'get',
+        url: 'profile/users',
+        params:{
+          'query':page
+        }
+      })
+      const users = await req.data;
+      return users;
+    }catch(error){
+       throw new Error(error)
+    }
+   
+}, { keepPreviousData : true })
+
+
+// const {isLoading:isLoadingUsers,
+//   isError:isErrorUsers, 
+//   data:dataUsers, 
+//   error:errorUsers, 
+//   isFetching:isFetchingUsers} = useQuery(['roles', refetch], async ()=>{
+//   const req = await axiosInstance({
+//    method:'get',
+//    url: 'profile/users',
+//    params:{
+//      'query':page
+//    }
+//  })
+//  const users = await req.data;
+//  return users;
+// }, { keepPreviousData : true })
 
 
     //handle the user permission btn
@@ -74,9 +112,9 @@ export default function Roles() {
             <RoleBanner/>
           
             <section className=''>
-               {isLoading? (
+               {isLoadingUsers? (
               <AdvanceLoading/>
-               ):isError? <div className="alert alert-danger mt-4" role="alert"> Something went wrong </div>:(
+               ):isErrorUsers? <div className="alert alert-danger mt-4" role="alert"> Something went wrong </div>:(
                 <>
                 <div className='container mt-4 table-responsive'>
                   {status==='success'?<SuccessAlert alert ={alert}  setAlert={setAlert}/>:<ErrorAlert alert ={alert} setAlert={setAlert}/>}
@@ -97,7 +135,7 @@ export default function Roles() {
                         </thead>
                         <tbody>
                         {
-                    data?.map(users =>(
+                    dataUsers?.map(users =>(
                           <tr key={users._id}>
                             <th scope="row">{users._id.substr(0, 5)}</th>
                             <td>{users.name}</td>
@@ -128,11 +166,11 @@ export default function Roles() {
                               // }
                             }}
                             // Disable the Next Page button until we know a next page is available
-                            disabled={data.length <= 5}
+                            disabled={dataUsers.length <= 5}
                           >
                             Next Page
                           </button>
-                          {isFetching ? <span className='alet alert-warning'> Loading...</span> : null}{' '}
+                          {isFetchingUsers ? <span className='alert alert-warning'> Loading...</span> : null}{' '}
                   </>
                )}
             </section>
