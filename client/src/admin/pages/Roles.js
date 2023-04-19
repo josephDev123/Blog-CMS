@@ -1,5 +1,5 @@
 
-import  {useState, useLayoutEffect} from 'react';
+import  {useState, useLayoutEffect , useContext} from 'react';
 import axiosInstance from '../../utils/axiosInstance';
 import '../asset/css/roles.css';
 // import {useReqHttp} from '../../customHooks/useReqHttp';
@@ -10,6 +10,8 @@ import {ErrorAlert} from '../components/ErrorAlert'
 import {RoleBanner} from '../components/RoleBanner'
 import {AdvanceLoading} from '../components/AdvanceLoading'
 import btn_styles from '../asset/css/css_modules/button-style.module.css'
+import {AuthContext} from '../../Context/AuthContext'
+
 
 export default function Roles() {
 
@@ -21,6 +23,8 @@ export default function Roles() {
     const [alert, setAlert] = useState(false);
     const [err, setErr] = useState(null);
 
+    const {isAuthUser} = useContext(AuthContext)
+
     useLayoutEffect(()=>{
       document.title = 'Role Page';
   }, [])
@@ -29,6 +33,29 @@ export default function Roles() {
       setShow(true);
       setUserId(userId)
     }
+
+    const {isLoading:isLoadingUser,
+      isError:isErrorUser, 
+      data:dataUser, 
+      error:errorUser, 
+      isFetching:isFetchingUser} = useQuery(['AuthenticatedUser', refetch], async ()=>{
+       try{
+         const req = await axiosInstance({
+           method:'get',
+           url: `profile/get-user-profile/${isAuthUser}`,
+          //  params:{
+          //    'query':isAuthUser
+          //  }
+         })
+         const user = await req.data;
+         return user;
+       }catch(error){
+          throw new Error(error);
+       }
+      
+    })
+
+    console.log(dataUser)
 
     // const {isLoading, isError, data, error, isFetching} = useReqHttp('profile/users', '', page, refetch, '', true)
 const {isLoading:isLoadingUsers,
@@ -50,24 +77,7 @@ const {isLoading:isLoadingUsers,
        throw new Error(error)
     }
    
-}, { keepPreviousData : true })
-
-
-// const {isLoading:isLoadingUsers,
-//   isError:isErrorUsers, 
-//   data:dataUsers, 
-//   error:errorUsers, 
-//   isFetching:isFetchingUsers} = useQuery(['roles', refetch], async ()=>{
-//   const req = await axiosInstance({
-//    method:'get',
-//    url: 'profile/users',
-//    params:{
-//      'query':page
-//    }
-//  })
-//  const users = await req.data;
-//  return users;
-// }, { keepPreviousData : true })
+}, { keepPreviousData : true, enabled: dataUser && dataUser.length > 0})
 
 
     //handle the user permission btn
@@ -144,7 +154,12 @@ const {isLoading:isLoadingUsers,
                             <td>{users.phone}</td>
                             <td>{users.surname}</td>
                             <td>{users.role.user && users.role.admin? users.role.user +' || admin': users.role.user}</td>
-                            <td><button className={btn_styles.secondaryBtnColorBg} onClick={()=>handleShowModal(users._id)}> user permission</button></td>
+                            <td>
+                              {dataUser.map(role=>(
+                                !role.admin? <fragment key={role._id}>Action is for <button className='btn btn-secondary' disabled>Admins</button></fragment>: 
+                                <button key={role._id} className={btn_styles.secondaryBtnColorBg} onClick={()=>handleShowModal(users._id)}> user permission</button>
+                              ))}
+                            </td>
                           </tr>
                            ))
                          }   
@@ -152,7 +167,7 @@ const {isLoading:isLoadingUsers,
                     </table>
                     
                   </div>
-                  <span>Current Page: {page}</span>
+                  <span>Current Page: {page}{' '}</span>
                           <button className={btn_styles.primaryColorBg}
                             onClick={() => setPage(page => page - 1)}
                             disabled={page === 1}
