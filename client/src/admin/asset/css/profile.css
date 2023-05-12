@@ -63,7 +63,8 @@ html{
     justify-content: flex-start;
     align-items: flex-start;
     gap: 2rem;
-    background-color: #e76f51;
+    /* background-color: #e76f51; */
+    background-color: var(--primary);
     border-top-left-radius: 1.5rem;
     border-bottom-right-radius: 1.5rem;
    font-size: 1.5rem;

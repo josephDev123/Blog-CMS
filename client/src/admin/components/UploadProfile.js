@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+import axiosInstance from '../../utils/axiosInstance'
 import { AuthContext } from '../../Context/AuthContext';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -38,9 +39,9 @@ export function UploadProfile({trigger, showModal, setShowModal}) {
     e.preventDefault();
 //handle the profile data request
     try{
-      const profile = await axios({
+      const profile = await axiosInstance({
         method:'post',
-        url:'http://localhost:7000/profile/upload-profile',
+        url:'/profile/upload-profile',
         data:{
             isAuthUser,
             names,
@@ -55,7 +56,7 @@ export function UploadProfile({trigger, showModal, setShowModal}) {
           e.target.reset();
           setVariant('success');
           setAlert(true)
-          trigger('enactRender')
+          trigger((initial)=>!initial)
         }else{
           setVariant('danger');
           setAlert(true)

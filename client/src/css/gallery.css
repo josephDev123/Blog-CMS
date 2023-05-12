@@ -25,3 +25,11 @@
 button.read-me{
     background-color: var(--secondary);
 }
+
+
+@media screen and (max-width: 425px){
+    .gallery_container{
+        margin-top: 1.5rem;
+        flex-direction: column;
+    }
+}

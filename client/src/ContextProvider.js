@@ -41,13 +41,6 @@ useEffect(()=>{
     const signOut = ()=>{
 
     }
-
-    // if the loading takes longer time maybe because of unauthenticated user or network
-//    const id = setTimeout(() => {
-//         setIsAuth('network');
-//         document.cookie = 'name=no register';
-//     }, 10000);
-
     
     if(isAuth === 'loading'){
             return (
@@ -66,11 +59,11 @@ useEffect(()=>{
 
         if (isAuth === 'fulfilled' || isAuth === 'network') {
             return (
-                <div>
+                <>
                     <AuthContext.Provider value={{ login, signOut, isAuthUser }}>
                         {children}
                     </AuthContext.Provider>  
-                </div>
+                </>
             )
         }
   

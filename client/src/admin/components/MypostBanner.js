@@ -1,15 +1,16 @@
 import React from 'react'
 
 export default function MypostBanner() {
-
+    const style = {
+        boxShadow:'0 0 0.5rem 0.1rem #ECECEC'
+    }
     const styleBanner = {
         objectFit:'cover',
         objectPosition:'center'
     }
   return (
-    
-    <section className='row mt-4'>
-    <div className="card mb-3 ps-0">
+   
+    <div className="card mb-3 ps-0 border-0 mt-4" style={style}>
         <div className="row g-0">
             <div className="col-md-4 col-sm-12">
             <img src={process.env.PUBLIC_URL + '/images/blog-post-header3.jpg'} className="img-fluid rounded-start border h-100 w-100" alt="..." style={styleBanner}/>
@@ -39,6 +40,5 @@ export default function MypostBanner() {
             </div>
         </div>
     </div>
-</section>
   )
 }

@@ -35,8 +35,9 @@ export default function Gallery({category}) {
                 </Link>
             </div>
           ))}
-          
+            
        </div>
+       
        <span style={{display:'flex', gap:'0.4rem', marginTop:'2rem'}}>
           <button className='btn btn-warning btn-sm' disabled={page===0}>Previous Page</button>
            <button className='btn btn-secondary btn-sm' disabled={data.length <=5}>Next Page</button>

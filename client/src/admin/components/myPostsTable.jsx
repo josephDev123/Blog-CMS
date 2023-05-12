@@ -106,7 +106,7 @@ const [alert, setAlert] = useState(false);
                 
                 <EditMyPostModal id={id} setquerykey={setquerykey}/>
                     
-                </div>
+            </div>
 
                 <span className='me-2'>Current Page: {currentPage + 1}</span>
 
