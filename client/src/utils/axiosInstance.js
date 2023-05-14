@@ -1,7 +1,7 @@
 import axios from 'axios';
 
  const axiosInstance = axios.create({
-    baseURL: 'https://blog-cms-server.onrender.com:7000/'
+    baseURL: 'https://blog-cms-server.onrender.com/'
 })
 
 // http://localhost:7000
