@@ -5,4 +5,5 @@ import axios from 'axios';
 })
 
 // http://localhost:7000
+//https://blog-cms-server.onrender.com:7000
 export default axiosInstance;

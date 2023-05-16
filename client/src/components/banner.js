@@ -17,7 +17,7 @@ export default function Banner() {
 
   const {isAuthUser} = useContext(AuthContext);
   const {isLoading, isError, error, data} = useReqHttp(url, null, isAuthUser);
-  console.log(data)
+  console.log(data, error)
   // console.log( data)
 
   const styleBgImg = {
@@ -33,10 +33,10 @@ export default function Banner() {
   }
 
   if (isError) {
-    return <ErrorAlert alert={alert} setAlert={setAlert}>{error.message}</ErrorAlert>
+    return <ErrorAlert alert={alert} setAlert={setAlert} >{error.message}</ErrorAlert>
   }
 
-  if (data.message.length <= 0) {
+  if (data.message?.length === 0) {
     return (
       <section className='container'>
             <div className={ bannerPhoto.banner_container}>

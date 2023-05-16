@@ -1,10 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {useState, useRef} from 'react';
+import { useRef} from 'react';
 
 
 export default function Search({setcategory, isLoading, isError, error, data}) {
-
+    console.log(data)
     const categoryBtn = useRef()
      function handleChangeCategory(e){
         setcategory(e.target.textContent);
@@ -30,9 +30,10 @@ export default function Search({setcategory, isLoading, isError, error, data}) {
                         <li>
                             {error.message}
                         </li>
-                :data.length=== 0?
+                :data.length === 0?
                         <li>no data yet</li>:
                         data.map(categories => 
+                           
                         <li key={categories._id} onClick={handleChangeCategory}><Link className="dropdown-item" to="#">
                             {categories.category}</Link>
                         </li>)
