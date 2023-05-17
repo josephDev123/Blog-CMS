@@ -20,7 +20,7 @@ async function Req_get(url, body='', param='', headersParams=null){
            })
         const req_result =req_make;
         if (!req_result.statusText === 'OK') {
-            throw new Error('oh oh error')
+            throw new Error('Oh error')
             // return req_result.data;
         }
         return req_result.data;

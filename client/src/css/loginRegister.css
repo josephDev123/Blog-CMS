@@ -9,11 +9,13 @@ form.login-form, form.register-form{
     margin-top:25vh;
     margin-bottom:25vh;
     flex: 1 1 0;
-    min-width: 400px;
+    /* min-width: 400px; */
+    max-width: 400px;
 }
 
 @media screen and (max-width: 375px) {
     form{
-        min-width: 300px;
+        /* min-width: 300px; */
+        max-width: 300px;
     }
 } 
