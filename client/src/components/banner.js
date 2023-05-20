@@ -10,21 +10,20 @@ import { useNavigate  } from 'react-router-dom';
 
 export default function Banner() {
   const [alert, setAlert] = useState(true);
-  const url = 'setting/change-banner-content';
+  const url = '/setting/change-banner-content';
 
 // const location= useLocation()
   const navigate = useNavigate()
 
   const {isAuthUser} = useContext(AuthContext);
   const {isLoading, isError, error, data} = useReqHttp(url, null, isAuthUser);
-  console.log(data, error)
+  console.log(data, isError, error)
   // console.log( data)
 
   const styleBgImg = {
      maxHeight:'30rem', 
      maxWidth:'100%', 
      objectFit:'cover',   
-    //  objectPosition: '80% 80%'
   }
  
 

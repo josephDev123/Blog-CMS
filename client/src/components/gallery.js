@@ -9,7 +9,7 @@ export default function Gallery({category}) {
   const [page, setPage]= useState(0);
 
   const { isLoading, isError, error, data, isFetching, isPreviousData} = useReqHttp('/blog/post/bycategories', category, page, page, '', true);
-// console.log(data);
+console.log(data);
 
   if(isLoading){
     return <div className="spinner-grow" role="status"><span className="visually-hidden">Loading...</span></div>

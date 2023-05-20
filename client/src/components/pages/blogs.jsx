@@ -1,4 +1,4 @@
-import react from 'react';
+
 import '../../css/blog-post.css'
 import Search from '../search';
 import { useState, useLayoutEffect } from 'react';
@@ -13,7 +13,7 @@ export const Blogs =()=>{
         }
     }, [])
   const [category, setCategory] = useState('');
-  const {isLoading, isError, error, data} = useReqHttp(`/blog/all-post/categories`);
+  const {isLoading, isError, error, data} = useReqHttp('/blog/all-post/categories');
 
     return(
         <div className='container blog_post_container mt-4'>

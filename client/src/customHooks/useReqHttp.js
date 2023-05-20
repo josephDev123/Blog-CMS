@@ -18,13 +18,14 @@ async function Req_get(url, body='', param='', headersParams=null){
                 'currentUser': headersCredential
             }
            })
+           
         const req_result =req_make;
         if (!req_result.statusText === 'OK') {
             throw new Error('Oh error')
-            // return req_result.data;
         }
         return req_result.data;
-    // } catch (error) {
+    // } 
+    // catch (error) {
     //     if (error.response) {
     //         // The request was made and the server responded with a status code
     //         // that falls out of the range of 2xx
