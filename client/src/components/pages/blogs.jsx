@@ -14,6 +14,7 @@ export const Blogs =()=>{
     }, [])
   const [category, setCategory] = useState('');
   const {isLoading, isError, error, data} = useReqHttp('/blog/all-post/categories');
+  console.log(isError, error, data)
 
     return(
         <div className='container blog_post_container mt-4'>
