@@ -6,7 +6,6 @@
   "type": "module",
   "scripts": {
    "start": "node app.js",
-   "build": "npm i",
    "dev": "nodemon app.js"
   },
   "author": "Joseph Uzuegbu",
