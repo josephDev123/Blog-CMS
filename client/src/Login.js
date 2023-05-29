@@ -42,6 +42,7 @@ export default function Login() {
 
   return (
     <div className='container form_wrapper'>
+        <Link to='/'><i className="fa-solid fa-arrow-left"></i></Link>
         <form onSubmit={handleSubmitLogin} className='login-form'>
             <h3>Login</h3>
 

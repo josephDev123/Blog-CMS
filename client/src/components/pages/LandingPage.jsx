@@ -1,6 +1,6 @@
 
 import '../../css/landing-page.css'
-import {useState, useLayoutEffect, useContext, useRef, useEffect} from 'react';
+import { useLayoutEffect, useRef, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {handleIntersect} from  '../../utils/handleIntersect'
 
@@ -9,17 +9,19 @@ export default function LandingPage() {
   
   const ref = useRef()
   const image_container_el = useRef()
+  
   let options = {
     root: null,
     rootMargin: "0px",
     threshold: 0.1,
   }
+
   useLayoutEffect(()=>{
     document.title = 'Home || Welcome'
     return ()=>{
         document.title = ''
     }
-  }, []);
+  });
 
   useEffect(()=>{
     const observer = new IntersectionObserver(handleIntersect, options);
@@ -27,7 +29,7 @@ export default function LandingPage() {
 
     const observerImage_container = new IntersectionObserver(handleIntersect, options);
     observerImage_container.observe(image_container_el.current);
-  }, []);
+  });
 
 
   const navigate = useNavigate();
@@ -55,7 +57,7 @@ export default function LandingPage() {
                 </span>
           </div>
           <div className='landing_page_action_side_image' ref={image_container_el}>
-                <img src={process.env.PUBLIC_URL+'/images/blog1.jpg'} alt='landing create image' style={{width:'100%'}} />
+                <img src={process.env.PUBLIC_URL+'/images/blog1.jpg'} alt='landing create ' style={{width:'100%'}} />
           </div>
 
       </div>

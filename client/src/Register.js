@@ -40,6 +40,7 @@ export default function Reqister() {
 
   return (
     <div className='container form_wrapper'>
+       <Link to='/'><i className="fa-solid fa-arrow-left"></i></Link>
         <form onSubmit={handlesubmit} className='register-form'> 
         <h3>Register</h3>
         {status === 'empty' &&  <div className="alert alert-danger" role="alert">Field(s) cannot be empty!</div>}
