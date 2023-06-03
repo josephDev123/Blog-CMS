@@ -1,4 +1,5 @@
 import {Post} from '../models/Blog.js';
+import {wrap}  from './asyncWrapper.js'
 
 export const AddBlog = (req, res)=>{
    const post = req.body;
@@ -83,9 +84,8 @@ export const allCategoriesPost = async (req, res)=>{
 
 
 //query db by category || empty query
-export const allPostByCategories = async (req, res)=>{
-    try {
-        // if there is query
+export const allPostByCategories = wrap( async (req, res)=>{
+  
         const {body} = req.body;
         if(body){
             const skip = req.query.query * 5
@@ -99,11 +99,7 @@ export const allPostByCategories = async (req, res)=>{
             const posts =  await Post.find({skip:skip, limit:limit});
             res.send(posts);
         }
-        
-    } catch (error) {
-        res.send(error.message);
-    }
-}
+})
 
 //query db by post id
 export const PostById = async (req, res)=>{
